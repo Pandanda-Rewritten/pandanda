@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flavorList PAGECOUNT="2">
+	<PAGE ID="1">
+		<SCOOP>
+			<ID>1</ID>
+			<TOPPING>0</TOPPING>
+			<COLOR>0xE1E078</COLOR>
+			<FLAVOR>Fading Sunshine</FLAVOR>
+		</SCOOP>
+		<SCOOP>
+			<ID>2</ID>
+			<TOPPING>2</TOPPING>
+			<COLOR>0x7FDAB7</COLOR>
+			<FLAVOR>Mint of Regret</FLAVOR>
+		</SCOOP>
+		<SCOOP>
+			<ID>3</ID>
+			<TOPPING>1</TOPPING>
+			<COLOR>0xDE79C2</COLOR>
+			<FLAVOR>Forgotten Love</FLAVOR>
+		</SCOOP>
+		<SCOOP>
+			<ID>4</ID>
+			<TOPPING>4</TOPPING>
+			<COLOR>0xE4DFB1</COLOR>
+			<FLAVOR>Disappointment Swirl</FLAVOR>
+		</SCOOP>
+		<SCOOP>
+			<ID>5</ID>
+			<TOPPING>5</TOPPING>
+			<COLOR>0x743927</COLOR>
+			<FLAVOR>Rock Bottom</FLAVOR>
+		</SCOOP>
+		<SCOOP>
+			<ID>6</ID>
+			<TOPPING>0</TOPPING>
+			<COLOR>0xE89759</COLOR>
+			<FLAVOR>Dying Embers</FLAVOR>
+		</SCOOP>
+		<SCOOP>
+			<ID>7</ID>
+			<TOPPING>3</TOPPING>
+			<COLOR>0xC02099</COLOR>
+			<FLAVOR>False Hope Swirl</FLAVOR>
+		</SCOOP>
+		<SCOOP>
+			<ID>8</ID>
+			<TOPPING>0</TOPPING>
+			<COLOR>0x6B4638</COLOR>
+			<FLAVOR>Ashes of Joy</FLAVOR>
+		</SCOOP>
+	</PAGE>
+	<PAGE ID="2">
+		<SCOOP>
+			<ID>9</ID>
+			<TOPPING>0</TOPPING>
+			<COLOR>0x1B1B1B</COLOR>
+			<FLAVOR>Void of Meaning</FLAVOR>
+		</SCOOP>
+		<SCOOP>
+			<ID>10</ID>
+			<TOPPING>0</TOPPING>
+			<COLOR>0xFF3232</COLOR>
+			<FLAVOR>Bleeding Heart</FLAVOR>
+		</SCOOP>
+		<SCOOP>
+			<ID>11</ID>
+			<TOPPING>0</TOPPING>
+			<COLOR>0xFFFFFF</COLOR>
+			<FLAVOR>Empty Promises</FLAVOR>
+		</SCOOP>
+		<SCOOP>
+			<ID>12</ID>
+			<TOPPING>0</TOPPING>
+			<COLOR>0x2E2EFF</COLOR>
+			<FLAVOR>Drowning Sorrows</FLAVOR>
+		</SCOOP>
+	</PAGE>
+</flavorList>

@@ -1,0 +1,168 @@
+<SmartFoxConfig>
+	<ServerSetup>
+		<ServerIP>127.0.0.1</ServerIP>
+		<ServerPort>9933</ServerPort>
+		<AutoSendPolicyFile>true</AutoSendPolicyFile>
+		<MaxUserIdleTime>21600</MaxUserIdleTime>
+		<MaxSocketIdleTime>3600</MaxSocketIdleTime>
+		<MaxRoomVars>100</MaxRoomVars>
+		<MaxUserVars>100</MaxUserVars>
+		<UserVarsOptimization>true</UserVarsOptimization>
+		<AntiFlood active="false">
+			<MinMsgTime tolerance="5">1000</MinMsgTime>
+			<MaxRepeatedMessages>3</MaxRepeatedMessages>
+			<WarningsBeforeKick>2</WarningsBeforeKick>
+			<WarningMessage><![CDATA[null]]></WarningMessage>
+			<KickMessage><![CDATA[null]]></KickMessage>
+			<BanMessage><![CDATA[null]]></BanMessage>			
+			<BanAfter timeSpan="1">3</BanAfter>
+		</AntiFlood>
+		<BadWordsFilter active="true">
+			<FilterMode>filter</FilterMode>
+			<StripCharacters><![CDATA[,.;:_!$%&/#*-+]]></StripCharacters>
+			<Warnings>true</Warnings>
+			<FilterRoomNames>true</FilterRoomNames>
+			<FilterUserNames>true</FilterUserNames>
+			<WarningsBeforeKick>5</WarningsBeforeKick>
+			<WarningMessage><![CDATA[Don't swear! This is a warning!]]></WarningMessage>
+			<KickMessage><![CDATA[Kicked for swearing - please don't.]]></KickMessage>
+			<BanMessage><![CDATA[Banned for swearing - come back in 30 minutes]]></BanMessage>	
+			<BanAfter timeSpan="1">9001</BanAfter>
+			<BadWordsList>
+				<badWord>squarehead</badWord>
+			</BadWordsList>
+		</BadWordsFilter>
+		<BanCleaning>auto</BanCleaning>
+		<BanDuration>1800</BanDuration>
+		<BannedLoginMessage>You have been banned!</BannedLoginMessage>
+		<OutQueueThreads>10</OutQueueThreads>
+		<ExtHandlerThreads>5</ExtHandlerThreads>
+		<MaxWriterQueue>50</MaxWriterQueue>
+		<ClientMessagQueue>
+			<QueueSize>100</QueueSize>
+			<MaxAllowedDroppedPackets>10</MaxAllowedDroppedPackets>
+		</ClientMessagQueue>
+		<MaxIncomingQueue>5000</MaxIncomingQueue>
+		<DeadChannelsPolicy>strict</DeadChannelsPolicy>
+		<MaxMsgLen>8192</MaxMsgLen>
+		<LogMaxSize>5000000</LogMaxSize>
+		<LogMaxFiles>5</LogMaxFiles>
+		<FileLoggingLevel>INFO</FileLoggingLevel>
+		<ConsoleLoggingLevel>INFO</ConsoleLoggingLevel>	
+		<AdminLogin>sfsadmin</AdminLogin>
+		<AdminPassword>sfspassword</AdminPassword>
+		<AdminAllowedAddresses>
+			<AllowedAddress>*.*.*.*</AllowedAddress>
+		</AdminAllowedAddresses>
+		<AutoReloadExtensions>false</AutoReloadExtensions>
+		<ExtensionRemoteDebug>false</ExtensionRemoteDebug>
+		<IpFilter>0</IpFilter>
+		<Mailer>
+			<MailHost>test.mail.com</MailHost>
+			<MailUser>foo</MailUser> 
+			<MailPass>bar</MailPass>
+			<SmtpPort>25</SmtpPort>
+			<WorkerThreads>1</WorkerThreads>
+		</Mailer>
+		<EnableZoneInfo>false</EnableZoneInfo>
+		<WebServer active="false">
+			<CfgFile>webserver/cfg/jetty.xml</CfgFile>
+		</WebServer>
+		<RawProtocolSeparator><![CDATA[%]]></RawProtocolSeparator>
+		<EnableNPC>true</EnableNPC>
+		<DynamicPropertiesClass>java.util.concurrent.ConcurrentHashMap</DynamicPropertiesClass>
+	</ServerSetup>
+	<Zones>	
+		<Zone name="game1" uCountUpdate="false" maxUsers="5000" customLogin="true">
+			<AutoReloadExtensions>false</AutoReloadExtensions>
+			<Rooms>
+				<Room name="MG_line_four_1" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />		
+				<Room name="MG_line_four_2" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />		
+				<Room name="MG_line_four_3" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />		
+				<Room name="MG_line_four_4" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />		
+				<Room name="MG_line_four_5" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />		
+				<Room name="MG_pen_the_pig_1" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />		
+				<Room name="MG_pen_the_pig_2" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />		
+				<Room name="MG_pen_the_pig_3" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />		
+				<Room name="MG_pen_the_pig_4" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="MG_pen_the_pig_5" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="MG_pen_the_pig_6" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="MG_pen_the_pig_7" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="MG_pen_the_pig_8" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="MG_pen_the_pig_9" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="MG_pen_the_pig_10" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="MG_pen_the_pig_11" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="MG_pen_the_pig_12" isGame="true" maxUsers="2" maxSpectators="20" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />		
+				<Room name="minigame" maxUsers="50" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="true" />
+				<Room name="EN_village" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_forest" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_icecream" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_treehouse" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_fishing_hole" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_orchard" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_stonehenge" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_townsquare2" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_townsquare" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_clothes_store" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_treehouse_lobby" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_bunny_field" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_library" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_graveyard" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_purple_door" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_parlour" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />		
+				<Room name="EN_petstore" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_beach" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_darkroom" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_barn" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_harvest_grove" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_old_town" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_hidden_cave" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_old_lake" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+				<Room name="EN_tiki_isle" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
+			</Rooms>
+			<BuddyList active="true">
+			   <size>200</size>
+			   <maxBuddyVariables>1000</maxBuddyVariables>
+			   <mode>basic</mode>
+			</BuddyList>
+			<Extensions>
+				<extension name="gameExt" className="gameExt.js" type="script" />
+				<extension name="slimeUpdatesExt" className="slimeUpdatesExt.js" type="script" />
+				<extension name="bunnyFieldExt" className="bunnyFieldExt.js" type="script" />
+				<extension name="houseExt" className="houseExt.js" type="script" />
+				<extension name="graveyardExt" className="graveyardExt.js" type="script" />
+			</Extensions>
+			<DatabaseManager active="true">
+				<Driver>com.mysql.jdbc.Driver</Driver>
+				<ConnectionString>jdbc:mysql://127.0.0.1/pandanda</ConnectionString>
+				<UserName>root</UserName>
+				<Password></Password>
+				<TestSQL><![CDATA[SELECT COUNT(*) FROM users]]></TestSQL>
+				<MaxActive>10</MaxActive>
+				<MaxIdle>10</MaxIdle>
+				<OnExhaustedPool>fail</OnExhaustedPool>
+				<BlockTime>5000</BlockTime>
+			</DatabaseManager>
+		</Zone>
+		<Zone name="pandandaLogin" uCountUpdate="false" maxUsers="5000" customLogin="false">
+			<AutoReloadExtensions>false</AutoReloadExtensions>
+			<Rooms>
+				<Room name="default" maxUsers="5000" isPrivate="false" isTemp="false" autoJoin="true" uCountUpdate="false" isLimbo="true"/>		
+			</Rooms>
+			<Extensions>
+				<extension name="verifyUserExt" className="verifyUserExt.js" type="script" />
+			</Extensions>
+			<DatabaseManager active="true">
+				<Driver>com.mysql.jdbc.Driver</Driver>
+				<ConnectionString>jdbc:mysql://127.0.0.1/pandanda</ConnectionString>
+				<UserName>root</UserName>
+				<Password></Password>
+				<TestSQL><![CDATA[SELECT COUNT(*) FROM users]]></TestSQL>
+				<MaxActive>10</MaxActive>
+				<MaxIdle>10</MaxIdle>
+				<OnExhaustedPool>fail</OnExhaustedPool>
+				<BlockTime>5000</BlockTime>
+			</DatabaseManager>
+		</Zone>
+	</Zones>
+</SmartFoxConfig>

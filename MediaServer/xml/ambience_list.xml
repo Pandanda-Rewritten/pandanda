@@ -1,0 +1,283 @@
+<AMBIENCE>
+    <!--This file contains all the ambient sounds/music for each location in the game-->
+    
+    <!--These are the locations in England-->
+    <LOCATION ID="EN_icecream">
+        <MUSIC>
+            <NAME>sound/music/icecream.mp3</NAME>
+            <LOOP>true</LOOP>
+        </MUSIC>
+    </LOCATION>
+    <LOCATION ID="EN_clothes_store">
+        <MUSIC>
+            <NAME>sound/music/clothes_store.mp3</NAME>
+            <LOOP>true</LOOP>
+        </MUSIC>
+    </LOCATION>
+    <LOCATION ID="EN_village">
+        <AMBIENCE>
+            <NAME>sound/squares_dayamb.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>false</NIGHT>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/squares_nightamb.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>
+    </LOCATION>
+    <LOCATION ID="EN_townsquare">
+        <AMBIENCE>
+            <NAME>sound/squares_dayamb.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>false</NIGHT>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/squares_nightamb.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>
+    </LOCATION>
+    <LOCATION ID="EN_townsquare2">
+        <AMBIENCE>
+            <NAME>sound/squares_dayamb.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>false</NIGHT>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/squares_nightamb.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>
+    </LOCATION>
+    <LOCATION ID="EN_forest">
+        <MUSIC>
+            <!-- <NAME>sound/forest.mp3</NAME> -->
+            <LOOP>true</LOOP>
+        </MUSIC>
+        <AMBIENCE>
+            <NAME>sound/forestambience04_30.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>false</NIGHT>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/crickets_amb_03_30.mp3</NAME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>
+    </LOCATION>
+    <LOCATION ID="EN_treehouse_lobby">
+        <AMBIENCE>
+            <NAME>sound/forestambience04_30.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>false</NIGHT>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/crickets_amb_03_30.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>
+    </LOCATION>
+    <LOCATION ID="EN_stonehenge">
+        <AMBIENCE>
+            <NAME>sound/country_ambience01_30.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>false</NIGHT>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/crickets_amb_03_30.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/torch_dungeon02.mp3</NAME>
+            <VOLUME>0.20</VOLUME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>
+    </LOCATION>
+    <LOCATION ID="EN_orchard">
+        <AMBIENCE>
+            <NAME>sound/country_ambience01_30.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>false</NIGHT>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/crickets_amb_03_30.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>
+    </LOCATION>
+    <LOCATION ID="EN_bunny_field">
+        <AMBIENCE>
+            <NAME>sound/country_ambience01_30.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>false</NIGHT>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/crickets_amb_03_30.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>
+    </LOCATION>
+    <LOCATION ID="EN_fishing_hole">
+        <AMBIENCE>
+            <NAME>sound/lapping02.mp3</NAME>
+            <VOLUME>0.20</VOLUME>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/crickets_amb_03_30.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/fire_06_loop20.mp3</NAME>
+            <VOLUME>0.20</VOLUME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>
+    </LOCATION>
+	<LOCATION ID="EN_old_town">
+        <AMBIENCE>
+            <NAME>sound/squares_dayamb.mp3</NAME>
+            <VOLUME>0.20</VOLUME>
+            <NIGHT>false</NIGHT>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/squares_nightamb.mp3</NAME>
+            <VOLUME>0.20</VOLUME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>
+    </LOCATION>
+	<LOCATION ID="EN_old_lake">        
+        <AMBIENCE>
+            <NAME>sound/lapping02.mp3</NAME>
+            <VOLUME>0.25</VOLUME>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/crickets_amb_03_30.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/fire_06_loop20.mp3</NAME>
+            <VOLUME>0.20</VOLUME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>
+    </LOCATION>
+    <LOCATION ID="EN_treehouse">
+    	<!--
+        <MUSIC>
+             <NAME>sound/treehouse.mp3</NAME>
+            <LOOP>true</LOOP>
+        </MUSIC>
+        -->
+    </LOCATION>
+    <LOCATION ID="EN_library">
+        <AMBIENCE>
+            <NAME>sound/fire_06_loop20.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+        </AMBIENCE>
+    </LOCATION>
+    <LOCATION ID="EN_purple_door">
+        <MUSIC>
+            <NAME>sound/music/purple_door1.mp3</NAME>
+        </MUSIC>
+        <MUSIC>
+            <NAME>sound/music/purple_door2.mp3</NAME>
+        </MUSIC>
+        <MUSIC>
+            <NAME>sound/music/purple_door3.mp3</NAME>
+        </MUSIC>
+    </LOCATION>
+    <LOCATION ID="EN_graveyard">
+        <AMBIENCE>
+            <NAME>sound/haunting_wind_in_trees_01.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+        </AMBIENCE>
+        <EFFECT>
+            <NAME>sound/thunder08.mp3</NAME>
+        </EFFECT>
+        <EFFECT>
+            <NAME>sound/ice_freeze_crack_09.mp3</NAME>
+        </EFFECT>
+    </LOCATION>
+    <LOCATION ID="EN_parlour">  
+        <AMBIENCE>
+            <NAME>sound/fire_06_loop20.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+        </AMBIENCE>
+        <EFFECT>
+            <NAME>sound/thunder08.mp3</NAME>
+        </EFFECT>
+    </LOCATION>
+    <LOCATION ID="EN_darkroom">
+        <AMBIENCE>
+            <NAME>sound/haunted_house_120loop_01.mp3</NAME>
+        </AMBIENCE>
+    </LOCATION>
+    <LOCATION ID="EN_beach">
+    	<!-- 
+        <MUSIC>
+            <NAME>sound/music/mary_ann.mp3</NAME> 
+            <LOOP>true</LOOP>
+        </MUSIC>    
+        -->   
+        <AMBIENCE>
+            <NAME>sound/waves_multiple02.mp3</NAME>
+            <VOLUME>0.25</VOLUME>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/coastal_amb_01_60.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>false</NIGHT>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/fire_06_loop20.mp3</NAME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>        
+    </LOCATION>
+    
+    <LOCATION ID="EN_harvest_grove">
+    <!--
+        <MUSIC>
+            <NAME>sound/music/county_line.mp3</NAME> 
+            <LOOP>true</LOOP>
+        </MUSIC>    
+       --> 
+        <AMBIENCE>
+            <NAME>sound/country_ambience01_30.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>false</NIGHT>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/crickets_amb_03_30.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>
+    </LOCATION>
+	<LOCATION ID="EN_barn">
+
+    </LOCATION>
+    <LOCATION ID="EN_tiki_isle">
+		<MUSIC>
+            <NAME>sound/music/summer3.mp3</NAME>
+            <LOOP>true</LOOP>
+        </MUSIC>
+        <AMBIENCE>
+            <NAME>sound/waves_multiple02.mp3</NAME>
+            <VOLUME>0.25</VOLUME>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/coastal_amb_01_60.mp3</NAME>
+            <VOLUME>0.3</VOLUME>
+            <NIGHT>false</NIGHT>
+        </AMBIENCE>
+        <AMBIENCE>
+            <NAME>sound/fire_06_loop20.mp3</NAME>
+            <VOLUME>0.20</VOLUME>
+            <NIGHT>true</NIGHT>
+        </AMBIENCE>        
+    </LOCATION>
+    
+    
+    <!--These are the locations in Candyland-->
+    
+</AMBIENCE>

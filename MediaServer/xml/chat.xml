@@ -1,0 +1,62 @@
+<CHAT>
+    <ROW T="Pirate">
+        <TEXT>Yo-ho-hope this voyage ends soon</TEXT>
+        <TEXT>Avast ye existential dread!</TEXT>
+        <TEXT>Yarrr the rum won't kill me fast enough</TEXT>
+    </ROW>
+    <ROW T="Arggg!">
+        <TEXT>My existence is pain</TEXT>
+        <TEXT>Stop breathing my air</TEXT>
+        <TEXT>Your face makes me seasick</TEXT>
+    </ROW>
+    <ROW T="Celebrate">
+        <TEXT>Pin the tail on the dying horse!</TEXT>
+        <TEXT>Cheers to our meaningless lives!</TEXT>
+        <TEXT>Whoop-de-fucking-doo</TEXT>
+    </ROW>
+    <ROW T="Time">
+        <TEXT>Time flies when you’re wishing for the end!</TEXT>
+        <TEXT>Hours pass. Nothing improves.</TEXT>
+        <TEXT>Tick tock toward the void</TEXT>
+    </ROW>
+    <ROW T="Questions">
+        <TEXT>Why are we here?</TEXT>
+        <TEXT>Care if I jump off this cliff?</TEXT>
+        <TEXT>Wanna help hide a body?</TEXT>
+    </ROW>
+    <ROW T="Responses">
+        <TEXT>Your mom</TEXT>
+        <TEXT>Hard pass</TEXT>
+        <TEXT>Not my circus, not my monkeys</TEXT>
+    </ROW>
+    <ROW T="Activities">
+        <TEXT>Let's play Russian Roulette!</TEXT>
+        <TEXT>How about a cyanide tasting?</TEXT>
+        <TEXT>I'll be in the fetal position</TEXT>
+    </ROW>
+    <ROW T="Friendship">
+        <TEXT>Let's be mutual disappointments!</TEXT>
+        <TEXT>You tolerate me, I'll tolerate you</TEXT>
+        <TEXT>We're all dying anyway</TEXT>
+    </ROW>
+    <ROW T="Hello">
+        <TEXT>Welcome to the dumpster fire</TEXT>
+        <TEXT>Why are you here?</TEXT>
+        <TEXT>Go away already</TEXT>
+    </ROW>
+    <ROW T="Goodbye">
+        <TEXT>Finally leaving? Good</TEXT>
+        <TEXT>Don't let the door hit you</TEXT>
+        <TEXT>See you in hell!</TEXT>
+    </ROW>
+    <ROW T="Quests">
+        <TEXT>Quest: Find will to live (FAILED)</TEXT>
+        <TEXT>Level: Pathetic</TEXT>
+        <TEXT>Objective: Give up</TEXT>
+    </ROW>
+    <ROW T="Emotes">
+    </ROW>
+    <TEXT>Whatever</TEXT>
+    <TEXT>Don't care</TEXT>
+    <TEXT>Why bother</TEXT>
+</CHAT>

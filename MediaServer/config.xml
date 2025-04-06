@@ -1,0 +1,5 @@
+<SmartFoxClient>
+	<ip>127.0.0.1</ip>
+	<port>9933</port>
+	<debug>true</debug>
+</SmartFoxClient>
