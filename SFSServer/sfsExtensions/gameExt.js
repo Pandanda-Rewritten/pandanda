@@ -1067,7 +1067,6 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
           break;
         }
         case "REDEEM_GOLDEN_TICKETS": {
-          var ticks = 0;
           var doPrize = params["doPrize"];
 
           if (doPrize === false) {
@@ -1097,8 +1096,8 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
               break;
             }
 
-            user.properties.put("tickets", ticks);
-            Users.UpdateCrumb(user.properties.get("id"), "tickets", ticks);
+            user.properties.put("tickets", 0);
+            Users.UpdateCrumb(user.properties.get("id"), "tickets", 0);
             receiveItem(user, zingItem);
 
             Users.SendJSON(user, {
@@ -1113,13 +1112,14 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
         case "ADD_SECRET_ITEM": {
           var itemId = Decoder.decodeData(params["e"], 11);
 
-          receiveItem(user, itemId);
-
-          Users.SendJSON(user, {
-            _cmd: "secretUpdate",
-            itemId: itemId,
-            success: true,
-          });
+          if (!hasItem(user, itemId)) {
+            receiveItem(user, itemId);
+            Users.SendJSON(user, {
+              _cmd: "secretUpdate",
+              itemId: itemId,
+              success: true,
+            });
+          }
           break;
         }
 
