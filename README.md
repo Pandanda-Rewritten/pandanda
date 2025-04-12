@@ -119,7 +119,8 @@ While I tried to bring this project to what I consider a "good enough" state, I 
 
 ## Disclaimers
 - I will never open a public server
-- This repository is neither owned by me or is gonna be maintained any further
+- This repository is neither owned by me nor is it gonna be maintained for long
+- Make sure to download it before someone succeeds in taking it down
 
 If you find this project useful and build upon it, please consider open-sourcing your improvements so the whole community can benefit from them.
 Huge thanks to everyone involved in making this a reality!
