@@ -1095,11 +1095,7 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
               });
               break;
             }
-
-            user.properties.put("tickets", 0);
-            Users.UpdateCrumb(user.properties.get("id"), "tickets", 0);
             receiveItem(user, zingItem);
-
             Users.SendJSON(user, {
               _cmd: "zing",
               cmd2: "ticketPurchase",
@@ -1107,6 +1103,8 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
               success: true,
             });
           }
+          user.properties.put("tickets", 0);
+          Users.UpdateCrumb(user.properties.get("id"), "tickets", 0);
           break;
         }
         case "ADD_SECRET_ITEM": {
