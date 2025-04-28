@@ -1,8 +1,3 @@
-/*
- * If you somehow have this code, I will h̸a̸t̸e̸  love you forever. G̸o̸ ̸d̸i̸e̸  Stay safe.
- * Sincerely, J̸a̸m̸e̸s̸  ???????.
- */
-
 var dbase, zone, _sfs, zingItem, fashionShowItem;
 var popInterval;
 
