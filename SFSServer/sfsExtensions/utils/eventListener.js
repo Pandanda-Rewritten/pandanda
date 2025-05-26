@@ -15,7 +15,6 @@ function handleRequest(cmd, params, user, fromRoom) {
   handlePandandaPacket(cmd, params, user, fromRoom);
 }
 function handleInternalEvent(evtObj) {
-  trace("Handling " + evtObj.name);
   if (evtObj.name == "serverReady") {
     Packages.java.lang.System.out.println("\n|:::::::SERVER READY:::::::|");
     _sfs = Packages.it.gotoandplay.smartfoxserver.SmartFoxServer;
