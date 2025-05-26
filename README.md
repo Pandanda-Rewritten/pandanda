@@ -19,7 +19,7 @@
 
 ### 3. Set Up the Media Server
 1. Clear all existing files in `C:\xampp\htdocs\`
-2. Copy all files from the `SFSServer` folder into `C:\xampp\htdocs\`
+2. Copy all files from the `MediaServer` folder into `C:\xampp\htdocs\`
    - This will set up your Media Server
 
 ### 4. Start the SmartFox Server
