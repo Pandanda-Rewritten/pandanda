@@ -60,6 +60,7 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `color` int(11) NOT NULL DEFAULT 0,
   `active` int(11) NOT NULL DEFAULT 1,
   `regdate` timestamp NOT NULL DEFAULT current_timestamp(),
   `crumbs` longtext DEFAULT NULL,
