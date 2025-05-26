@@ -102,7 +102,7 @@ Before starting, ensure you have the following tools installed:
 
 # Project Notes
 
-## Contributions:
+## Contributions
 
 Pandanda Rewritten - Implemented the original in-game register.
 
