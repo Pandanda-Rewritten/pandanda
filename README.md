@@ -27,7 +27,7 @@
    - This will launch the SmartFox server with all server-side code
 
 ## Create Your Account
-1. Navigate to: [http://localhost/register.php](http://localhost/register.php)
+1. Navigate to: [http://localhost/register.php](http://localhost/register.php) or use the in-game register
 2. Register a new account
 
 ## Play the Game
@@ -102,17 +102,9 @@ Before starting, ensure you have the following tools installed:
 
 # Project Notes
 
-## Development History
-This server originated from the basic fPDN implementation with limited functionality. I worked to:
+## Contributions:
 
-- Implemented *most* features that players expect
-- Cleaned up the code
-- Reconstructed most of Project Pandanda's modern features
-
-The media server portions largely came from Project Pandanda, with key modifications:
-- Restored most of the original branding
-- Stripped some encryption to make some files more accessible
-- Added some *personal touches*
+Pandanda Rewritten - Implemented the original in-game register.
 
 ## Current State
 While I tried to bring this project to what I consider a "good enough" state, I only had so much time to work on this so there always remains room for further Improvements.
