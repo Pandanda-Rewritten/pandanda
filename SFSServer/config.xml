@@ -164,5 +164,25 @@
 				<BlockTime>5000</BlockTime>
 			</DatabaseManager>
 		</Zone>
+		<Zone name="regZone" uCountUpdate="false" maxUsers="5000" customLogin="false">
+            <AutoReloadExtensions>false</AutoReloadExtensions>
+            <Rooms>
+                <Room name="default" maxUsers="5000" isPrivate="false" isTemp="false" autoJoin="true" uCountUpdate="false" isLimbo="true"/>
+            </Rooms>
+            <Extensions>
+                <extension name="regExt" className="regExt.js" type="script" />
+            </Extensions>
+            <DatabaseManager active="true">
+                <Driver>com.mysql.jdbc.Driver</Driver>
+                <ConnectionString>jdbc:mysql://127.0.0.1/pandanda</ConnectionString>
+                <UserName>root</UserName>
+                <Password></Password>
+                <TestSQL><![CDATA[SELECT COUNT(*) FROM users]]></TestSQL>
+                <MaxActive>10</MaxActive>
+                <MaxIdle>10</MaxIdle>
+                <OnExhaustedPool>fail</OnExhaustedPool>
+                <BlockTime>5000</BlockTime>
+            </DatabaseManager>
+        </Zone>
 	</Zones>
 </SmartFoxConfig>
