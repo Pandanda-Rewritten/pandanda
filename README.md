@@ -104,7 +104,12 @@ Before starting, ensure you have the following tools installed:
 
 ## Contributions
 
-Pandanda Rewritten - Implemented the original in-game register.
+Pandanda Rewritten 
+   - Implemented the original in-game register.
+   - Hashing for IP addresses
+
+iPandanda
+   - Original Media Server assets
 
 ## Current State
 While I tried to bring this project to what I consider a "good enough" state, I only had so much time to work on this so there always remains room for further Improvements.
