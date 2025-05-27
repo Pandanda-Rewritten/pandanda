@@ -1,71 +1,29 @@
-<FAQ>  
-    <QUESTION>  
-        <TITLE>How do I get Elite Membership?</TITLE>  
-        <SUBTITLE>Free-to-Play (Irrevocably)</SUBTITLE>  
-        <ANSWER>All accounts are permanently Elite. Features degrade over time. Coins are earned by completing tasks that erase portions of your save file. No refunds.</ANSWER>  
-    </QUESTION>  
-    <QUESTION>  
-        <TITLE>Where can I find the User Panel?</TITLE>  
-        <SUBTITLE>Interface Degradation</SUBTITLE>  
-        <ANSWER>The button on your player card opens a menu where you may:  
-• Cycle through 3 muted emotional states ("Vague Unease" is popular)  
-• Assign a BFF to inherit your penalties if you disconnect  
-• Edit your name (limited to 12 characters, all lowercase)</ANSWER>  
-    </QUESTION>  
-    <QUESTION>  
-        <TITLE>How can I become a VIP Panda?</TITLE>  
-        <SUBTITLE>Voluntary Obsoletion</SUBTITLE>  
-        <ANSWER>Purchase VIP to access:  
-• A catalog of items that disappear if acknowledged  
-• Chat bubbles that display inverted messages  
-• 10 outfit slots (6 are pre-filled with unremovable default skins)  
-Your player card will display a badge that causes NPCs to avoid you.</ANSWER>  
-    </QUESTION>  
-    <QUESTION>  
-        <TITLE>How do I start a quest?</TITLE>  
-        <SUBTITLE>Compulsory Participation</SUBTITLE>  
-        <ANSWER>NPCs marked [!] assign mandatory tasks:  
-• Bake bread using flour ground from deleted accounts  
-• Return library books that rewrite themselves overnight  
-• Listen to Zing’s monologues about the void behind the UI  
-Completion rewards tokens redeemable for minor UI adjustments.</ANSWER>  
-    </QUESTION>  
-    <QUESTION>  
-        <TITLE>How do I join the Pandanda Discord?</TITLE>  
-        <SUBTITLE>Echo Chamber Access</SUBTITLE>  
-        <ANSWER>The Discord link is hidden in the 14th page of the FAQ. 73% of messages are automated reminders to check the FAQ. Support tickets auto-reply with "Have you tried restarting?"</ANSWER>  
-    </QUESTION>  
-    <QUESTION>  
-        <TITLE>How do I report a player?</TITLE>  
-        <SUBTITLE>Self-Inflicted Audits</SUBTITLE>  
-        <ANSWER>Reporting opens a 45-minute questionnaire. Incorrect answers deduct coins. Valid reports reward 1 "Karma Point" (value: undefined). False reports corrupt your outfit slots.</ANSWER>  
-    </QUESTION>  
-    <QUESTION>  
-        <TITLE>How can I change my email or password?</TITLE>  
-        <SUBTITLE>Identity Migration</SUBTITLE>  
-        <ANSWER>Submit a request via the account page. 30-day processing period. Success rate: 11%. Failed attempts lock your currency as "read-only."</ANSWER>  
-    </QUESTION>  
-    <QUESTION>  
-        <TITLE>What are the game rules?</TITLE>  
-        <SUBTITLE>Fluid Enforcement</SUBTITLE>  
-        <ANSWER>1. Chat logs are archived and recontextualized  
-2. Exploits are defined retroactively  
-3. "Inappropriate topics" include discussing the weather  
-Violators receive randomized punishments, often unrelated to the offense.</ANSWER>  
-    </QUESTION>  
-    <QUESTION>  
-        <TITLE>How can I contact support?</TITLE>  
-        <SUBTITLE>Simulated Assistance</SUBTITLE>  
-        <ANSWER>Support tickets generate automated poetry about futility. Critical bugs are reclassified as "ambient lore." All feedback is cataloged and ignored alphabetically.</ANSWER>  
-    </QUESTION>  
-    <QUESTION>  
-        <TITLE>What can I do in Pandanda?</TITLE>  
-        <SUBTITLE>Circular Activities</SUBTITLE>  
-        <ANSWER>Engage in:  
-• Minigames that subtract coins upon completion  
-• Dragon care (they starve if unobserved)  
-• Furniture arranging (layouts reset hourly)  
-• Chatting with players who may not exist  
-New features are added every 6-8 months, then deprecated.</ANSWER>  
-    </QUESTION>  
-</FAQ>  
+<FAQ>
+
+    <QUESTION>
+        <TITLE>become an Elite Member?</TITLE>
+        <SUBTITLE>Elite Membership</SUBTITLE>
+        <ANSWER>Some features like unlocking your tree house, buying furniture for your tree house, and buying clothes for your Panda are reserved for players who become Elite Members. 
+If you would like to sign up to be an Elite Member, please visit the Membership page.
+        </ANSWER>
+    </QUESTION>
+    <QUESTION>
+        <TITLE>Ignore or report another player?</TITLE>
+        <SUBTITLE>Ignoring and Reporting Players</SUBTITLE>
+        <ANSWER>By clicking on another player and selecting "Ignore Player", you will have a choice to either ignore that player or report them. Both of these actions will add the player to your ignore list and you will no longer see them in Pandanda.
+However, you should only report a player if you believe he or she has broken one of the Pandanda Rules. Reporting a player will send an alert to a Pandanda Moderator for investigation.</ANSWER>
+    </QUESTION>
+    <QUESTION>
+        <TITLE>Pandanda Rules</TITLE>
+        <SUBTITLE>Pandanda Rules</SUBTITLE>
+        <ANSWER>Pandanda does not tolerate bad language and discussion of inappropriate topics. This includes swearing, dating chat, bullying and general disrespectful behavior towards other players. In addition it is not appropriate to discuss drug, alcohol, sex and racial topics. Players found not obeying this rule will be banned and repeated offenses will result in permanent banning.
+Play it safe by never sharing your real name, address, phone number, email address, or passwords with anyone online.
+Players may not use third party programs or create any programs that enable cheating in Pandanda. Use of such programs will result in permanent banning.</ANSWER>
+    </QUESTION>
+    <QUESTION>
+        <TITLE>Report a Bug</TITLE>
+        <SUBTITLE>Report a Bug</SUBTITLE>
+        <ANSWER>We are always working to make Pandanda a better place. If you think you have found a bug in the game, please click the button below to submit a bug report. Your help will make Pandanda better for everyone!</ANSWER>
+    </QUESTION>
+    
+</FAQ>

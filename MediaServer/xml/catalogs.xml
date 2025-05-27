@@ -1,7 +1,8 @@
 <CATALOGS>
-    <CLOTHES>09_fall.pets.swf</CLOTHES>
+    <CLOTHES>11_winter_clothes.swf</CLOTHES>
     <FURNITURE>10_fall_furniture.swf</FURNITURE>  
     <PETS>09_fall_pets.swf</PETS>
     <FLAGS>flag_catalog.swf</FLAGS>
     <QUEST_REWARDS>quest_rewards.swf</QUEST_REWARDS>
+    <NEWSPAPER>issue11.swf</NEWSPAPER>
 </CATALOGS>

@@ -1,62 +1,380 @@
 <CHAT>
+
     <ROW T="Pirate">
-        <TEXT>Yo-ho-hope this voyage ends soon</TEXT>
-        <TEXT>Avast ye existential dread!</TEXT>
-        <TEXT>Yarrr the rum won't kill me fast enough</TEXT>
+        <ROW T="Ahoy!">
+            <TEXT>Yo-ho-ho!</TEXT>
+            <TEXT>Ahoy mateys!</TEXT>
+            <TEXT>Yarrrrr!</TEXT>
+        </ROW>
+        <TEXT>Avast!</TEXT>
+        <TEXT>Avast ye scurvy dogs!</TEXT>
+        <TEXT>Aye aye cap'n!</TEXT>
+        <TEXT>Will ye be me bucko?</TEXT>
+        <TEXT>What ye doin'?</TEXT>
+        <TEXT>Whar be th' gally?</TEXT>
     </ROW>
     <ROW T="Arggg!">
-        <TEXT>My existence is pain</TEXT>
-        <TEXT>Stop breathing my air</TEXT>
-        <TEXT>Your face makes me seasick</TEXT>
+        <TEXT>Ack!</TEXT>
+        <TEXT>Eek!</TEXT>
+        <TEXT>Ugh!</TEXT>
+        <TEXT>Yucky!</TEXT>
+        <TEXT>Oh no!</TEXT>
+        <TEXT>Leave me alone.</TEXT>
+        <TEXT>Don't do that.</TEXT>
     </ROW>
     <ROW T="Celebrate">
-        <TEXT>Pin the tail on the dying horse!</TEXT>
-        <TEXT>Cheers to our meaningless lives!</TEXT>
-        <TEXT>Whoop-de-fucking-doo</TEXT>
+        <ROW T="Holidays">
+            <TEXT>Happy New Year!</TEXT>
+            <TEXT>Happy Valentine's Day!</TEXT>
+            <TEXT>Happy Easter!</TEXT>
+            <TEXT>Happy Halloween!</TEXT>
+            <TEXT>Happy Thanksgiving!</TEXT>
+            <TEXT>Merry Christmas!</TEXT>
+        </ROW>
+        <ROW T="Party">
+            <TEXT>Where's the party?</TEXT>
+            <TEXT>Party at my treehouse!</TEXT>
+            <TEXT>Let's have a party!</TEXT>
+            <TEXT>This is cool!</TEXT>
+        </ROW>
+        <TEXT>Woo hoo!</TEXT>
+        <TEXT>Hurray!</TEXT>
+        <TEXT>Ya hoo!</TEXT>
+        <TEXT>Hallelujah!</TEXT>
+        <TEXT>Yipee!</TEXT>
+        <TEXT>Fantastic!</TEXT>
+        <TEXT>Awesome!</TEXT>
+        <TEXT>Whoopie!</TEXT>
+        <TEXT>Yay!</TEXT>
     </ROW>
     <ROW T="Time">
-        <TEXT>Time flies when youâ€™re wishing for the end!</TEXT>
-        <TEXT>Hours pass. Nothing improves.</TEXT>
-        <TEXT>Tick tock toward the void</TEXT>
+        <ROW T="Today">
+            <TEXT>Tonight</TEXT>
+            <TEXT>Tomorrow</TEXT>
+            <TEXT>Yesterday</TEXT>
+            <TEXT>This morning</TEXT>
+            <TEXT>This afternoon</TEXT>
+            <TEXT>Last night</TEXT>
+        </ROW>
+        <ROW T="Now">
+            <TEXT>In 15 minutes</TEXT>
+            <TEXT>In 30 minutes</TEXT>
+            <TEXT>In 1 hour</TEXT>
+        </ROW>
+        <ROW T="Sunday">
+            <TEXT>Monday</TEXT>
+            <TEXT>Tuesday</TEXT>
+            <TEXT>Wednesday</TEXT>
+            <TEXT>Thursday</TEXT>
+            <TEXT>Friday</TEXT>
+            <TEXT>Saturday</TEXT>
+        </ROW>
+        <ROW T="O'Clock">
+            <ROW T="12 O'Clock">
+                <TEXT>12:15</TEXT>
+                <TEXT>12:30</TEXT>
+                <TEXT>12:45</TEXT>
+            </ROW>
+            <ROW T="1 O'Clock">
+                <TEXT>1:15</TEXT>
+                <TEXT>1:30</TEXT>
+                <TEXT>1:45</TEXT>
+            </ROW>
+            <ROW T="2 O'Clock">
+                <TEXT>2:15</TEXT>
+                <TEXT>2:30</TEXT>
+                <TEXT>2:45</TEXT>
+            </ROW>
+            <ROW T="3 O'Clock">
+                <TEXT>3:15</TEXT>
+                <TEXT>3:30</TEXT>
+                <TEXT>3:45</TEXT>
+            </ROW>
+            <ROW T="4 O'Clock">
+                <TEXT>4:15</TEXT>
+                <TEXT>4:30</TEXT>
+                <TEXT>4:45</TEXT>
+            </ROW>
+            <ROW T="5 O'Clock">
+                <TEXT>5:15</TEXT>
+                <TEXT>5:30</TEXT>
+                <TEXT>5:45</TEXT>
+            </ROW>
+            <ROW T="6 O'Clock">
+                <TEXT>6:15</TEXT>
+                <TEXT>6:30</TEXT>
+                <TEXT>6:45</TEXT>
+            </ROW>
+            <ROW T="7 O'Clock">
+                <TEXT>7:15</TEXT>
+                <TEXT>7:30</TEXT>
+                <TEXT>7:45</TEXT>
+            </ROW>
+            <ROW T="8 O'Clock">
+                <TEXT>8:15</TEXT>
+                <TEXT>8:30</TEXT>
+                <TEXT>8:45</TEXT>
+            </ROW>
+            <ROW T="9 O'Clock">
+                <TEXT>9:15</TEXT>
+                <TEXT>9:30</TEXT>
+                <TEXT>9:45</TEXT>
+            </ROW>
+            <ROW T="10 O'Clock">
+                <TEXT>10:15</TEXT>
+                <TEXT>10:30</TEXT>
+                <TEXT>10:45</TEXT>
+            </ROW>
+            <ROW T="11 O'Clock">
+                <TEXT>11:15</TEXT>
+                <TEXT>11:30</TEXT>
+                <TEXT>11:45</TEXT>
+            </ROW>
+        </ROW>
     </ROW>
     <ROW T="Questions">
-        <TEXT>Why are we here?</TEXT>
-        <TEXT>Care if I jump off this cliff?</TEXT>
-        <TEXT>Wanna help hide a body?</TEXT>
+        <ROW T="Pandanda">
+            <TEXT>Where can I buy clothes?</TEXT>
+            <TEXT>Where can I find gems?</TEXT>
+            <TEXT>Where can I find fruit?</TEXT>
+            <TEXT>Where can I find mushrooms?</TEXT>
+            <TEXT>When does it get dark?</TEXT>
+        </ROW>
+        <TEXT>What animals do you like?</TEXT>
+        <TEXT>Are you in any clubs?</TEXT>
+        <TEXT>What food do you like?</TEXT>
+        <TEXT>What sports do you like?</TEXT>
+        <TEXT>What music do you like?</TEXT>
+        <TEXT>Do you play an instrument?</TEXT>
+        <TEXT>What do you like to do?</TEXT>
+        <TEXT>How are you today?</TEXT>
+        <TEXT>Where do you want to go?</TEXT>
+        <TEXT>Boy or girl?</TEXT>
     </ROW>
     <ROW T="Responses">
-        <TEXT>Your mom</TEXT>
-        <TEXT>Hard pass</TEXT>
-        <TEXT>Not my circus, not my monkeys</TEXT>
+        <ROW T="Animals">
+            <TEXT>Aardvarks</TEXT>
+            <TEXT>Cats</TEXT>
+            <TEXT>Dogs</TEXT>
+            <TEXT>Dolphins</TEXT>
+            <TEXT>Giraffes</TEXT>
+            <TEXT>Horses</TEXT>
+            <TEXT>Kangaroos</TEXT>
+            <TEXT>Koalas</TEXT>
+            <TEXT>Pigs</TEXT>
+            <TEXT>Raccoons</TEXT>
+            <TEXT>Squirrels</TEXT>
+            <TEXT>Unicorns</TEXT>
+            <TEXT>Zebras</TEXT>
+        </ROW>
+        <ROW T="Clubs">
+            <TEXT>Chess Club</TEXT>
+            <TEXT>Math Club</TEXT>
+            <TEXT>Boy Scouts</TEXT>
+            <TEXT>Girl Scouts</TEXT>
+            <TEXT>Music Club</TEXT>
+        </ROW>
+        <ROW T="Feelings">
+            <TEXT>I'm alright</TEXT>
+            <TEXT>I'm excited</TEXT>
+            <TEXT>I'm good</TEXT>
+            <TEXT>I'm hungry</TEXT>
+            <TEXT>I'm sad</TEXT>
+            <TEXT>I'm sleepy</TEXT>
+            <TEXT>I'm super</TEXT>
+        </ROW>
+        <ROW T="Food">
+            <TEXT>Apples</TEXT>
+            <TEXT>Candy</TEXT>
+            <TEXT>Chocolate</TEXT>
+            <TEXT>Hamburgers</TEXT>
+            <TEXT>Hot dogs</TEXT>
+            <TEXT>Ice cream</TEXT>
+            <TEXT>Mushrooms</TEXT>
+            <TEXT>Oranges</TEXT>
+            <TEXT>Peaches</TEXT>
+            <TEXT>Pizza</TEXT>
+            <TEXT>Let's eat!</TEXT>
+        </ROW>
+        <ROW T="Free Time">
+            <TEXT>Crafts</TEXT>
+            <TEXT>Homework</TEXT>
+            <TEXT>Movies</TEXT>
+            <TEXT>Reading</TEXT>
+            <TEXT>Sports</TEXT>
+            <TEXT>TV</TEXT>
+            <TEXT>Video Games</TEXT>
+        </ROW>
+        <ROW T="Locations">
+            <TEXT>Bear Hollow</TEXT>
+            <TEXT>Book Nook</TEXT>
+			<TEXT>The Clothing Co.</TEXT>
+			<TEXT>Coconut Beach</TEXT>
+			<TEXT>Darby Field</TEXT>
+            <TEXT>The Den</TEXT>
+            <TEXT>East Market Street</TEXT>
+			<TEXT>Farmer Ned's Barn</TEXT>
+            <TEXT>Fishing Hole</TEXT>
+			<TEXT>Harvest Grove</TEXT>
+            <TEXT>Ice Cream Parlor</TEXT>
+			<TEXT>Misty Hill</TEXT>
+            <TEXT>The Orchard</TEXT>
+            <TEXT>Pawthorne Forest</TEXT>
+			<TEXT>The Purple Door</TEXT>
+            <TEXT>Shady Glen</TEXT>
+            <TEXT>Treehouse Lobby</TEXT>
+            <TEXT>West Market Street</TEXT>
+        </ROW>
+        <ROW T="Music">
+            <TEXT>Country</TEXT>
+            <TEXT>Classical</TEXT>
+            <TEXT>Rock n' Roll!</TEXT>
+            <TEXT>Pop</TEXT>
+            <TEXT>Techno</TEXT>
+            <TEXT>Cello</TEXT>
+            <TEXT>Drums</TEXT>
+            <TEXT>Guitar</TEXT>
+            <TEXT>Piano</TEXT>
+            <TEXT>Tuba</TEXT>
+            <TEXT>Violin</TEXT>
+        </ROW>
+        <ROW T="Sports">
+            <TEXT>Ballet</TEXT>
+            <TEXT>Baseball</TEXT>
+            <TEXT>Basketball</TEXT>
+            <TEXT>Bowling</TEXT>
+            <TEXT>Football</TEXT>
+            <TEXT>Gymnastics</TEXT>
+            <TEXT>Soccer</TEXT>
+            <TEXT>Swimming</TEXT>
+            <TEXT>Tennis</TEXT>
+        </ROW>
+        <TEXT>Boy</TEXT>
+        <TEXT>Girl</TEXT>
     </ROW>
     <ROW T="Activities">
-        <TEXT>Let's play Russian Roulette!</TEXT>
-        <TEXT>How about a cyanide tasting?</TEXT>
-        <TEXT>I'll be in the fetal position</TEXT>
+        <ROW T="Games">
+            <TEXT>Let's play Line Four!</TEXT>
+            <TEXT>Let's play Pen the Pig!</TEXT>
+            <TEXT>Good game!</TEXT>
+            <TEXT>Nice move!</TEXT>
+            <TEXT>That was fun!</TEXT>
+            <TEXT>Want to play again?</TEXT>
+        </ROW>
+        <ROW T="Fishing">
+            <TEXT>Let's go fishing!</TEXT>
+            <TEXT>Catching anything good?</TEXT>
+            <TEXT>Please don't scare the fish.</TEXT>
+            <TEXT>Ahhh, this is relaxing.</TEXT>
+        </ROW>
+        <TEXT>Collecting</TEXT>
+        <TEXT>Let's dance!</TEXT>
     </ROW>
     <ROW T="Friendship">
-        <TEXT>Let's be mutual disappointments!</TEXT>
-        <TEXT>You tolerate me, I'll tolerate you</TEXT>
-        <TEXT>We're all dying anyway</TEXT>
+        <ROW T="Nice Treehouse">
+            <TEXT>I like your treehouse.</TEXT>
+            <TEXT>You have cool stuff!</TEXT>
+            <TEXT>You have a lot of stuff!</TEXT>
+            <TEXT>This is really cozy.</TEXT>
+        </ROW>
+        <ROW T="Follow me">
+            <TEXT>Come to my treehouse.</TEXT>
+            <TEXT>I'll show you around.</TEXT>
+        </ROW>
+        <ROW T="I like you!">
+            <TEXT>I really like you!</TEXT>
+            <TEXT>You're really nice!</TEXT>
+            <TEXT>I like your outfit!</TEXT>
+            <TEXT>You're the best!</TEXT>
+        </ROW>
+        <ROW T="Thanks!">
+            <TEXT>Thank you!</TEXT>
+            <TEXT>Thanks for your help!</TEXT>
+            <TEXT>You're welcome!</TEXT>
+        </ROW>
+        <TEXT>Let's be friends!</TEXT>
+        <TEXT>Will you be my friend?</TEXT>
+        <TEXT>You're a great friend!</TEXT>
     </ROW>
     <ROW T="Hello">
-        <TEXT>Welcome to the dumpster fire</TEXT>
-        <TEXT>Why are you here?</TEXT>
-        <TEXT>Go away already</TEXT>
+        <ROW T="Hey">
+            <TEXT>Hi</TEXT>
+            <TEXT>Hi ya</TEXT>
+            <TEXT>Hey everyone</TEXT>
+            <TEXT>Howdy</TEXT>
+        </ROW>
+        <ROW T="What's up?">
+            <TEXT>How's it going?</TEXT>
+            <TEXT>What's up?</TEXT>
+            <TEXT>How is everyone?</TEXT>
+            <TEXT>What's going on?</TEXT>
+        </ROW>
+        <ROW T="Greetings">
+            <TEXT>Aloha</TEXT>
+            <TEXT>Bonjour</TEXT>
+            <TEXT>Ciào</TEXT>
+            <TEXT>Guten Tag</TEXT>
+            <TEXT>Hallo</TEXT>
+            <TEXT>Hola</TEXT>
+            <TEXT>Konnichi Wa</TEXT>
+        </ROW>
     </ROW>
     <ROW T="Goodbye">
-        <TEXT>Finally leaving? Good</TEXT>
-        <TEXT>Don't let the door hit you</TEXT>
-        <TEXT>See you in hell!</TEXT>
+        <ROW T="Bye">
+            <TEXT>See ya!</TEXT>
+            <TEXT>Take care!</TEXT>
+        </ROW>
+        <ROW T="Later">
+            <TEXT>I'll be back later</TEXT>
+            <TEXT>I'll be right back!</TEXT>
+            <TEXT>Back in five!</TEXT>
+            <TEXT>See you tomorrow!</TEXT>
+        </ROW>
+        <TEXT>Gotta go</TEXT>
+        <TEXT>I'm out!</TEXT>
     </ROW>
-    <ROW T="Quests">
-        <TEXT>Quest: Find will to live (FAILED)</TEXT>
-        <TEXT>Level: Pathetic</TEXT>
-        <TEXT>Objective: Give up</TEXT>
+	<ROW T="Quests">
+        <ROW T="Level">
+			<TEXT>What Level are you?</TEXT>
+			<TEXT>I just leveled up!</TEXT>
+            <TEXT>I'm Level 1</TEXT>
+			<TEXT>I'm Level 2</TEXT>
+			<TEXT>I'm Level 3</TEXT>
+			<TEXT>I'm Level 4</TEXT>
+			<TEXT>I'm Level 5</TEXT>
+			<TEXT>I'm Level 6</TEXT>
+			<TEXT>I'm Level 7</TEXT>
+			<TEXT>I'm Level 8</TEXT>
+			<TEXT>I'm Level 9</TEXT>
+			<TEXT>I'm Level 10</TEXT>
+			<TEXT>I'm Level 11</TEXT>
+			<TEXT>I'm Level 12</TEXT>
+			<TEXT>I'm Level 13</TEXT>
+			<TEXT>I'm Level 14</TEXT>
+			<TEXT>I'm Level 15</TEXT>
+        </ROW>
+        <ROW T="Panda Power">
+            <TEXT>I need more Panda Power!</TEXT>
+            <TEXT>Panda Power rocks!</TEXT>
+        </ROW>
+		<ROW T="Progress">
+            <TEXT>I just started a new quest!</TEXT>
+			<TEXT>I'm on a quest</TEXT>
+            <TEXT>I finished a quest!</TEXT>
+			<TEXT>Are you on a quest?</TEXT>
+			<TEXT>I just dropped a quest</TEXT>
+        </ROW>
+		<ROW T="Quest Log">
+			<TEXT>My Quest Log is full</TEXT>
+			<TEXT>My Quest Log is empty</TEXT>
+		</ROW>
+		<TEXT>Quests are cool!</TEXT>
+		
     </ROW>
     <ROW T="Emotes">
     </ROW>
-    <TEXT>Whatever</TEXT>
-    <TEXT>Don't care</TEXT>
-    <TEXT>Why bother</TEXT>
+    <TEXT>Yeah</TEXT>
+    <TEXT>Nope</TEXT>
+    <TEXT>Ok</TEXT>
+    
 </CHAT>

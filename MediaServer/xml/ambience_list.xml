@@ -134,34 +134,6 @@
             <NIGHT>true</NIGHT>
         </AMBIENCE>
     </LOCATION>
-	<LOCATION ID="EN_old_town">
-        <AMBIENCE>
-            <NAME>sound/squares_dayamb.mp3</NAME>
-            <VOLUME>0.20</VOLUME>
-            <NIGHT>false</NIGHT>
-        </AMBIENCE>
-        <AMBIENCE>
-            <NAME>sound/squares_nightamb.mp3</NAME>
-            <VOLUME>0.20</VOLUME>
-            <NIGHT>true</NIGHT>
-        </AMBIENCE>
-    </LOCATION>
-	<LOCATION ID="EN_old_lake">        
-        <AMBIENCE>
-            <NAME>sound/lapping02.mp3</NAME>
-            <VOLUME>0.25</VOLUME>
-        </AMBIENCE>
-        <AMBIENCE>
-            <NAME>sound/crickets_amb_03_30.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
-            <NIGHT>true</NIGHT>
-        </AMBIENCE>
-        <AMBIENCE>
-            <NAME>sound/fire_06_loop20.mp3</NAME>
-            <VOLUME>0.20</VOLUME>
-            <NIGHT>true</NIGHT>
-        </AMBIENCE>
-    </LOCATION>
     <LOCATION ID="EN_treehouse">
     	<!--
         <MUSIC>
@@ -254,28 +226,6 @@
         </AMBIENCE>
     </LOCATION>
 	<LOCATION ID="EN_barn">
-
-    </LOCATION>
-    <LOCATION ID="EN_tiki_isle">
-		<MUSIC>
-            <NAME>sound/music/summer3.mp3</NAME>
-            <LOOP>true</LOOP>
-        </MUSIC>
-        <AMBIENCE>
-            <NAME>sound/waves_multiple02.mp3</NAME>
-            <VOLUME>0.25</VOLUME>
-        </AMBIENCE>
-        <AMBIENCE>
-            <NAME>sound/coastal_amb_01_60.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
-            <NIGHT>false</NIGHT>
-        </AMBIENCE>
-        <AMBIENCE>
-            <NAME>sound/fire_06_loop20.mp3</NAME>
-            <VOLUME>0.20</VOLUME>
-            <NIGHT>true</NIGHT>
-        </AMBIENCE>        
-    </LOCATION>
     
     
     <!--These are the locations in Candyland-->
