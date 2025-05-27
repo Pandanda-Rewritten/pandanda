@@ -978,6 +978,44 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
         case "BUY_ICECREAM": {
           break;
         }
+        case "ALLOW_FRIEND_REQUESTS": {
+          // Get current allowFriends value from user crumbs
+          var userId = user.properties.get("id");
+          var qRes = dbase.executeQuery(
+            "SELECT crumbs FROM users WHERE id='" +
+              _server.escapeQuotes(userId) +
+              "';"
+          );
+          
+          if (qRes.size() > 0) {
+            var userCrumbs = JSON.parse(qRes.get(0).getItem("crumbs"));
+            // Check if allowFriends is 0, then set to 1
+            var currentAllowFriends = userCrumbs.allowFriends;
+            var newAllowFriends = 1;
+            
+            // If allowFriends is already 1 or not set, set it to 0
+            if (currentAllowFriends === 1 || currentAllowFriends === undefined) {
+              newAllowFriends = 0;
+            }
+            
+            // Update the user crumb
+            Users.UpdateCrumb(userId, "allowFriends", newAllowFriends);
+            
+            // Send response to client
+            Users.SendJSON(user, {
+              _cmd: "allowFriendsUpdate",
+              allowFriends: newAllowFriends,
+              success: true
+            });
+          } else {
+            Users.SendJSON(user, {
+              _cmd: "allowFriendsUpdate",
+              success: false,
+              error: "Failed to update settings"
+            });
+          }
+          break;
+        }
         case "START_QUEST": {
           var questid = Decoder.decodeData(params["e"], 11);
           var response = startQuest(user, questid);
