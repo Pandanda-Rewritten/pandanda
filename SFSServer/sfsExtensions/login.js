@@ -118,7 +118,7 @@ function loginFunction(username, password, chan) {
     var tempets = [];
     dbase.executeCommand(
       "UPDATE users SET ip='" +
-        _server.escapeQuotes(String(user.getIpAddress())) +
+        _server.escapeQuotes(_server.md5(String(user.getIpAddress()))) +
         "' WHERE id='" +
         _server.escapeQuotes(qRes.get(0).getItem("id")) +
         "';"
@@ -143,8 +143,7 @@ function loginFunction(username, password, chan) {
     user.properties.put("petarray", tempets);
     var date = new Date();
     crumbs["_cmd"] = "loginSuccess";
-
-    crumbs["ip"] = String(user.getIpAddress() || "127.0.0.1");
+    crumbs["ip"] = _server.md5(String(user.getIpAddress()) || "127.0.0.1");
     crumbs["isBday"] = 0;
     crumbs["sTime"] = String(
       dbase
