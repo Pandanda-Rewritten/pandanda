@@ -116,7 +116,7 @@ iPandanda
 This is a basic functioning Pandanda Server, It runs everything bar minigames works. Any additional work would be specific to your own creation or community contribution.
 
 ## Disclaimers
-- This repository stands to be a public arhive/asset for anyone wanting to create a Pandanda Server
+- This repository stands to be a public archive/asset for anyone wanting to create a Pandanda Server
 - This repository is placed in the public domain and will be maintained based off enhancements from Pandanda Rewritten and any community contirbutions
 
 If you find this project useful and build upon it, please consider submitting a pull request with your improvements so the whole community can benefit from them. 
