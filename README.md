@@ -110,9 +110,8 @@ Pandanda Rewritten - Implemented the original in-game register.
 While I tried to bring this project to what I consider a "good enough" state, I only had so much time to work on this so there always remains room for further Improvements.
 
 ## Disclaimers
-- I will never open a public server
-- This repository is neither owned by me nor is it gonna be maintained for long
-- Make sure to download it before someone succeeds in taking it down
+- This repository stands to be a public arhive/asset for anyone wanting to create a Pandanda Server
+- This repository is placed in the public domain and will be maintained based off enhancements from Pandanda Rewritten and any community contirbutions
 
-If you find this project useful and build upon it, please consider open-sourcing your improvements so the whole community can benefit from them.
+If you find this project useful and build upon it, please consider submitting a pull request with your improvements so the whole community can benefit from them. 
 Huge thanks to everyone involved in making this a reality!
