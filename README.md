@@ -102,6 +102,13 @@ Before starting, ensure you have the following tools installed:
 
 # Project Notes
 
+## PRs / Community Contributions Needed
+
+- Line Four / Pig Pen Minigame Integration
+- In-built Reporting System
+- Buddy Icon showing for server with friends online
+- New/Custom Room Creation toolkit?
+
 ## Contributions
 
 Pandanda Rewritten 
