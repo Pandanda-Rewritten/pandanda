@@ -112,7 +112,8 @@ iPandanda
    - Original Media Server assets
 
 ## Current State
-While I tried to bring this project to what I consider a "good enough" state, I only had so much time to work on this so there always remains room for further Improvements.
+
+This is a basic functioning Pandanda Server, It runs everything bar minigames works. Any additional work would be specific to your own creation or community contribution.
 
 ## Disclaimers
 - This repository stands to be a public arhive/asset for anyone wanting to create a Pandanda Server
