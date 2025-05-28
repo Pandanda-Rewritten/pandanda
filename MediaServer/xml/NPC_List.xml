@@ -11,8 +11,8 @@
             <FACELEFT>true</FACELEFT>
             <SCALE>1.3</SCALE>   
             <COLOR>7</COLOR>
-            <!--<CLOTHING>C301e,C489i</CLOTHING>-->
-			<CLOTHING>C019,C107,461a,C301j</CLOTHING>
+            <CLOTHING>C301e,C489i</CLOTHING>
+			<!-- <CLOTHING>C019,C107,461a,C301j</CLOTHING> HALLOWEEN -->
             <TITLE>William McWiggles</TITLE>
             <GREETING>Greetings, I'm William McWiggles. Welcome to my shop. I've got the best ice cream this side of Muskrat River!</GREETING>
             <GAME>MG003</GAME>
@@ -31,8 +31,8 @@
             <FACELEFT>false</FACELEFT>
             <SCALE>0.7</SCALE>
             <COLOR>3</COLOR>
-			<CLOTHING>C050e,C610f,C202p</CLOTHING>
-            <!--<CLOTHING>C604d</CLOTHING>-->
+			<!-- <CLOTHING>C050e,C610f,C202p</CLOTHING> HALLOWEEN -->
+            <CLOTHING>C604d</CLOTHING>
             <TITLE>Lisa McWiggles</TITLE>
             <GREETING>Help! I've wandered off and seem to have gotten lost. Can you help me find my way back to town?</GREETING>
             <BUYTEXT>Would you like some ice cream? I hope I have what you like. My flavors change regularly so check back often.</BUYTEXT>
@@ -50,115 +50,29 @@
             <DIRECTION>0</DIRECTION>
             <FACELEFT>false</FACELEFT>
             <SCALE>0.85</SCALE>   
-            <COLOR>1</COLOR>
-            <!-- GamerX19 needs this!! C209,C493,C728,C079 -->
+            <COLOR>7</COLOR>
 			<!--Warm weather clothes for paige: C438d,C301a,C104b,C203h-->
 			<!--Cold weather clothes for paige: C020a,C906a,C463c,C602g,C202h-->
 			<!--spring weather clothes for paige: C037f,C115e,C439i,C301m,C203d,C902f-->
 			<!--winter weather clothes for paige: C023h,C518a,C304a,C204g-->
-			<!--halloween <CLOTHING>C090a,C742,C124e,C611a</CLOTHING>-->
+            <!--<CLOTHING>C105f,C603c,C438d,C023f,C213f</CLOTHING>-->
+			<!--CLOTHING>C037f,C439i,C301m</CLOTHING>-->
+			<!--CLOTHING>C090a,C742,C124e,C611a</CLOTHING-->
+			<!-- hat C037f-->
+			<CLOTHING>C438d,C301a,C104b,C203h</CLOTHING>
             <TITLE>Paige</TITLE>
-            <CLOTHING>C438d,C301a,C104b,C203h</CLOTHING>
             <GREETING>Hi! </GREETING>
             <GAME>MG003</GAME>
             <GAMETEXT>Would you like to play Dragon's Revenge?</GAMETEXT>
-            <BUYTEXT>Sorry! Beta is over, would you like to buy some of my clothes?</BUYTEXT>
-            <BUYITEMS>C438d,C301a,C104b,C203h</BUYITEMS>
+            <BUYTEXT>I got these potions from Trixie. I haven't tried them yet so don't blame me if they turn you into a toad.</BUYTEXT>
+            <BUYITEMS>GI712,GI703,GI704,GI705,GI706,GI701,GI709</BUYITEMS>
             <BUYBACKGROUND>2</BUYBACKGROUND>
             <SELLTEXT>I'll buy back any potions you don't want.</SELLTEXT>            
             <SELLTYPE>CATEGORY_POTION</SELLTYPE>
-            <ACTIONS>NPC_BUY_GENERIC</ACTIONS>
+            <ACTIONS>NPC_BUY_GENERIC,NPC_SELL</ACTIONS>
         </NPC>
     </LOCATION>
-    <LOCATION ID="EN_village">
-        <NPC>
-            <ID>CUSTOM1</ID>
-            <NAME>King Panda</NAME>
-            <XPOS>77</XPOS>
-            <YPOS>399</YPOS>
-            <DIRECTION>0</DIRECTION>
-            <FACELEFT>false</FACELEFT>
-            <SCALE>2</SCALE>
-            <COLOR>14</COLOR>
-            <!-- GamerX19 needs this!! C209,C493,C728,C079 -->
-            <TITLE>King Panda here!</TITLE>
-            <CLOTHING>C457a,C457b,C457c,C105g,C041d,C606c</CLOTHING>
-             <!-- <CLOTHING>C457a,C457b,C457c,C105g,C041d,C606c</CLOTHING> -->
-            <GREETING>Hi! </GREETING>
-            <BUYTEXT>Hey! Buy some potions below!</BUYTEXT>
-            <BUYITEMS>GI706</BUYITEMS>
-            <BUYBACKGROUND>3</BUYBACKGROUND>
-            <SELLTEXT>I'll buy back any potions you don't want.</SELLTEXT>
-            <SELLTYPE>CATEGORY_POTION</SELLTYPE>
-            <ACTIONS>NPC_BUY_GENERIC</ACTIONS>
-        </NPC>
-    </LOCATION>
-   <!-- <LOCATION ID="EN_village">
-        <NPC>
-            <ID>CUSTOM2</ID>
-            <NAME>King Jr</NAME>
-            <XPOS>134</XPOS>
-            <YPOS>422</YPOS>
-            <DIRECTION>0</DIRECTION>
-            <FACELEFT>false</FACELEFT>
-            <SCALE>1.3</SCALE>
-            <COLOR>2</COLOR>
-    GamerX19 needs this!! C209,C493,C728,C079 
-            <TITLE>Silly Sunday!</TITLE>
-            <CLOTHING>C214a,C013a,C737a,C937a,C308a,C928a,C125a</CLOTHING>
-    <CLOTHING>C457a,C457b,C457c,C105g,C041d,C606c</CLOTHING> 
-            <GREETING>Hi! </GREETING>
-            <BUYTEXT>Time to dress silly! I have a wide range of cool silly items for you to buy.</BUYTEXT>
-            <BUYITEMS>C013a,C737a,C937a,C308a,C928a,C125a,C016a,C211a,C529a,C606a,C723a,C102a,C141a</BUYITEMS>
-            <BUYBACKGROUND>4</BUYBACKGROUND>
-            <SELLTEXT>I'll buy back any potions you don't want.</SELLTEXT>
-            <SELLTYPE>CATEGORY_POTION</SELLTYPE>
-            <ACTIONS>NPC_BUY_GENERIC</ACTIONS>
-        </NPC>
-    </LOCATION>-->
-    <!--<LOCATION ID="EN_village">
-        <NPC>
-            <ID>CUSTOM2</ID>
-            <NAME>Glasses Guy</NAME>
-            <XPOS>848</XPOS>
-            <YPOS>494</YPOS>
-            <DIRECTION>0</DIRECTION>
-            <FACELEFT>false</FACELEFT>
-            <SCALE>1.5</SCALE>
-            <COLOR>2</COLOR>
-            <TITLE>Happy Easter!</TITLE>
-            <CLOTHING>C105a</CLOTHING>
-            <GREETING>Hi! </GREETING>
-            <BUYTEXT>GamerX19 sent me here to sell you these.</BUYTEXT>
-            <BUYITEMS>C105a,C105b,C105c,C105d</BUYITEMS>
-            <BUYBACKGROUND>5</BUYBACKGROUND>
-            <SELLTEXT>I'll buy back any potions you don't want.</SELLTEXT>
-            <SELLTYPE>CATEGORY_POTION</SELLTYPE>
-            <ACTIONS>NPC_BUY_GENERIC</ACTIONS>
-        </NPC>
-    </LOCATION>-->
-	    <LOCATION ID="EN_fishing_hole">
-        <NPC>
-            <ID>NPC003</ID>
-            <NAME>Tina</NAME>
-            <XPOS>736</XPOS>
-            <YPOS>413</YPOS>
-            <DIRECTION>0</DIRECTION>
-            <FACELEFT>false</FACELEFT>
-            <SCALE>0.10</SCALE>   
-            <COLOR>2</COLOR>
-			<!--Warm weather clothes for paige: C438d,C301a,C104b,C203h-->
-			<!--Cold weather clothes for paige: C020a,C906a,C463c,C602g,C202h-->
-			<!--spring weather clothes for paige: C037f,C115e,C439i,C301m,C203d,C902f-->
-			<!--winter weather clothes for paige: C023h,C518a,C304a,C204g-->
-            <CLOTHING>C105f,C603c,C438d,C023f,C213f</CLOTHING>
-			<!--halloween <CLOTHING>C090a,C742,C124e,C611a</CLOTHING>-->
-            <TITLE>Bot</TITLE>
-            <GREETING></GREETING>
-            <ACTIONS></ACTIONS>
-        </NPC>
-    </LOCATION>
-       <LOCATION ID="EN_fishing_hole">
+    <LOCATION ID="EN_fishing_hole">
         <NPC>
             <ID>NPC004</ID>
             <NAME>Joe</NAME>
@@ -170,8 +84,8 @@
             <COLOR>8</COLOR>
             <!--spring weather clothes for joe: C489c,C022-->
             <!--winter weather clothes for joe:C514c,C022 -->
-            <!--<CLOTHING>C489c,C022</CLOTHING>-->
-			<CLOTHING>C053e,C124c,C508a</CLOTHING>
+            <CLOTHING>C489c,C022</CLOTHING>
+			<!-- <CLOTHING>C053e,C124c,C508a</CLOTHING> HALLOWEEN -->
             <TITLE>Fishy Joe</TITLE>
             <GREETING>Howdy, I like fish.</GREETING>
             <GAMETEXT>Have you ever been sky diving before? I must say I find it rather scary. But, I'm sure you'll be ok. Have fun!</GAMETEXT>
@@ -181,7 +95,7 @@
             <SELLTEXT>How's the fishin' today? Catch anything good?</SELLTEXT>
             <SELLTYPE>CATEGORY_FISH</SELLTYPE>
             <ACTIONS>NPC_SELL,NPC_BUY_GENERIC</ACTIONS>
-        </NPC>    
+        </NPC>
         <!-- summer festival 
         <NPC>
             <ID>NPC013</ID>
@@ -221,16 +135,17 @@
         <!--Change x, y pos for tammy when harvest festival scene is in to x=238, y=491, normal is 805, 370-->
             <ID>NPC005</ID>
             <NAME>Tammy</NAME>
-            <XPOS>238</XPOS>
-            <YPOS>491</YPOS>
+            <XPOS>805</XPOS>
+            <YPOS>370</YPOS>
             <DIRECTION>0</DIRECTION>
             <FACELEFT>false</FACELEFT>
             <SCALE>0.9</SCALE>   
             <COLOR>2</COLOR>
             <!--spring weather clothes for tammy: C804a,C202p,C023f-->            
             <!--winter weather clothes for tammy: C020a,C906a,C463c,C602g,C202h-->            
-            <!--<CLOTHING>C604a,C048b,C102a</CLOTHING>-->
-			<CLOTHING>C047g,C607h,C202j</CLOTHING>
+            <!-- <CLOTHING>C604a,C048b,C102a</CLOTHING> ??? -->
+			<!-- <CLOTHING>C047g,C607h,C202j</CLOTHING> HALLOWEEN -->
+			<CLOTHING>C804a,C202p,C023f</CLOTHING>
             <TITLE>Tammy Tomato</TITLE>
             <GREETING>Greetings, I'm Tammy Tomato. I buy and sell fruits and vegetables.</GREETING>
             <GAMETEXT>Have you ever been sky diving before? I must say I find it rather scary. But, I'm sure you'll be ok. Have fun!</GAMETEXT>
@@ -250,8 +165,9 @@
             <COLOR>4</COLOR>
             <!--spring weather clothes for steve: C007d,C205b,C303g,C469b-->            
             <!--winter weather clothes for steve: C007d,C205b,C303g,C462c-->            
-            <!--<CLOTHING>C303c,C520e,C007h,C205c</CLOTHING>-->
-			<CLOTHING>C091,C813c,C204h</CLOTHING>
+            <!-- <CLOTHING>C303c,C520e,C007h,C205c</CLOTHING> ??? -->
+			<!-- <CLOTHING>C091,C813c,C204h</CLOTHING> HALLOWEEN -->
+			<CLOTHING>C007d,C205b,C303g,C469b</CLOTHING>
             <TITLE>Steve McClean</TITLE>
             <GREETING>Greetings, I'm Tammy Tomato. I buy and sell fruits and vegetables.</GREETING>
             <GAMETEXT>Have you ever been sky diving before? I must say I find it rather scary. But, I'm sure you'll be ok. Have fun!</GAMETEXT>
@@ -273,8 +189,8 @@
             <COLOR>7</COLOR>
             <!--spring weather clothes for jim: C038i,C489a,C204g,C303f-->            
             <!--winter weather clothes for jim: C038i,C518c,C204g,C303f-->            
-            <!--<CLOTHING>C489a,C204g,C303f,C105k,C212c</CLOTHING>-->
-			<CLOTHING>C010g,C119b,C440i,C301c,C204c</CLOTHING>
+            <CLOTHING>C489a,C204g,C303f,C105k,C212c</CLOTHING>
+			<!-- <CLOTHING>C010g,C119b,C440i,C301c,C204c</CLOTHING> HALLOWEEN -->
             <TITLE>Jim</TITLE>
             <GREETING>Howdy, I like fish.</GREETING>
             <BUYTEXT>Before you can do any mining for gemstones and minerals, you'll need a rock hammer and maybe a shovel.</BUYTEXT>
@@ -293,8 +209,8 @@
             <FACELEFT>false</FACELEFT>
             <SCALE>1.1</SCALE>   
             <COLOR>0</COLOR>
-            <!--<CLOTHING>C801a,C201a,C001</CLOTHING>-->
-			<CLOTHING>C057f,C473c,C301j,C204j</CLOTHING>
+            <CLOTHING>C801a,C201a,C001</CLOTHING>
+			<!-- <CLOTHING>C057f,C473c,C301j,C204j</CLOTHING> HALLOWEEN -->
             <TITLE>Mr. Elmhurst</TITLE>
             <GREETING>Howdy</GREETING>
             <BUYTEXT>Feel free to take a look at what I have available. </BUYTEXT>
@@ -310,7 +226,7 @@
 			<!--add this to the line below when mr elmhurst is ready to sell stuff: NPC_BUY_GENERIC-->
             <ACTIONS>NPC_SELL</ACTIONS>
         </NPC>
-	 <NPC>
+	 <!-- <NPC>
 		<ID>NPC017</ID>
 		<NAME>Cauldron of Prizes</NAME>
 		<MODEL>AVATAR_MODEL_CAULDRON</MODEL>		
@@ -324,7 +240,7 @@
 		<TITLE>Cauldron of Prizes</TITLE>
 		<GREETING>Howdy</GREETING>
 		<ACTIONS></ACTIONS>
-	 </NPC>                     
+	 </NPC>                      -->
 	 <!--
 	 <NPC>
 		<ID>NPC019</ID>
@@ -412,7 +328,8 @@
             <SCALE>1.25</SCALE>   
             <COLOR>8</COLOR>
 			<!--<CLOTHING>C471c,C301e,C023d,C108,C204b</CLOTHING>-->
-            <CLOTHING>C056,C108,C608a</CLOTHING>
+            <!-- <CLOTHING>C056,C108,C608a</CLOTHING> ???  -->
+			<CLOTHING>C471c,C301e,C023d,C108,C204b</CLOTHING>
             <TITLE>Izzy</TITLE>
             <GREETING></GREETING>
             <BUYTEXT>Buy your hatchling eggs here.</BUYTEXT>
@@ -429,8 +346,8 @@
 		<FACELEFT>false</FACELEFT>
 		<SCALE>0.90</SCALE>   
 		<COLOR>7</COLOR>
-	    	<!--<CLOTHING>C809a,C010a,C201b,C117</CLOTHING>-->
-			<CLOTHING>C132,C412a,C301j,C201a</CLOTHING>
+	    	<CLOTHING>C809a,C010a,C201b,C117</CLOTHING>
+			<!-- <CLOTHING>C132,C412a,C301j,C201a</CLOTHING> HALLOWEEN -->
 		<TITLE>Farmer Ned</TITLE>
 		<GREETING>Howdy</GREETING>
 	    	<BUYTEXT>Howdy there. What can I help you find today?</BUYTEXT>
@@ -476,7 +393,7 @@
 	    <SELLTYPE>CATEGORY_FRUIT,CATEGORY_VEGETABLE,CATEGORY_MUSHROOM</SELLTYPE>
 	    <ACTIONS>NPC_SELL</ACTIONS>
         </NPC>
-        <!--<NPC>
+        <NPC>
             <ID>NPC018</ID>
             <NAME>Questy</NAME>
             <XPOS>370</XPOS>
@@ -490,7 +407,7 @@
             <GREETING>Hello, I'm Questy Greybeard. </GREETING>
             <BUYTEXT>Ah, I can tell you have proved yourself worthy by gaining much power. Perhaps you would like to reward yourself with some of my very special merchandise.</BUYTEXT>
             <ACTIONS>NPC_QUEST_REWARDS_CATALOG</ACTIONS>
-        </NPC>-->
+        </NPC>
     </LOCATION>    
     <LOCATION ID="EN_darkroom">
 	 <NPC>
@@ -554,8 +471,8 @@
 		<FACELEFT>false</FACELEFT>
 		<SCALE>1.0</SCALE>   
 		<COLOR>14</COLOR>
-		<!--<CLOTHING>C008c,C307d,C204l,C440e,C730</CLOTHING>-->
-		<CLOTHING>C050d,C408a,C603i,C202p</CLOTHING>
+		<CLOTHING>C008c,C307d,C204l,C440e,C730</CLOTHING>
+		<!-- <CLOTHING>C050d,C408a,C603i,C202p</CLOTHING> HALLOWEEN -->
 		<TITLE>Stable Master</TITLE>
 		<GREETING>Howdy</GREETING>
 		<ACTIONS>NPC_BUY_COMPANIONS</ACTIONS>
