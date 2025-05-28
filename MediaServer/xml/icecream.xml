@@ -5,49 +5,49 @@
 			<ID>1</ID>
 			<TOPPING>0</TOPPING>
 			<COLOR>0xE1E078</COLOR>
-			<FLAVOR>Fading Sunshine</FLAVOR>
+			<FLAVOR>Lemon</FLAVOR>
 		</SCOOP>
 		<SCOOP>
 			<ID>2</ID>
 			<TOPPING>2</TOPPING>
 			<COLOR>0x7FDAB7</COLOR>
-			<FLAVOR>Mint of Regret</FLAVOR>
+			<FLAVOR>Mint Chocolate Chip</FLAVOR>
 		</SCOOP>
 		<SCOOP>
 			<ID>3</ID>
 			<TOPPING>1</TOPPING>
 			<COLOR>0xDE79C2</COLOR>
-			<FLAVOR>Forgotten Love</FLAVOR>
+			<FLAVOR>Pink Butter Gum</FLAVOR>
 		</SCOOP>
 		<SCOOP>
 			<ID>4</ID>
 			<TOPPING>4</TOPPING>
 			<COLOR>0xE4DFB1</COLOR>
-			<FLAVOR>Disappointment Swirl</FLAVOR>
+			<FLAVOR>Butter Pecan</FLAVOR>
 		</SCOOP>
 		<SCOOP>
 			<ID>5</ID>
 			<TOPPING>5</TOPPING>
 			<COLOR>0x743927</COLOR>
-			<FLAVOR>Rock Bottom</FLAVOR>
+			<FLAVOR>Rocky Road</FLAVOR>
 		</SCOOP>
 		<SCOOP>
 			<ID>6</ID>
 			<TOPPING>0</TOPPING>
 			<COLOR>0xE89759</COLOR>
-			<FLAVOR>Dying Embers</FLAVOR>
+			<FLAVOR>Orange Shebert</FLAVOR>
 		</SCOOP>
 		<SCOOP>
 			<ID>7</ID>
 			<TOPPING>3</TOPPING>
 			<COLOR>0xC02099</COLOR>
-			<FLAVOR>False Hope Swirl</FLAVOR>
+			<FLAVOR>Strawberry Cream Swirl</FLAVOR>
 		</SCOOP>
 		<SCOOP>
 			<ID>8</ID>
 			<TOPPING>0</TOPPING>
 			<COLOR>0x6B4638</COLOR>
-			<FLAVOR>Ashes of Joy</FLAVOR>
+			<FLAVOR>Chocolate</FLAVOR>
 		</SCOOP>
 	</PAGE>
 	<PAGE ID="2">
@@ -55,25 +55,25 @@
 			<ID>9</ID>
 			<TOPPING>0</TOPPING>
 			<COLOR>0x1B1B1B</COLOR>
-			<FLAVOR>Void of Meaning</FLAVOR>
+			<FLAVOR>Midnight Surprise</FLAVOR>
 		</SCOOP>
 		<SCOOP>
 			<ID>10</ID>
 			<TOPPING>0</TOPPING>
 			<COLOR>0xFF3232</COLOR>
-			<FLAVOR>Bleeding Heart</FLAVOR>
+			<FLAVOR>Cherry</FLAVOR>
 		</SCOOP>
 		<SCOOP>
 			<ID>11</ID>
 			<TOPPING>0</TOPPING>
 			<COLOR>0xFFFFFF</COLOR>
-			<FLAVOR>Empty Promises</FLAVOR>
+			<FLAVOR>Vanilla</FLAVOR>
 		</SCOOP>
 		<SCOOP>
 			<ID>12</ID>
 			<TOPPING>0</TOPPING>
 			<COLOR>0x2E2EFF</COLOR>
-			<FLAVOR>Drowning Sorrows</FLAVOR>
+			<FLAVOR>Blueberry</FLAVOR>
 		</SCOOP>
 	</PAGE>
 </flavorList>
