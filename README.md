@@ -115,6 +115,7 @@ Pandanda Rewritten
    - Implemented the original in-game register.
    - Hashing for IP addresses
    - Friend Request Toggling (and Saving)
+   - Quest Item Objective overflowing UI
 
 iPandanda
    - Original Media Server assets
