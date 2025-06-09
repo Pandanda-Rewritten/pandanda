@@ -1,4 +1,5 @@
-# Pandanda Private Server Setup Guide
+# Open Source Pandanda Server Project 
+## Pandanda Private Server Setup Guide
 
 ## Prerequisites
 - Windows operating system
