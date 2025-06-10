@@ -7,6 +7,15 @@ eval(_server.readFile("utils/eventListener.js"));
 
 var Commands = {};
 
+// Dynamic coin multiplier based on user's ghostDay crumb
+function getGhostGameCoinMultiplier(user) {
+  var ghostDay = user.properties.get("ghostDay");
+  if (ghostDay == "1" || ghostDay == 1) {
+    return 4; // Double coins day
+  }
+  return 2; // Normal multiplier
+}
+
 function handlePandandaPacket(cmd, params, user, fromRoom) {
   var header = cmd.split("##")[1];
   if (header == undefined) header = cmd;
@@ -23,7 +32,8 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
           var ghostroom = zone.getRoomByName("EN_graveyard");
           var usrz = ghostroom.getAllUsers();
           for (var i in usrz) {
-            user.properties.put("ghostsCaught", 0);
+            usrz[i].properties.put("ghostsCaught", 0);
+            usrz[i].properties.put("baseGhostsCaught", 0);
           }
 
           Users.SendJSON(user, {
@@ -36,7 +46,16 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
         }
         case "GHOST_GAME_UPDATE_PLAYER_SCORE": {
           var ghostsCaught = Number(user.properties.get("ghostsCaught")) || 0;
-          user.properties.put("ghostsCaught", ghostsCaught + 1);
+          
+          // Calculate the actual coin value with multiplier (1 point per ghost * multiplier)
+          var actualCoinsToAdd = 1 * getGhostGameCoinMultiplier(user);
+          ghostsCaught += actualCoinsToAdd;
+          user.properties.put("ghostsCaught", ghostsCaught);
+          
+          // Also track base ghost count (before multiplier) for client display calculation
+          var baseGhostsCaught = Number(user.properties.get("baseGhostsCaught")) || 0;
+          baseGhostsCaught += 1;
+          user.properties.put("baseGhostsCaught", baseGhostsCaught);
 
           break;
         }
@@ -47,7 +66,8 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
             var totalpoints = Number(
               user.properties.get("ghostsCaught").toString()
             );
-            var newCoins = currentCoins + totalpoints * 2;
+            // ghostsCaught now already contains multiplied values, so no need to multiply again
+            var newCoins = currentCoins + totalpoints;
 
             user.properties.put("coins", newCoins);
             Users.UpdateCrumb(user.properties.get("id"), "coins", newCoins);
@@ -57,6 +77,8 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
               success: true,
               coins: newCoins,
             });
+            user.properties.put("ghostsCaught", 0);
+            user.properties.put("baseGhostsCaught", 0);
           } catch (e) {
             trace("Error in GHOST_GAME_FINAL_PLAYER_SCORE: " + e);
             Users.SendJSON(user, {
@@ -94,16 +116,40 @@ function ghostGameFunc() {
     for (i in usrz) {
       try {
         var totalpoints = Number(usrz[i].properties.get("ghostsCaught")) || 0;
+        
+        // Get base points for client display calculation
+        var baseGhostsCaught = Number(usrz[i].properties.get("baseGhostsCaught")) || 0;
+        
+        // Calculate final coins earned amount for client display (base points * server multiplier)
+        var coinsEarned = baseGhostsCaught * getGhostGameCoinMultiplier(usrz[i]);
 
         var currentCoins = Number(usrz[i].properties.get("coins")) || 0;
 
-        var newCoins = currentCoins + totalpoints * 2;
+        // ghostsCaught now already contains multiplied values, so no need to multiply again
+        var newCoins = currentCoins + totalpoints;
 
+        // Update user properties
+        usrz[i].properties.put("coins", newCoins);
+        
+        // Update database
         Users.UpdateCrumb(usrz[i].properties.get("id"), "coins", newCoins);
+        
+        // Notify the UI
+        Users.SendJSON(usrz[i], {
+          _cmd: "coinUpdate",
+          coins: newCoins,
+          success: true,
+        });
+        
+        // Reset ghost tracking for next game
+        usrz[i].properties.put("ghostsCaught", 0);
+        usrz[i].properties.put("baseGhostsCaught", 0);
 
         ghostList.push({
           username: String(usrz[i].getName()),
-          totalpoints: Number(totalpoints),
+          totalpoints: totalpoints,
+          baseGhostsCaught: baseGhostsCaught,
+          coinsEarned: coinsEarned,
         });
       } catch (e) {
         trace("Error processing player: " + e);
@@ -120,7 +166,9 @@ function ghostGameFunc() {
         "," +
         String(sortedList[i].username) +
         "," +
-        String(sortedList[i].totalpoints) +
+        String(sortedList[i].baseGhostsCaught) +
+        "," +
+        String(sortedList[i].coinsEarned) +
         ";";
       miejsce = miejsce + 1;
     }

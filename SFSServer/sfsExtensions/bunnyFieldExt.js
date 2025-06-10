@@ -1,5 +1,14 @@
 var dbase, zone, _sfs, bunnyGameState;
 
+// Dynamic coin multiplier based on user's bunnyDay crumb
+function getBunnyGameCoinMultiplier(user) {
+  var bunnyDay = user.properties.get("bunnyDay");
+  if (bunnyDay == "1" || bunnyDay == 1) {
+    return 4; // Double coins day
+  }
+  return 2; // Normal multiplier
+}
+
 eval(_server.readFile("utils/json.js"));
 eval(_server.readFile("utils/functions.js"));
 eval(_server.readFile("utils/xn_name_map.js"));
@@ -29,7 +38,15 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
         }
         case "BUNNY_GAME_UPDATE_PLAYER_SCORE": {
           var toadd = Decoder.decodeData(params["e"], 11);
-          var cur = Number(user.properties.get("bunnyPoints")) + Number(toadd);
+          
+          // Calculate the actual coin value with multiplier
+          var actualCoinsToAdd = Number(toadd) * getBunnyGameCoinMultiplier(user);
+          var cur = Number(user.properties.get("bunnyPoints")) + actualCoinsToAdd;
+          
+          // Also track base points (before multiplier) for client display calculation
+          var baseTotalPoints = Number(user.properties.get("baseBunnyPoints")) || 0;
+          baseTotalPoints += Number(toadd);
+          user.properties.put("baseBunnyPoints", baseTotalPoints);
 
           if (toadd == 1) {
             var whiteBunnies = Number(user.properties.get("whiteBunnies")) || 0;
@@ -49,7 +66,8 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
           try {
             var currentCoins = Number(user.properties.get("coins")) || 0;
             var totalpoints = Number(user.properties.get("bunnyPoints")) || 0;
-            var newCoins = currentCoins + totalpoints * 2;
+            // bunnyPoints now already contains multiplied values, so no need to multiply again
+            var newCoins = currentCoins + totalpoints;
             user.properties.put("coins", newCoins);
             Users.UpdateCrumb(user.properties.get("id"), "coins", newCoins);
 
@@ -62,6 +80,7 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
             user.properties.put("whiteBunnies", 0);
             user.properties.put("brownBunnies", 0);
             user.properties.put("blackBunnies", 0);
+            user.properties.put("baseBunnyPoints", 0);
           } catch (e) {
             trace("Error in BUNNY_GAME_FINAL_PLAYER_SCORE: " + e);
             Users.SendJSON(user, {
@@ -104,16 +123,43 @@ function bunnyGameFunc() {
         var totalpoints = Number(
           usrz[i].properties.get("bunnyPoints").toString()
         );
+        
+        // Get base points for client display calculation
+        var baseTotalPoints = Number(usrz[i].properties.get("baseBunnyPoints")) || 0;
+        
+        // Calculate final coins earned amount for client display (base points * server multiplier)
+        var coinsEarned = baseTotalPoints * getBunnyGameCoinMultiplier(usrz[i]);
 
         var currentCoins = Number(usrz[i].properties.get("coins")) || 0;
 
-        var newCoins = currentCoins + totalpoints * 2;
+        // bunnyPoints now already contains multiplied values, so no need to multiply again
+        var newCoins = currentCoins + totalpoints;
 
+        // Update user properties
+        usrz[i].properties.put("coins", newCoins);
+        
+        // Update database
         Users.UpdateCrumb(usrz[i].properties.get("id"), "coins", newCoins);
+        
+        // Notify the UI
+        Users.SendJSON(usrz[i], {
+          _cmd: "coinUpdate",
+          coins: newCoins,
+          success: true,
+        });
+        
+        // Reset bunny tracking for next game
+        usrz[i].properties.put("bunnyPoints", 0);
+        usrz[i].properties.put("whiteBunnies", 0);
+        usrz[i].properties.put("brownBunnies", 0);
+        usrz[i].properties.put("blackBunnies", 0);
+        usrz[i].properties.put("baseBunnyPoints", 0);
 
         bunnyList.push({
           username: String(usrz[i].getName()),
           totalpoints: totalpoints,
+          baseTotalPoints: baseTotalPoints,
+          coinsEarned: coinsEarned,
           whiteBunnies: whiteBunnies,
           brownBunnies: brownBunnies,
           blackBunnies: blackBunnies,
@@ -139,7 +185,9 @@ function bunnyGameFunc() {
         "," +
         String(sortedList[i].blackBunnies) +
         "," +
-        String(sortedList[i].totalpoints) +
+        String(sortedList[i].baseTotalPoints) +
+        "," +
+        String(sortedList[i].coinsEarned) +
         ";";
       miejsce = miejsce + 1;
     }

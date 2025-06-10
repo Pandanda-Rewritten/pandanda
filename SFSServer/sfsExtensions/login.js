@@ -151,12 +151,57 @@ function loginFunction(username, password, chan) {
         .get(0)
         .getItem("test") || null
     );
-    crumbs["priceList"] = String(
-      dbase
-        .executeQuery("SELECT `value` FROM config WHERE `key`='priceList';")
-        .get(0)
-        .getItem("value")
-    );
+    // Check event toggles to determine which price list to use
+    var priceListKey = "priceList"; // Default price list
+    
+    try {
+      // Check for active events in eventconfig table
+      var eventQuery = dbase.executeQuery("SELECT `event`, active FROM eventconfig WHERE active = 1;");
+      
+      if (eventQuery != null && eventQuery.size() > 0) {
+        var doubleGemsActive = false;
+        var doubleFruitVegActive = false;
+        var doubleFruitVegGemsActive = false;
+        var doubleRecycleActive = false;
+        var doubleFishActive = false;
+        var doubleAllSellingActive = false;
+        
+        for (var i = 0; i < eventQuery.size(); i++) {
+          var eventName = eventQuery.get(i).getItem("event");
+          var isActive = eventQuery.get(i).getItem("active");
+          
+          if ((isActive == "1" || isActive == 1) && eventName == "doubleGems") {
+            doubleGemsActive = true;
+          } else if ((isActive == "1" || isActive == 1) && eventName == "doubleFruitVeg") {
+            doubleFruitVegActive = true;
+          } else if ((isActive == "1" || isActive == 1) && eventName == "doubleFruitVegGems") {
+            doubleFruitVegGemsActive = true;
+          } else if ((isActive == "1" || isActive == 1) && eventName == "doubleRecycle") {
+            doubleRecycleActive = true;
+          } else if ((isActive == "1" || isActive == 1) && eventName == "doubleFish") {
+            doubleFishActive = true;
+          } else if ((isActive == "1" || isActive == 1) && eventName == "doubleAllSelling") {
+            doubleAllSellingActive = true;
+          }
+        }
+        
+        if (doubleGemsActive) {
+          priceListKey = "doubleGemsPriceList";
+        } else if (doubleFruitVegActive) {
+          priceListKey = "doubleFVPriceList";
+        } else if (doubleFruitVegGemsActive) {
+          priceListKey = "doubleFVGPPriceList";
+        } else if (doubleRecycleActive) {
+          priceListKey = "doubleTrashPriceList";
+        } else if (doubleFishActive) {
+          priceListKey = "doubleFishPriceList";
+        } else if (doubleAllSellingActive) {
+          priceListKey = "doubleAllPriceList";
+        }
+      }
+    } catch (e) {
+      trace("Error checking eventconfig, using default price list: " + e);
+    }
     crumbs["catalogs"] = String(
       dbase
         .executeQuery("SELECT `value` FROM config WHERE `key`='catalogs';")
@@ -167,7 +212,53 @@ function loginFunction(username, password, chan) {
       (date.getDay() + date.getDate()) * date.getMonth() * 2
     );
     crumbs["isMember"] = 1;
-    crumbs["isZing"] = 1;
+    
+    // Check eventconfig for isZing value
+    var isZingValue = 0; // Default value
+    
+    try {
+      // Check for isZing event in eventconfig table
+      var zingQuery = dbase.executeQuery("SELECT active FROM eventconfig WHERE event = 'zingActive';");
+      if (zingQuery != null && zingQuery.size() > 0) {
+        var zingActive = zingQuery.get(0).getItem("active");
+        isZingValue = (zingActive == "1" || zingActive == 1) ? 1 : 0;
+      }
+    } catch (e) {
+      trace("Error checking eventconfig for isZing using default value: " + e);
+    }
+    
+    crumbs["isZing"] = isZingValue;
+
+    // Check eventconfig for isBunnyDay value
+    var isBunnyDayValue = 0; // Default value
+    
+    try {
+      // Check for isBunnyDay event in eventconfig table
+      var bunnyDayQuery = dbase.executeQuery("SELECT active FROM eventconfig WHERE event = 'doubleBunnyGame';");
+      if (bunnyDayQuery != null && bunnyDayQuery.size() > 0) {
+        var isBunnyDay = bunnyDayQuery.get(0).getItem("active");
+        isBunnyDayValue = (isBunnyDay == "1" || isBunnyDay == 1) ? 1 : 0;
+      }
+    } catch (e) {
+      trace("Error checking eventconfig for bunnyDay, using default value: " + e);
+    }
+    crumbs["bunnyDay"] = isBunnyDayValue;
+
+    // Check eventconfig for isGhostDay value
+    var isGhostDayValue = 0; // Default value
+    
+    try {
+      // Check for isGhostDay event in eventconfig table
+      var ghostDayQuery = dbase.executeQuery("SELECT active FROM eventconfig WHERE event = 'doubleGhostGame';");
+      if (ghostDayQuery != null && ghostDayQuery.size() > 0) {
+        var isGhostDay = ghostDayQuery.get(0).getItem("active");
+        isGhostDayValue = (isGhostDay == "1" || isGhostDay == 1) ? 1 : 0;
+      }
+    } catch (e) {
+      trace("Error checking eventconfig for bunnyDay, using default value: " + e);
+    }
+    crumbs["ghostDay"] = isGhostDayValue;
+
     crumbs["isChristmas"] = 0;
     crumbs["festivalCollection"] = 0;
     crumbs["id"] = String(user.getUserId());
