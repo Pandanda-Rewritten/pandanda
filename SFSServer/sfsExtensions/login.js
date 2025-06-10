@@ -83,7 +83,7 @@ function loginFunction(username, password, chan) {
         bff: "None",
         color: "0",
         cardBG: "BG001",
-        qAvailable: processQAvailable(
+        qAvailable: "Q001a:QI001-1:50:90:," + processQAvailable(
           String(
             dbase
               .executeQuery(
