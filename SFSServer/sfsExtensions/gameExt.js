@@ -1,4 +1,4 @@
-var dbase, zone, _sfs, zingItem, fashionShowItem;
+var dbase, zone, _sfs, zingItem, celebItem;
 var popInterval;
 
 eval(_server.readFile("utils/json.js"));
@@ -650,11 +650,11 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
           var whom = Decoder.decodeData(params["e"], 11);
           if (String(user.getName()) == "Sheriff") {
             var targetz = Users.GetUserByName(String(whom));
-            receiveItem(targetz, fashionShowItem);
+            receiveItem(targetz, celebItem);
             Users.SendJSON(targetz, {
               _cmd: "secretUpdate",
               success: true,
-              itemId: fashionShowItem,
+              itemId: celebItem,
             });
             return;
           } else {
@@ -1264,7 +1264,12 @@ function init() {
       .get(0)
       .getItem("value")
   );
-  fashionShowItem = zingItem;
+  celebItem = String(
+    dbase
+      .executeQuery("SELECT `value` FROM config WHERE `key`='celebItem';")
+      .get(0)
+      .getItem("value")
+  );
   popInterval = setInterval("updatePop", 30000);
   _server.getCurrentZone().setPubMsgInternalEvent(true);
 }

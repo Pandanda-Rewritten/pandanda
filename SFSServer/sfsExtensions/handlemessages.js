@@ -193,14 +193,6 @@ function handlePublicMessage(user, message, fromRoom) {
           }
         }
       }
-    } else if (thecmd == "!fashionshow") {
-      hide = true;
-      if (user.isModerator()) {
-        if (!msgex[1]) {
-        } else {
-          fashionShowItem = msgex[1];
-        }
-      }
     } else if (thecmd == "!kick") {
       if (user.isModerator()) {
         if (!msgex[1]) {
