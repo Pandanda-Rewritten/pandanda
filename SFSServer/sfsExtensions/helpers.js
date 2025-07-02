@@ -244,3 +244,58 @@ function processQAvailable(qAvailableString) {
     return qAvailableString;
   }
 }
+
+function checkAndGiveLoginItem(user) {
+  try {
+    // Check if free item event is active
+    var eventRes = dbase.executeQuery(
+      "SELECT active FROM eventconfig WHERE event='loginItemActive' LIMIT 1;"
+    );
+    
+    if (eventRes.size() == 0 || Number(eventRes.get(0).getItem("active")) !== 1) {
+      return; // Event not active
+    }
+    
+    // Get the current login item
+    var configRes = dbase.executeQuery(
+      "SELECT value FROM config WHERE `key`='loginItem' LIMIT 1;"
+    );
+    
+    if (configRes.size() == 0) {
+      return; // No login item configured
+    }
+    
+    var loginItem = String(configRes.get(0).getItem("value"));
+    if (!loginItem || loginItem === "") {
+      return; // No valid login item
+    }
+    
+    // Check if user already has this item
+    if (hasItem(user, loginItem)) {
+      return; // User already has the item
+    }
+    
+    // Check if user has already received the current login item
+    var lastLoginItem = user.properties.get("lastLoginItem") || "";
+    if (lastLoginItem === loginItem) {
+      return; // User already received this login item
+    }
+    
+    // Give the item to the user
+    receiveItem(user, loginItem);
+    
+    // Mark that they've received this login item
+    user.properties.put("lastLoginItem", loginItem);
+    Users.UpdateCrumb(user.properties.get("id"), "lastLoginItem", loginItem);
+    
+    // Send the secret item popup
+    Users.SendJSON(user, {
+      _cmd: "secretUpdate",
+      itemId: loginItem,
+      success: true,
+    });
+    
+  } catch (e) {
+    trace("Error in checkAndGiveLoginItem: " + e);
+  }
+}

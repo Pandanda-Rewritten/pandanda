@@ -103,6 +103,17 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
             px: 530,
             py: 400,
           });
+
+          // Check for login item when user joins their first room after login
+          if (!user.properties.get("loginItemChecked")) {
+            // Mark as checked for this session to prevent multiple checks
+            user.properties.put("loginItemChecked", true);
+            
+            // Check and give login item if conditions are met
+            if (typeof checkAndGiveLoginItem === "function") {
+              checkAndGiveLoginItem(user);
+            }
+          }
           break;
         }
         case "GET_USER_ROOM": {
