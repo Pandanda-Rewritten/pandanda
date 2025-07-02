@@ -10,6 +10,7 @@ eval(_server.readFile("utils/eventListener.js"));
 eval(_server.readFile("login.js"));
 eval(_server.readFile("quests.js"));
 eval(_server.readFile("petHandlers.js"));
+eval(_server.readFile("modExt.js"));
 
 var Commands = {};
 
