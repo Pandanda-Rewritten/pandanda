@@ -117,6 +117,9 @@ Pandanda Rewritten
    - Hashing for IP addresses
    - Friend Request Toggling (and Saving)
    - Quest Item Objective overflowing UI
+   - Remote Event Toggle-ability for Double Coins and Zing
+   - Celebrity Item Correct Functionality
+   - Free Login Item Functionality
 
 iPandanda
    - Original Media Server assets
