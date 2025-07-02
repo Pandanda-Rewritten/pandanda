@@ -25,6 +25,14 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
           handlePublicMessage(user, params.msg, fromRoom);
           break;
         }
+        case "MOD_KICK":
+        case "MOD_MUTE":
+        case "MOD_BAN":
+        case "MOD_PERM_BAN":
+        case "PERM_BAN": {
+          handleModCommand(XT_Hash[header], params, user, fromRoom);
+          break;
+        }
         case "MG_GET_STATS": {
           break;
         }
