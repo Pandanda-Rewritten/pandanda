@@ -1255,16 +1255,21 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
   }
 }
 
+function refreshZingItem() {
+  try {
+    var result = dbase.executeQuery("SELECT value FROM config WHERE `key` = 'zingItem'");
+    if (result && result.size() > 0) {
+      zingItem = String(result.get(0).getItem("value"));
+    }
+  } catch (e) {
+    trace("Failed to refresh zingItem: " + e);
+  }
+}
+
 function init() {
   dbase = _server.getDatabaseManager();
   zone = _server.getCurrentZone();
   _sfs = Packages.it.gotoandplay.smartfoxserver.SmartFoxServer;
-  zingItem = String(
-    dbase
-      .executeQuery("SELECT `value` FROM config WHERE `key`='zingItem';")
-      .get(0)
-      .getItem("value")
-  );
   celebItem = String(
     dbase
       .executeQuery("SELECT `value` FROM config WHERE `key`='celebItem';")
