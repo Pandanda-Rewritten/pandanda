@@ -1096,6 +1096,7 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
           break;
         }
         case "TICKET_PRIZE": {
+          refreshZingItem();
           Users.SendJSON(user, {
             _cmd: "zing",
             cmd2: "ticketPrize",
