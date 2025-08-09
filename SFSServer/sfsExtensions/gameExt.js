@@ -550,7 +550,8 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
                   isSuccess: true,
                   _cmd: "useItem",
                 });
-                return;
+                // Chest removed; proceed to credit coins and consume key
+                break;
               }
             }
           }
