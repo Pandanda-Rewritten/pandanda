@@ -120,6 +120,7 @@ Pandanda Rewritten
    - Remote Event Toggle-ability for Double Coins and Zing
    - Celebrity Item Correct Functionality
    - Free Login Item Functionality
+   - Fix Implemented for Treasure Chest Functionality
 
 iPandanda
    - Original Media Server assets
