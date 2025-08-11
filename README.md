@@ -125,6 +125,7 @@ Pandanda Rewritten
    - Custom Bad Word (Swear Filter) for Chat & Registration
    - Server List Toggleable features (Elite, Level Req, SafeChat only)
    - Fix Implemented for Population Counter
+   - Buddy icon to Server list
 
 iPandanda
    - Original Media Server assets

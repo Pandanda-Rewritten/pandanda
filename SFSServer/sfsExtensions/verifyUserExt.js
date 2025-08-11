@@ -1,13 +1,50 @@
-eval(_server.readFile("utils/eventListener.js"));
+﻿eval(_server.readFile("utils/eventListener.js"));
 eval(_server.readFile("utils/functions.js"));
 eval(_server.readFile("utils/json.js"));
 
+// Global variables
 var dbase;
 var handlers = {};
 
 function handlePandandaPacket(cmd, params, user, fromRoom) {
-  
-  if (handlers[cmd] == null) {
+  // no-op
+}
+
+function checkFriendsOnlineOnServer(username, serverName, zoneName) {
+  try {
+    var zone = _server.getZone(zoneName);
+    if (!zone) return false;
+
+    var buddyList = zone.loadBuddyList(username);
+    if (!buddyList || !buddyList.buddies) return false;
+
+    // Build a normalized set of online usernames
+    var onlineUsers = zone.getUserList().toArray();
+    var onlineSet = {};
+    for (var j = 0; j < onlineUsers.length; j++) {
+      var u = onlineUsers[j];
+      if (u && u.getName) {
+        var nm = String(u.getName()).toLowerCase().trim();
+        if (nm) onlineSet[nm] = true;
+      }
+    }
+
+    // Check each buddy against normalized set
+    for (var i = 0; i < buddyList.buddies.size(); i++) {
+      var b = buddyList.buddies.get(i);
+      var bName = null;
+      try {
+        bName = b.getName ? String(b.getName()).toLowerCase().trim() : String(b.name).toLowerCase().trim();
+      } catch (e) {
+        bName = String(b.name).toLowerCase().trim();
+      }
+      if (bName && onlineSet[bName] === true) return true;
+    }
+
+    return false;
+  } catch (e) {
+    trace("verifyUserExt: Error checking friends online: " + e);
+    return false;
   }
 }
 
@@ -40,7 +77,6 @@ function handleLoginVerify(evtObj, user) {
         });
       } else {
         // Ban has expired, clear it
-        trace("Ban expired for user " + username + ", clearing ubdate");
         dbase.executeCommand(
           "UPDATE users SET ubdate=NULL WHERE username='" +
             _server.escapeQuotes(username) +
@@ -80,7 +116,10 @@ function handleLoginVerify(evtObj, user) {
     var serverStr = new Array(),
       servers = dbase.executeQuery("SELECT * FROM servers;");
     for (var i = 0; i < servers.size(); i++) {
+      var serverName = servers.get(i).getItem("name");
+      var zoneName = servers.get(i).getItem("zone");
       var popu = servers.get(i).getItem("population");
+      var hasFriendsOnline = checkFriendsOnlineOnServer(username, serverName, zoneName);
       serverStr.push(
         servers.get(i).getItem("name") +
           "," +
@@ -98,12 +137,7 @@ function handleLoginVerify(evtObj, user) {
           "," +
           servers.get(i).getItem("levelReq") +
           "," +
-          servers.get(i).getItem("friendOnline")
-          // Old Hardcoded values:
-          // false, // Safe Chat
-          // false, //Members Only
-          // 0, // Level Req
-          // false, // Friend Online
+          (hasFriendsOnline ? "true" : "false")
       );
     }
     serverStr = serverStr.join(";");
