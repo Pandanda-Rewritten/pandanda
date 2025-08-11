@@ -1,4 +1,5 @@
 // Crypto utilities for reversible IP encryption using AES-CBC + HMAC-SHA256
+// Blob format: v1:<base64(iv)>:<base64(ciphertext)>:<base64(tag)>
 
 (function () {
   var Cipher = Packages.javax.crypto.Cipher;
@@ -7,17 +8,65 @@
   var SecureRandom = Packages.java.security.SecureRandom;
   var Mac = Packages.javax.crypto.Mac;
   var Arrays = Packages.java.util.Arrays;
-  var BASE64Encoder = Packages.sun.misc.BASE64Encoder;
-  var BASE64Decoder = Packages.sun.misc.BASE64Decoder;
+
+  // Pure JavaScript Base64 implementation to avoid Java class resolution issues
+  var b64chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+  var b64tab = {};
+  for (var i = 0; i < b64chars.length; i++) {
+    b64tab[b64chars.charAt(i)] = i;
+  }
 
   function b64encode(bytes) {
-    var enc = new BASE64Encoder().encode(bytes);
-    // remove CR/LF inserted by encoder
-    return String(enc).replace(/\r|\n/g, "");
+    var str = '';
+    var len = bytes.length;
+    for (var i = 0; i < len; i += 3) {
+      var b1 = bytes[i] & 0xff;
+      var b2 = i + 1 < len ? bytes[i + 1] & 0xff : 0;
+      var b3 = i + 2 < len ? bytes[i + 2] & 0xff : 0;
+      
+      var e1 = b1 >> 2;
+      var e2 = ((b1 & 3) << 4) | (b2 >> 4);
+      var e3 = ((b2 & 15) << 2) | (b3 >> 6);
+      var e4 = b3 & 63;
+      
+      str += b64chars.charAt(e1) + b64chars.charAt(e2);
+      str += i + 1 < len ? b64chars.charAt(e3) : '=';
+      str += i + 2 < len ? b64chars.charAt(e4) : '=';
+    }
+    return str;
   }
 
   function b64decode(text) {
-    return new BASE64Decoder().decodeBuffer(String(text));
+    var str = String(text).replace(/[^A-Za-z0-9\+\/\=]/g, '');
+    var result = [];
+    var len = str.length;
+    
+    for (var i = 0; i < len; i += 4) {
+      var e1 = b64tab[str.charAt(i)];
+      var e2 = b64tab[str.charAt(i + 1)];
+      var e3 = b64tab[str.charAt(i + 2)];
+      var e4 = b64tab[str.charAt(i + 3)];
+      
+      var b1 = (e1 << 2) | (e2 >> 4);
+      var b2 = ((e2 & 15) << 4) | (e3 >> 2);
+      var b3 = ((e3 & 3) << 6) | e4;
+      
+      result.push(b1);
+      if (e3 !== undefined) result.push(b2);
+      if (e4 !== undefined) result.push(b3);
+    }
+    
+    // Convert JavaScript array to Java byte array
+    var javaBytes = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, result.length);
+    for (var i = 0; i < result.length; i++) {
+      // Convert to signed byte (-128 to 127)
+      var byteValue = result[i] & 0xff;
+      if (byteValue > 127) {
+        byteValue = byteValue - 256;
+      }
+      javaBytes[i] = new java.lang.Byte(byteValue);
+    }
+    return javaBytes;
   }
 
   function getConfigValue(key) {
