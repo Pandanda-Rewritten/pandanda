@@ -223,7 +223,7 @@ function handlePublicMessage(user, message, fromRoom) {
               "';"
           );
 
-          if (queryResult) {
+          if (queryResult && queryResult.size() > 0) {
             dbase.executeCommand(
               "UPDATE users SET ubdate=null WHERE username='" +
                 _server.escapeQuotes(targetUsername) +
@@ -471,11 +471,19 @@ function handlePublicMessage(user, message, fromRoom) {
     } else if (thecmd == "!ban") {
       if (user.isModerator() || user.properties.get("isSMod") == 1) {
         if (!msgex[1]) {
+          Users.SendAdmin(user, "Usage: !ban [username]", fromRoom);
         } else {
-          var targetz = Users.GetUserByName(
-            String(message).replace("!ban ", "")
+          var targetUsername = String(message).replace("!ban ", "").trim();
+          
+          // Check if user exists in database
+          var queryResult = dbase.executeQuery(
+            "SELECT * FROM users WHERE username='" +
+              _server.escapeQuotes(targetUsername) +
+              "';"
           );
-          if (targetz != null) {
+          
+          if (queryResult && queryResult.size() > 0) {
+            var targetz = Users.GetUserByName(targetUsername);
             var date = new Date();
             var permanentDate = new Date(
               date.getTime() + 1000 * 60 * 60 * 24 * 365 * 1000
@@ -486,14 +494,28 @@ function handlePublicMessage(user, message, fromRoom) {
               "UPDATE users SET ubdate='" +
                 _server.escapeQuotes(dateString) +
                 "' WHERE username='" +
-                _server.escapeQuotes(String(message).replace("!ban ", "")) +
+                _server.escapeQuotes(targetUsername) +
                 "';"
             );
-            _server.kickUser(
-              targetz,
-              10,
-              "You have been banned! Please behave better next time..."
-            );
+            
+            // Show success message to moderator first
+            Users.SendAdmin(user, targetUsername + " has been banned permanently.", fromRoom);
+            
+            // Then try to kick if user is online
+            if (targetz != null) {
+              try {
+                _server.kickUser(
+                  targetz,
+                  1,
+                  "You have been banned! Please behave better next time..."
+                );
+              } catch (e) {
+                trace("handlemessages.js: Error kicking user " + targetUsername + ": " + e);
+                // User was banned in database, kick error doesn't matter
+              }
+            }
+          } else {
+            Users.SendAdmin(user, "Error: User '" + targetUsername + "' does not exist.", fromRoom);
           }
         }
       }
