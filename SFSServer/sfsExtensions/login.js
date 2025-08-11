@@ -116,13 +116,33 @@ function loginFunction(username, password, chan) {
     var clo = _.uniq(crumbs["closet"].split(","), false);
     crumbs["closet"] = clo.join(",");
     var tempets = [];
-    dbase.executeCommand(
-      "UPDATE users SET ip='" +
-        _server.escapeQuotes(_server.md5(String(user.getIpAddress()))) +
-        "' WHERE id='" +
-        _server.escapeQuotes(qRes.get(0).getItem("id")) +
-        "';"
-    );
+    // Encrypt and store IP in existing ip column (reversible), widening column if required
+    try {
+      var __ipStr = String(user.getIpAddress());
+      var __ipEnc = CryptoUtil.encryptIp(__ipStr);
+      dbase.executeCommand(
+        "UPDATE users SET ip='" +
+          _server.escapeQuotes(String(__ipEnc || "")) +
+          "' WHERE id='" +
+          _server.escapeQuotes(qRes.get(0).getItem("id")) +
+          "';"
+      );
+    } catch (e) {
+      try {
+        dbase.executeCommand("ALTER TABLE users MODIFY COLUMN ip TEXT NULL;");
+        var __ipStr2 = String(user.getIpAddress());
+        var __ipEnc2 = CryptoUtil.encryptIp(__ipStr2);
+        dbase.executeCommand(
+          "UPDATE users SET ip='" +
+            _server.escapeQuotes(String(__ipEnc2 || "")) +
+            "' WHERE id='" +
+            _server.escapeQuotes(qRes.get(0).getItem("id")) +
+            "';"
+        );
+      } catch (e2) {
+        trace("login.js: failed to store encrypted IP in users.ip: " + e2);
+      }
+    }
     var queryRes = dbase.executeQuery(
       'SELECT *, DATE_FORMAT(birthday, "%m/%d/%Y") AS datey FROM pets WHERE owner=\'' +
         _server.escapeQuotes(qRes.get(0).getItem("id")) +
@@ -143,7 +163,12 @@ function loginFunction(username, password, chan) {
     user.properties.put("petarray", tempets);
     var date = new Date();
     crumbs["_cmd"] = "loginSuccess";
-    crumbs["ip"] = _server.md5(String(user.getIpAddress()) || "127.0.0.1");
+    // Provide encrypted IP blob in crumbs
+    try {
+      crumbs["ip"] = String(CryptoUtil.encryptIp(String(user.getIpAddress())) || "127.0.0.1");
+    } catch (e) {
+      crumbs["ip"] = "";
+    }
     crumbs["isBday"] = 0;
     crumbs["sTime"] = String(
       dbase
