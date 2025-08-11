@@ -209,7 +209,7 @@ function updatePop() {
   dbase.executeCommand(
     "UPDATE servers SET population='" +
       _server.escapeQuotes(
-        String(Math.floor((Number(zone.getUserCount()) / 600) * 100))
+        String(zone.getUserCount())
       ) +
       "' WHERE zone='" +
       _server.escapeQuotes(String(zone.getName())) +

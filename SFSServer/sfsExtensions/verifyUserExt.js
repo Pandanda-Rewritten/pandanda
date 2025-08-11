@@ -92,7 +92,18 @@ function handleLoginVerify(evtObj, user) {
           "," +
           popu +
           "," +
-          "false,false,0,false"
+          servers.get(i).getItem("safeChat") +
+          "," +
+          servers.get(i).getItem("membersOnly") +
+          "," +
+          servers.get(i).getItem("levelReq") +
+          "," +
+          servers.get(i).getItem("friendOnline")
+          // Old Hardcoded values:
+          // false, // Safe Chat
+          // false, //Members Only
+          // 0, // Level Req
+          // false, // Friend Online
       );
     }
     serverStr = serverStr.join(";");

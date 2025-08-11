@@ -81,7 +81,13 @@ CREATE TABLE `servers` (
   `zone` varchar(255) NOT NULL,
   `host` varchar(255) NOT NULL,
   `port` int(11) NOT NULL,
-  `population` int(11) NOT NULL
+  `population` int(11) NOT NULL,
+  `safeChat` varchar(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT 'false',
+  `elite` varchar(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT 'false',
+  `levelReq` int NULL DEFAULT 0,
+  `friendOnline` varchar(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT 'false',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `name`(`name`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 

@@ -123,6 +123,8 @@ Pandanda Rewritten
    - Fix Implemented for Treasure Chest Functionality
    - Fix Implemented for Ban and Unban commands
    - Custom Bad Word (Swear Filter) for Chat & Registration
+   - Server List Toggleable features (Elite, Level Req, SafeChat only)
+   - Fix Implemented for Population Counter
 
 iPandanda
    - Original Media Server assets
