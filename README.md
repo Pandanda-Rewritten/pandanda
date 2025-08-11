@@ -114,13 +114,14 @@ Before starting, ensure you have the following tools installed:
 
 Pandanda Rewritten 
    - Implemented the original in-game register.
-   - Hashing for IP addresses
+   - Custom Encryption Hashing for IP addresses
    - Friend Request Toggling (and Saving)
    - Quest Item Objective overflowing UI
    - Remote Event Toggle-ability for Double Coins and Zing
    - Celebrity Item Correct Functionality
    - Free Login Item Functionality
    - Fix Implemented for Treasure Chest Functionality
+   - Fix Implemented for Ban and Unban commands
 
 iPandanda
    - Original Media Server assets
