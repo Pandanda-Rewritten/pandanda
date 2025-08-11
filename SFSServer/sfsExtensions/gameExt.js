@@ -4,6 +4,7 @@ var popInterval;
 eval(_server.readFile("utils/json.js"));
 eval(_server.readFile("utils/functions.js"));
 eval(_server.readFile("utils/xn_name_map.js"));
+eval(_server.readFile("badwords.js"));
 eval(_server.readFile("handlemessages.js"));
 eval(_server.readFile("helpers.js"));
 eval(_server.readFile("utils/eventListener.js"));
@@ -1280,6 +1281,8 @@ function init() {
   );
   popInterval = setInterval("updatePop", 30000);
   _server.getCurrentZone().setPubMsgInternalEvent(true);
+  // Load bad words from database
+  loadBadWordsFromDB();
 }
 function destroy() {
   trace("Nice knowing you, bye! :)");

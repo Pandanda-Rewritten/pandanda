@@ -122,6 +122,7 @@ Pandanda Rewritten
    - Free Login Item Functionality
    - Fix Implemented for Treasure Chest Functionality
    - Fix Implemented for Ban and Unban commands
+   - Custom Bad Word (Swear Filter) for Chat & Registration
 
 iPandanda
    - Original Media Server assets

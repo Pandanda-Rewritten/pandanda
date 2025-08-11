@@ -13,6 +13,7 @@ function loginFunction(username, password, chan) {
       "';"
   );
 
+
   if (qRes != null) {
     if (qRes.size() == 0)
       return sendLoginError(chan, "user", "user not found", {});
@@ -20,14 +21,48 @@ function loginFunction(username, password, chan) {
       return sendLoginError(chan, "password", "wrong password", {});
     if (qRes.get(0).getItem("active") != "1")
       return sendLoginError(chan, "activation", "not activated", {});
-    if (Date.parse(qRes.get(0).getItem("ubdate")) > Date.now())
-      return sendLoginError(chan, "banned", "banned by name", {
-        expiration: qRes.get(0).getItem("ubdate"),
-      });
-    if (qRes.get(0).getItem("ubdate") == "PERMABANNED")
-      return sendLoginError(chan, "banned", "banned by name", {
-        expiration: "Permanent",
-      });
+    // Check for ban (ubdate) and clear if expired
+    var ubdate = qRes.get(0).getItem("ubdate");
+    if (ubdate && ubdate !== "" && ubdate !== "null") {
+      if (ubdate == "PERMABANNED") {
+        return sendLoginError(chan, "banned", "banned by name", {
+          expiration: "Permanent",
+        });
+      } else if (Date.parse(ubdate) > Date.now()) {
+        return sendLoginError(chan, "banned", "banned by name", {
+          expiration: ubdate,
+        });
+      } else {
+        // Ban has expired, clear it
+        trace("Ban expired for user " + username + ", clearing ubdate");
+        dbase.executeCommand(
+          "UPDATE users SET ubdate=NULL WHERE username='" +
+            _server.escapeQuotes(username) +
+            "';"
+        );
+      }
+    }
+    
+    // Check for timed mute (umdate) - similar to ubdate check
+    var umdate = qRes.get(0).getItem("umdate");
+    var isMuteExpired = false;
+    var shouldClearSafeChat = false;
+    
+    if (umdate && umdate !== "" && umdate !== "null") {
+      if (Date.parse(umdate) <= Date.now()) {
+        // Mute has expired, clear it
+        isMuteExpired = true;
+        shouldClearSafeChat = true;
+        dbase.executeCommand(
+          "UPDATE users SET umdate=NULL WHERE username='" +
+            _server.escapeQuotes(username) +
+            "';"
+        );
+      }
+    } else {
+      // No active mute (umdate is null/empty), should clear SafeChat if it's still active
+      shouldClearSafeChat = true;
+    }
     if (
       _server.loginUser(qRes.get(0).getItem("username"), password, chan, true)
         .success != true
@@ -69,7 +104,7 @@ function loginFunction(username, password, chan) {
         isEligible: "1",
         isMember: 1,
         lastGame: "undefined",
-        isSafe: "0",
+        isSafe: qRes.get(0).getItem("safeChat"),
         storage: "F206",
         furniture: "",
         wearing: "",
@@ -96,6 +131,20 @@ function loginFunction(username, password, chan) {
         mood: "Hello! I'm playing Pandanda!",
       };
     }
+
+    
+
+    // Check and update questHash and qAvailable if necessary for existing crumbs
+    if (crumbs != null) {        
+        // Check if mute has expired or no active mute and update isSafe accordingly
+        if (shouldClearSafeChat && crumbs.isSafe == 1) {
+            trace("Clearing SafeChat mode for user " + username + " (mute expired or no active mute)");
+            crumbs.isSafe = 0;
+            // Update the database crumb as well
+            Users.UpdateCrumb(qRes.get(0).getItem("id"), "isSafe", 0);
+        }
+    }
+
     user = _server.getUserByChannel(chan);
 
     user.properties.put("id", qRes.get(0).getItem("id"));

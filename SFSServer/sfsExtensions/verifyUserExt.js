@@ -27,14 +27,55 @@ function handleLoginVerify(evtObj, user) {
       return sendLoginError(chan, "password", "wrong password", {});
     if (qRes.get(0).getItem("active") != "1")
       return sendLoginError(chan, "activation", "not activated", {});
-    if (Date.parse(qRes.get(0).getItem("ubdate")) > Date.now())
-      return sendLoginError(chan, "banned", "banned by name", {
-        expiration: qRes.get(0).getItem("ubdate"),
-      });
-    if (qRes.get(0).getItem("ubdate") == "PERMABANNED")
-      return sendLoginError(chan, "banned", "banned by name", {
-        expiration: "Permanent",
-      });
+    // Check for ban (ubdate) and clear if expired
+    var ubdate = qRes.get(0).getItem("ubdate");
+    if (ubdate && ubdate !== "" && ubdate !== "null") {
+      if (ubdate == "PERMABANNED") {
+        return sendLoginError(chan, "banned", "banned by name", {
+          expiration: "Permanent",
+        });
+      } else if (Date.parse(ubdate) > Date.now()) {
+        return sendLoginError(chan, "banned", "banned by name", {
+          expiration: ubdate,
+        });
+      } else {
+        // Ban has expired, clear it
+        trace("Ban expired for user " + username + ", clearing ubdate");
+        dbase.executeCommand(
+          "UPDATE users SET ubdate=NULL WHERE username='" +
+            _server.escapeQuotes(username) +
+            "';"
+        );
+      }
+    }
+    
+    // Check for timed mute (umdate) - similar to ubdate check
+    var umdate = qRes.get(0).getItem("umdate");
+    var shouldClearSafeChat = false;
+    
+    if (umdate && umdate !== "" && umdate !== "null") {
+      if (Date.parse(umdate) <= Date.now()) {
+        // Mute has expired, clear it
+        shouldClearSafeChat = true;
+        dbase.executeCommand(
+          "UPDATE users SET umdate=NULL WHERE username='" +
+            _server.escapeQuotes(username) +
+            "';"
+        );
+      }
+    } else {
+      // No active mute (umdate is null/empty), should clear SafeChat if it's still active
+      shouldClearSafeChat = true;
+    }
+    
+    // Clear SafeChat mode if no active mute
+    if (shouldClearSafeChat) {
+      dbase.executeCommand(
+        "UPDATE users SET crumbs = JSON_SET(crumbs, '$.isSafe', 0) WHERE username='" +
+          _server.escapeQuotes(username) +
+          "' AND JSON_EXTRACT(crumbs, '$.isSafe') = 1;"
+      );
+    }
 
     var serverStr = new Array(),
       servers = dbase.executeQuery("SELECT * FROM servers;");

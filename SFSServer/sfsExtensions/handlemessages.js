@@ -1,6 +1,176 @@
 var Commands = {};
 
+// Helper function to pad numbers with leading zeros
+function padZero(num) {
+  return (num < 10 ? '0' : '') + num;
+}
+
 function handlePublicMessage(user, message, fromRoom) {
+  // Debug check for mute status
+  trace("Message from " + user.getName() + ", muted status: " + user.properties.get("muted"));
+  
+  // Ensure bad words are loaded if they haven't been yet
+  if (typeof badWords === 'undefined' || badWords.length === 0) {
+    trace("handlemessages.js: Bad words not loaded, attempting to load from database");
+    try {
+      if (typeof dbase !== 'undefined' && dbase !== null) {
+        loadBadWordsFromDB();
+        trace("handlemessages.js: Bad words loaded from database, count: " + badWords.length);
+      }
+    } catch (e) {
+      trace("handlemessages.js: Error loading bad words: " + e);
+    }
+  }
+  
+  // Check if message contains any bad words
+  if (containsBadWord(message)) {
+    trace("Bad word detected from user " + user.getName() + ": " + message);
+    var triggeredWord = getTriggeredBadWord(message);
+    
+    // Count all previous auto-action offenses (warning, mute, ban, permban)
+    var offenseCount = 0;
+    try {
+      var offenseResult = dbase.executeQuery(
+        "SELECT COUNT(*) AS count FROM moderation_logs WHERE username='" +
+          _server.escapeQuotes(user.getName()) +
+          "' AND action IN ('auto_warning', 'auto_mute', 'auto_ban', 'auto_permban');"
+      );
+      if (offenseResult && offenseResult.size() > 0) {
+        offenseCount = parseInt(offenseResult.get(0).getItem("count"));
+      }
+    } catch (e) {
+      trace("Error counting previous offenses: " + e);
+    }
+    offenseCount = isNaN(offenseCount) ? 0 : offenseCount;
+    
+    // Progressive offense system: warnings, mutes, then bans
+    var muteHours = 0;
+    var actionType = "warning";
+    var actionMessage = "";
+    
+    if (offenseCount < 30) {
+      // 0-29 offenses: Warning and block message
+      actionType = "warning";
+      actionMessage = "Your message contained inappropriate language and was blocked. Please refrain from using inappropriate language. Continued behaviour will result in further action";
+    } else if (offenseCount >= 30 && offenseCount < 60) {
+      // 30-59 offenses: Safe chat mute for 72 hours
+      actionType = "mute";
+      muteHours = 72; // 72 hours as requested
+      actionMessage = "You have been muted for 72 hours for using prohibited language. You are now in SafeChat mode. (Offense " + (offenseCount + 1) + "/60)";
+    } else {
+      // 60+ offenses: Permanent ban
+      actionType = "permban";
+      actionMessage = "You have been permanently banned for repeated use of prohibited language. (Offense " + (offenseCount + 1) + ")";
+    }
+    
+    
+    // Log the incident to the database
+    var date = new Date();
+    var timestamp = formatDate(date) + " " + 
+                   padZero(date.getHours()) + ":" + 
+                   padZero(date.getMinutes()) + ":" + 
+                   padZero(date.getSeconds());
+    try {
+      dbase.executeCommand(
+        "INSERT INTO moderation_logs(username, action, message, bad_word, room, timestamp) VALUES('" +
+          _server.escapeQuotes(user.getName()) +
+          "', 'auto_" + actionType + "', '" +
+          _server.escapeQuotes(message) +
+          "', '" +
+          _server.escapeQuotes(triggeredWord) +
+          "', '" +
+          _server.escapeQuotes(fromRoom.getName()) +
+          "', '" +
+          _server.escapeQuotes(timestamp) +
+          "');"
+      );
+    } catch (e) {
+      trace("Error logging bad word detection: " + e);
+    }
+    
+    if (actionType === "warning") {
+      // First offense: Warning only - just block the message and notify user with popup
+      Users.SendAdmin(
+        user,
+        actionMessage,
+        fromRoom
+      );
+      
+    } else if (actionType === "mute") {
+      // Apply timed mute - set umdate and force SafeChat
+      var muteMillis = muteHours * 60 * 60 * 1000;
+      var muteUntil = new Date(date.getTime() + muteMillis);
+      var dateString = formatDate(muteUntil) + " 12:00";
+      
+      // Set umdate in database
+      dbase.executeCommand(
+        "UPDATE users SET umdate='" +
+          _server.escapeQuotes(dateString) +
+          "' WHERE username='" +
+          _server.escapeQuotes(user.getName()) +
+          "';"
+      );
+      
+      // Force user into SafeChat mode
+      user.properties.put("isSafe", 1);
+      Users.UpdateCrumb(user.properties.get("id"), "isSafe", 1);
+      
+      // Kick the user with mute message
+      _server.kickUser(
+        user,
+        5,
+        actionMessage
+      );
+      
+    } else if (actionType === "permban") {
+      // Apply permanent ban until 31/12/9999
+      var dateString = "9999/12/31 12:00";
+      dbase.executeCommand(
+        "UPDATE users SET ubdate='" +
+          _server.escapeQuotes(dateString) +
+          "' WHERE username='" +
+          _server.escapeQuotes(user.getName()) +
+          "';"
+      );
+      
+      // Kick the user with ban message
+      _server.kickUser(
+        user,
+        2,
+        actionMessage
+      );
+    }
+    
+    return; // Exit early, don't process the message
+  }
+  
+  // Check if user is muted and block the message if so
+  if (user.properties.get("muted") === "1") {
+    trace("User " + user.getName() + " is muted, blocking message");
+    Users.SendJSON(user, {
+      _cmd: "moderation",
+      action: "muteError",
+      message: "You are currently muted and cannot send messages."
+    });
+    return; // Exit early, don't process the message
+  }
+  
+  // Check if user is in SafeChat mode due to timed mute
+  if (user.properties.get("isSafe") === 1 || user.properties.get("isSafe") === "1") {
+    trace("User " + user.getName() + " is in SafeChat mode, filtering message");
+    // In SafeChat mode, only allow very basic messages
+    // This is a simple implementation - you might want to expand this
+    var safeChatAllowed = /^[a-zA-Z0-9\s\.\!\?\,]+$/.test(message) && message.length <= 50;
+    if (!safeChatAllowed) {
+      Users.SendJSON(user, {
+        _cmd: "moderation",
+        action: "safeChatError",
+        message: "You are in SafeChat mode. Only simple messages are allowed."
+      });
+      return; // Exit early, don't process the message
+    }
+  }
+  
   dbase.executeCommand(
     "INSERT INTO messages(author,message,room) VALUES('" +
       _server.escapeQuotes(String(user.getName())) +
@@ -203,7 +373,7 @@ function handlePublicMessage(user, message, fromRoom) {
           if (targetz != null) {
             _server.kickUser(
               targetz,
-              10,
+              4,
               "You have been kicked! Please behave better next time..."
             );
           }
@@ -346,14 +516,71 @@ function handlePublicMessage(user, message, fromRoom) {
           var targetName = String(message).replace("!unmute ", "");
           var targetUser = Users.GetUserByName(targetName);
           if (targetUser != null) {
+            // Clear both regular mute and timed mute
             targetUser.properties.put("isSafe", 0);
             Users.UpdateCrumb(targetUser.properties.get("id"), "isSafe", 0);
+            
+            // Clear umdate from database
+            dbase.executeCommand(
+              "UPDATE users SET umdate=NULL WHERE username='" +
+                _server.escapeQuotes(targetName) +
+                "';"
+            );
 
             Users.SendAdmin(
               targetUser,
               "You have been unmuted. Please remember to follow the rules!",
               fromRoom
             );
+            
+            Users.SendAdmin(
+              user,
+              "Successfully unmuted " + targetName + " and cleared any timed mute.",
+              fromRoom
+            );
+          }
+        }
+      }
+    } else if (thecmd == "!mutestatus") {
+      hide = true;
+      if (user.isModerator() || user.properties.get("isSMod") == 1) {
+        if (!msgex[1]) {
+          Users.SendAdmin(user, "Usage: !mutestatus username", fromRoom);
+        } else {
+          var targetName = String(message).replace("!mutestatus ", "");
+          
+          // Check database for mute status
+          var qRes = dbase.executeQuery(
+            "SELECT umdate, crumbs FROM users WHERE username='" +
+              _server.escapeQuotes(targetName) +
+              "';"
+          );
+          
+          if (qRes && qRes.size() > 0) {
+            var umdate = qRes.get(0).getItem("umdate");
+            var crumbsData = qRes.get(0).getItem("crumbs");
+            var statusMessage = "Mute status for " + targetName + ": ";
+            
+            try {
+              var userCrumbs = JSON.parse(crumbsData);
+              var isSafe = userCrumbs.isSafe;
+              
+              if (umdate && umdate !== "" && umdate !== "null") {
+                if (Date.parse(umdate) > Date.now()) {
+                  statusMessage += "Timed mute active until " + umdate + " (SafeChat: " + (isSafe ? "ON" : "OFF") + ")";
+                } else {
+                  statusMessage += "Timed mute expired (should be cleared on next login). SafeChat: " + (isSafe ? "ON" : "OFF");
+                }
+              } else {
+                statusMessage += "No timed mute. SafeChat: " + (isSafe ? "ON" : "OFF");
+              }
+            } catch (e) {
+              statusMessage += "Error reading user data";
+            }
+            
+            Users.SendAdmin(user, statusMessage, fromRoom);
+          } else {
+            Users.SendAdmin(user, "User " + targetName + " not found", fromRoom);
           }
         }
       }
@@ -519,8 +746,32 @@ function handlePublicMessage(user, message, fromRoom) {
           }
         }
       }
-    }
+    } 
   }
   if (!user.properties.get("muted") && !hide)
     _server.dispatchPublicMessage(message, fromRoom, user);
+}
+
+// Ensure bad words are loaded from database when this module is loaded
+try {
+  if (typeof dbase !== 'undefined' && dbase !== null) {
+    loadBadWordsFromDB();
+    trace("handlemessages.js: Bad words loaded from database");
+  } else {
+    trace("handlemessages.js: Database not available yet, bad words will be loaded later");
+  }
+} catch (e) {
+  trace("handlemessages.js: Error loading bad words: " + e);
+}
+
+// Function to check bad words status (can be called from other modules)
+function checkBadWordsStatus() {
+  var status = {
+    badWordsLoaded: typeof badWords !== 'undefined',
+    badWordsCount: typeof badWords !== 'undefined' ? badWords.length : 0,
+    databaseAvailable: typeof dbase !== 'undefined' && dbase !== null
+  };
+  
+  trace("handlemessages.js: Bad words status - " + JSON.stringify(status));
+  return status;
 }
