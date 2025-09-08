@@ -134,7 +134,7 @@
 			</Extensions>
 			<DatabaseManager active="true">
 				<Driver>com.mysql.jdbc.Driver</Driver>
-				<ConnectionString>jdbc:mysql://127.0.0.1/pandanda</ConnectionString>
+				<ConnectionString>jdbc:mysql://127.0.0.1/os_pandanda</ConnectionString>
 				<UserName>root</UserName>
 				<Password></Password>
 				<TestSQL><![CDATA[SELECT COUNT(*) FROM users]]></TestSQL>
@@ -154,7 +154,7 @@
 			</Extensions>
 			<DatabaseManager active="true">
 				<Driver>com.mysql.jdbc.Driver</Driver>
-				<ConnectionString>jdbc:mysql://127.0.0.1/pandanda</ConnectionString>
+				<ConnectionString>jdbc:mysql://127.0.0.1/os_pandanda</ConnectionString>
 				<UserName>root</UserName>
 				<Password></Password>
 				<TestSQL><![CDATA[SELECT COUNT(*) FROM users]]></TestSQL>
@@ -174,7 +174,7 @@
             </Extensions>
             <DatabaseManager active="true">
                 <Driver>com.mysql.jdbc.Driver</Driver>
-                <ConnectionString>jdbc:mysql://127.0.0.1/pandanda</ConnectionString>
+                <ConnectionString>jdbc:mysql://127.0.0.1/os_pandanda</ConnectionString>
                 <UserName>root</UserName>
                 <Password></Password>
                 <TestSQL><![CDATA[SELECT COUNT(*) FROM users]]></TestSQL>
