@@ -4,7 +4,7 @@
     <!--These are the locations in England-->
     <LOCATION ID="EN_icecream">
         <MUSIC>
-            <NAME>sound/music/icecream.mp3</NAME>
+            <NAME>sound/music2/icecream.mp3</NAME>
             <LOOP>true</LOOP>
         </MUSIC>
     </LOCATION>
@@ -15,40 +15,22 @@
         </MUSIC>
     </LOCATION>
     <LOCATION ID="EN_village">
-        <AMBIENCE>
-            <NAME>sound/squares_dayamb.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
-            <NIGHT>false</NIGHT>
-        </AMBIENCE>
-        <AMBIENCE>
-            <NAME>sound/squares_nightamb.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
-            <NIGHT>true</NIGHT>
-        </AMBIENCE>
+        <MUSIC>
+            <NAME>sound/music/halloween2.mp3</NAME> 
+            <LOOP>true</LOOP>
+        </MUSIC>
     </LOCATION>
     <LOCATION ID="EN_townsquare">
-        <AMBIENCE>
-            <NAME>sound/squares_dayamb.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
-            <NIGHT>false</NIGHT>
-        </AMBIENCE>
-        <AMBIENCE>
-            <NAME>sound/squares_nightamb.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
-            <NIGHT>true</NIGHT>
-        </AMBIENCE>
+        <MUSIC>
+            <NAME>sound/music/halloween1.mp3</NAME>
+            <LOOP>true</LOOP>
+        </MUSIC>
     </LOCATION>
     <LOCATION ID="EN_townsquare2">
-        <AMBIENCE>
-            <NAME>sound/squares_dayamb.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
-            <NIGHT>false</NIGHT>
-        </AMBIENCE>
-        <AMBIENCE>
-            <NAME>sound/squares_nightamb.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
-            <NIGHT>true</NIGHT>
-        </AMBIENCE>
+        <MUSIC>
+            <NAME>sound/music/halloween4.mp3</NAME>
+            <LOOP>true</LOOP>
+        </MUSIC>
     </LOCATION>
     <LOCATION ID="EN_forest">
         <MUSIC>
@@ -57,7 +39,7 @@
         </MUSIC>
         <AMBIENCE>
             <NAME>sound/forestambience04_30.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
+            <VOLUME>0.25</VOLUME>
             <NIGHT>false</NIGHT>
         </AMBIENCE>
         <AMBIENCE>
@@ -66,71 +48,80 @@
         </AMBIENCE>
     </LOCATION>
     <LOCATION ID="EN_treehouse_lobby">
+        <MUSIC>
+            <NAME>sound/forest.mp3</NAME>
+            <LOOP>true</LOOP>
+        </MUSIC>
         <AMBIENCE>
             <NAME>sound/forestambience04_30.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
+            <VOLUME>0.25</VOLUME>
             <NIGHT>false</NIGHT>
         </AMBIENCE>
         <AMBIENCE>
             <NAME>sound/crickets_amb_03_30.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
             <NIGHT>true</NIGHT>
         </AMBIENCE>
     </LOCATION>
     <LOCATION ID="EN_stonehenge">
+        <MUSIC>
+            <NAME>sound/stonehenge.mp3</NAME>
+            <LOOP>true</LOOP>
+        </MUSIC>
         <AMBIENCE>
             <NAME>sound/country_ambience01_30.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
             <NIGHT>false</NIGHT>
         </AMBIENCE>
         <AMBIENCE>
             <NAME>sound/crickets_amb_03_30.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
             <NIGHT>true</NIGHT>
         </AMBIENCE>
         <AMBIENCE>
             <NAME>sound/torch_dungeon02.mp3</NAME>
-            <VOLUME>0.20</VOLUME>
+            <VOLUME>0.25</VOLUME>
             <NIGHT>true</NIGHT>
         </AMBIENCE>
     </LOCATION>
     <LOCATION ID="EN_orchard">
+    	<!-- 
+        <MUSIC>
+            <NAME>sound/orchard.mp3</NAME> 
+            <LOOP>true</LOOP>
+        </MUSIC>
+        -->
         <AMBIENCE>
             <NAME>sound/country_ambience01_30.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
             <NIGHT>false</NIGHT>
         </AMBIENCE>
         <AMBIENCE>
             <NAME>sound/crickets_amb_03_30.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
             <NIGHT>true</NIGHT>
         </AMBIENCE>
     </LOCATION>
     <LOCATION ID="EN_bunny_field">
-        <AMBIENCE>
-            <NAME>sound/country_ambience01_30.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
-            <NIGHT>false</NIGHT>
-        </AMBIENCE>
-        <AMBIENCE>
-            <NAME>sound/crickets_amb_03_30.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
-            <NIGHT>true</NIGHT>
-        </AMBIENCE>
+    	<!-- 
+        <MUSIC>
+            <NAME>sound/orchard.mp3</NAME> 
+            <LOOP>true</LOOP>
+        </MUSIC>
+        -->
     </LOCATION>
     <LOCATION ID="EN_fishing_hole">
+    	<!--         
+        <MUSIC>
+  	    <NAME>sound/music/mary_ann.mp3</NAME> 
+            <LOOP>true</LOOP>
+        </MUSIC>    
+        -->
         <AMBIENCE>
             <NAME>sound/lapping02.mp3</NAME>
-            <VOLUME>0.20</VOLUME>
+            <VOLUME>0.25</VOLUME>
         </AMBIENCE>
         <AMBIENCE>
             <NAME>sound/crickets_amb_03_30.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
             <NIGHT>true</NIGHT>
         </AMBIENCE>
         <AMBIENCE>
             <NAME>sound/fire_06_loop20.mp3</NAME>
-            <VOLUME>0.20</VOLUME>
             <NIGHT>true</NIGHT>
         </AMBIENCE>
     </LOCATION>
@@ -145,7 +136,7 @@
     <LOCATION ID="EN_library">
         <AMBIENCE>
             <NAME>sound/fire_06_loop20.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
+            <VOLUME>0.5</VOLUME>
         </AMBIENCE>
     </LOCATION>
     <LOCATION ID="EN_purple_door">
@@ -158,11 +149,17 @@
         <MUSIC>
             <NAME>sound/music/purple_door3.mp3</NAME>
         </MUSIC>
+        <MUSIC>
+            <NAME>sound/music/winter_party1.mp3</NAME>
+        </MUSIC>
+        <MUSIC>
+            <NAME>sound/music/winter_party3.mp3</NAME>
+        </MUSIC>
     </LOCATION>
     <LOCATION ID="EN_graveyard">
         <AMBIENCE>
             <NAME>sound/haunting_wind_in_trees_01.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
+            <VOLUME>0.4</VOLUME>
         </AMBIENCE>
         <EFFECT>
             <NAME>sound/thunder08.mp3</NAME>
@@ -171,10 +168,14 @@
             <NAME>sound/ice_freeze_crack_09.mp3</NAME>
         </EFFECT>
     </LOCATION>
-    <LOCATION ID="EN_parlour">  
+    <LOCATION ID="EN_parlour">
+        <MUSIC>
+            <NAME>sound/music/halloween3.mp3</NAME>
+            <LOOP>true</LOOP>
+        </MUSIC>    
         <AMBIENCE>
             <NAME>sound/fire_06_loop20.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
+            <VOLUME>0.5</VOLUME>
         </AMBIENCE>
         <EFFECT>
             <NAME>sound/thunder08.mp3</NAME>
@@ -191,14 +192,14 @@
             <NAME>sound/music/mary_ann.mp3</NAME> 
             <LOOP>true</LOOP>
         </MUSIC>    
-        -->   
+        -->
         <AMBIENCE>
             <NAME>sound/waves_multiple02.mp3</NAME>
-            <VOLUME>0.25</VOLUME>
+            <VOLUME>0.35</VOLUME>
         </AMBIENCE>
         <AMBIENCE>
             <NAME>sound/coastal_amb_01_60.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
+            <VOLUME>0.7</VOLUME>
             <NIGHT>false</NIGHT>
         </AMBIENCE>
         <AMBIENCE>
@@ -213,19 +214,16 @@
             <NAME>sound/music/county_line.mp3</NAME> 
             <LOOP>true</LOOP>
         </MUSIC>    
-       --> 
+       -->
         <AMBIENCE>
             <NAME>sound/country_ambience01_30.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
             <NIGHT>false</NIGHT>
         </AMBIENCE>
         <AMBIENCE>
             <NAME>sound/crickets_amb_03_30.mp3</NAME>
-            <VOLUME>0.3</VOLUME>
             <NIGHT>true</NIGHT>
         </AMBIENCE>
     </LOCATION>
-	<LOCATION ID="EN_barn">
     
     
     <!--These are the locations in Candyland-->
