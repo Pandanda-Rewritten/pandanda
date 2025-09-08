@@ -128,6 +128,7 @@ Pandanda Rewritten
    - Buddy icon to Server list
    - More Robust Zing Item Logic
    - Automatic Quest Rotation System
+   - New Menubar HUD
 
 iPandanda
    - Original Media Server assets
