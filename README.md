@@ -126,9 +126,14 @@ Pandanda Rewritten
    - Server List Toggleable features (Elite, Level Req, SafeChat only)
    - Fix Implemented for Population Counter
    - Buddy icon to Server list
+   - More Robust Zing Item Logic
+   - Automatic Quest Rotation System
 
 iPandanda
    - Original Media Server assets
+
+mPandanda
+   - Pandanda festival room recreations
 
 ## Current State
 
