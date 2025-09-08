@@ -1,0 +1,150 @@
+BODY
+{
+    PADDING-RIGHT: 0px;
+    PADDING-LEFT: 0px;
+    PADDING-BOTTOM: 0px;
+    PADDING-TOP: 0px;
+    MARGIN: 0px;
+    COLOR: #000000;
+    BACKGROUND-IMAGE:URL('../images/game_bkgd_tile.gif');
+    BACKGROUND-COLOR: #EEEEEE; //04488D
+}
+
+iframe {display: block;}
+
+A
+{
+    COLOR: #FFFFFF;
+    TEXT-DECORATION: none
+}
+A:hover
+{
+    TEXT-DECORATION: underline
+}
+.headerlink
+{
+    COLOR: white;
+    TEXT-DECORATION: none
+}
+.headerlink:hover
+{
+    TEXT-DECORATION: underline
+}
+
+.whiteText
+{
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bold;
+}
+
+
+.whiteTextUnderline
+{
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bold;
+    TEXT-DECORATION: underline
+}
+
+.link
+{
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bold;
+}
+.link:hover
+{
+    CURSOR: hand;
+    COLOR: #FFFFFF;
+    TEXT-DECORATION: underline
+}
+.itemlink
+{
+    FONT-SIZE: 8pt;
+    COLOR: black;
+    FONT-FAMILY: "tahoma";
+    TEXT-DECORATION: none
+}
+.itemlink:hover
+{
+    CURSOR: hand;
+    COLOR: #4282b5;
+    TEXT-DECORATION: underline
+}
+.PageLayoutTable
+{
+    BORDER-RIGHT: #fbfbf0 0px;
+    PADDING-RIGHT: 0px;
+    BORDER-TOP: #fbfbf0 0px;
+    PADDING-LEFT: 0px;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 0px;
+    BORDER-LEFT: #fbfbf0 0px;
+    WIDTH: 100%;
+    PADDING-TOP: 0px;
+    BORDER-BOTTOM: #fbfbf0 0px
+}
+
+.PlainText
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 13px;
+    COLOR: #000000;
+    FONT-FAMILY: verdana
+}
+.BoldText
+{
+    FONT-WEIGHT: bold
+}
+
+
+
+.TableFooterBox
+{
+    WIDTH: 750px;
+    height: 80px;
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt;
+}
+
+
+.TablePageMain
+{
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-left: 0;
+	padding-right: 0;
+	width: 935px;
+	height: 27px;
+
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 12pt;
+    FONT-WEIGHT: bold;
+
+}
+
+.TableMaintenance
+{
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-left: 0;
+	padding-right: 0;
+	width: 710px;
+	height: 461px;
+
+
+    color: black;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 12pt;
+    FONT-WEIGHT: bold;
+    text-align:left;
+
+}
+
+.TableMaintenance img { display:block; }
