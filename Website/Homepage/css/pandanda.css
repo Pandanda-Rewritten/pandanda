@@ -1,0 +1,423 @@
+BODY
+{
+    PADDING-RIGHT: 0px;
+    PADDING-LEFT: 0px;
+    PADDING-BOTTOM: 0px;
+    PADDING-TOP: 0px;
+    MARGIN: 0px;
+    COLOR: #000000;
+    height:100%;
+    width: 100%;
+    min-width: 952px;
+    BACKGROUND-IMAGE:URL('../images/hm_bkgd_tile_new.gif');
+    BACKGROUND-COLOR: #024e9a
+}
+
+/* The main flash header navigation bar */
+#navBar
+{
+	position: relative;
+	height:560px;
+	width: 100%;
+	margin:auto;
+	top: 0px;
+}
+
+#trees
+{
+	position: relative;
+	top:0px;
+	height:237px;
+	width:100%;
+}
+
+#ticker
+{
+	position: relative;
+	top:0px;
+	height:37px;
+	width:100%;
+}
+
+#main
+{
+	position: relative;
+	height:296px;
+	width:952px;
+	margin:auto;
+	top:0px;
+}
+
+
+
+.TablePageMain
+{
+	/*background-color: white;*/
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	width: 952px;
+	height: 296px;
+}
+
+.TableTextHeader
+{
+	BACKGROUND-IMAGE:URL('../images/hm_heading_tile.gif');
+	/*background-color: #009dea;*/
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 10px;
+	padding-right: 0px;
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+    FONT-WEIGHT: bold;
+}
+
+.TableTextInfo
+{
+	background-color: #C6E762;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+    color: black;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.TableShareTextInfo
+{
+	background-color: #C6E762;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 5px;
+	padding-right: 0px;
+    color: black;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.TablePDClock
+{
+	BACKGROUND-IMAGE:URL('../images/hm_clock_bkgd.gif');
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+    color: #533013;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+    FONT-WEIGHT: bold;
+}
+
+.TableHenryInfo
+{
+	/* halloween dk orange color is: FF8F0F, yellow text color is: FFF0AC */
+	background-color: #37B3EE;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	width: 732px;
+	height: 270px;
+    color: #FFFFFF;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.TableHenryHrefText
+{
+	/* halloween yellow color is: FFF0AC */
+    COLOR: #FFFFFF;
+    FONT-FAMILY: Arial;
+}
+
+.TableHenryHrefLargeText
+{
+	/* halloween rust color is: 9E4102 */
+    COLOR: #FFFFFF;
+    FONT-FAMILY: Arial;
+}
+
+.TableFooterBox
+{
+  /*  BACKGROUND-COLOR: #0083D6;*/
+    WIDTH: 1006px;
+    height: 80px;
+    color: #533013;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt;
+}
+
+.TableMainPageInfoBox
+{
+	/* orange color is: FF8F0F */
+	background-color: #37B3EE
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	border-style: solid;
+	border-left-width: 1px;
+	/* remove the next line to return the infobox to white divider lines - this is brown for launch page*/
+	/*border-left-color: #9E4102;*/
+	border-right-width: 0px;
+	border-top-width: 0px;
+	border-bottom-width: 0px;
+	width: 172px;
+	height: 270px;
+}
+
+.TableMainPageInfoBoxText
+{
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	width: 172px;
+	height: 155px;
+}
+
+H1
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 30pt;
+    COLOR: #313884;
+    FONT-FAMILY: verdana
+}
+H2
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 18pt;
+    COLOR: #628C48;
+    FONT-FAMILY: verdana
+}
+H3
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 16pt;
+    COLOR: #313884;
+    FONT-FAMILY: verdana
+}
+H4
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 30pt;
+    COLOR: #313884;
+    FONT-FAMILY: verdana
+}
+H5
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 8pt;
+    COLOR: #313884;
+    FONT-FAMILY: verdana;
+    TEXT-ALIGN: right
+}
+H6
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 9pt;
+    COLOR: #313884;
+    FONT-FAMILY: verdana;
+    TEXT-ALIGN: center
+}
+H7
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 25pt;
+    COLOR: #313884;
+    FONT-FAMILY: verdana
+}
+A
+{
+    COLOR: #533013;
+    TEXT-DECORATION: none
+}
+A:hover
+{
+    TEXT-DECORATION: underline
+}
+
+.morelink
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+    COLOR: white;
+    TEXT-DECORATION: underline
+}
+.link
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt;
+    COLOR: white;
+    TEXT-DECORATION: none
+}
+.link:hover
+{
+    CURSOR: hand;
+    COLOR: #4282b5;
+    TEXT-DECORATION: underline
+}
+
+.PlainText
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 15px;
+    COLOR: #024e9a;
+    FONT-FAMILY: verdana
+}
+
+.BoldText
+{
+    FONT-WEIGHT: bold
+}
+
+
+
+
+
+/*----------------------------------------------------------------------------------------*/
+/* This stuff below is for the html rollover buttons                                      */
+/*----------------------------------------------------------------------------------------*/
+
+/* createAccount Button */
+.createAccountButton
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/hm_create_panda_btn_over.gif) no-repeat;
+	width: 160px;
+	height: 48px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.createAccountButton a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 160px;
+	height: 48px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.createAccountButton a:hover
+{
+	color: #ffffff;
+}
+
+.createAccountButton img {width: 160px; height: 48px; border: 0; }
+* html a:hover {visibility:visible}
+.createAccountButton a:hover img{visibility:hidden}
+
+/* henrysBlogButton Button */
+.henrysBlogButton
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/hm_henrys_blog_btn_over.gif) no-repeat;
+	width: 199px;
+	height: 78px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.henrysBlogButton a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 199px;
+	height: 78px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.henrysBlogButton a:hover
+{
+	color: #ffffff;
+}
+
+.henrysBlogButton img {width: 199px; height: 78px; border: 0; }
+* html a:hover {visibility:visible}
+.henrysBlogButton a:hover img{visibility:hidden}
+
+/* BUTTON 1 */
+.homePlayButton
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/hm_heading_right_over.gif) no-repeat;
+	width: 353px;
+	height: 114px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.homePlayButton a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 353px;
+	height: 114px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.homePlayButton a:hover
+{
+	color: #ffffff;
+}
+
+.homePlayButton img {width: 353px; height: 114px; border: 0; }
+* html a:hover {visibility:visible}
+.homePlayButton a:hover img{visibility:hidden}
+
+.homeBlogButton
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/hm_heading_middle_over.gif) no-repeat;
+	width: 433px;
+	height: 114px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.homeBlogButton a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 433px;
+	height: 114px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.homeBlogButton a:hover
+{
+	color: #ffffff;
+}
+
+.homeBlogButton img {width: 433px; height: 114px; border: 0; }
+* html a:hover {visibility:visible}
+.homeBlogButton a:hover img{visibility:hidden}
