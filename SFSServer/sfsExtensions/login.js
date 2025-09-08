@@ -1,4 +1,5 @@
 eval(_server.readFile("utils/underscore.js"));
+eval(_server.readFile("utils/crypto.js"));
 function handleLogin(username, password, chan) {
   try {
     loginFunction(username, password, chan);
@@ -12,7 +13,6 @@ function loginFunction(username, password, chan) {
       _server.escapeQuotes(username) +
       "';"
   );
-
 
   if (qRes != null) {
     if (qRes.size() == 0)
@@ -75,11 +75,18 @@ function loginFunction(username, password, chan) {
       crumbs = null;
     }
     if (crumbs == null) {
+      // Get color from database
+      var userColor = qRes.get(0).getItem("color");
+      if (!userColor) {
+          userColor = "P001";
+      }
+      var processedData = processUserColorAndCloset(userColor, "C301c,C415a,C601a");
+      
       crumbs = {
         lastPlayed: "1/1/1,383",
         xp: 0,
         xpLevel: 300,
-        closet: "P001,C301c,C415a,C601a",
+        closet: processedData.processedCloset,
         memberOnly: "",
         bankCount: "",
         qActive: "",
@@ -96,7 +103,7 @@ function loginFunction(username, password, chan) {
         games: "MG001,MG002,MG003",
         cardColor: 8,
         isEmailValidated: 1,
-        isZing: 1,
+        isZing: 0,
         mounts: "",
         qItems: "",
         coins: 2000,
@@ -128,14 +135,38 @@ function loginFunction(username, password, chan) {
               .getItem("value")
           )
         ),
-        mood: "Hello! I'm playing Pandanda!",
+        questHash: getQuestHashConfig(),
+        mood: "Hello! I'm playing Pandanda Rewritten!",
       };
     }
 
-    
-
     // Check and update questHash and qAvailable if necessary for existing crumbs
-    if (crumbs != null) {        
+    if (crumbs != null) {
+        try {
+            var currentQuestHash = getQuestHashConfig();
+            if (crumbs.questHash !== currentQuestHash) {
+                trace("QuestHash mismatch for user " + username + ". Updating quests.");
+                
+                // Fetch and process current qAvailable
+                var qAvailableValue = "";
+                var qAvailableConfig = dbase.executeQuery("SELECT `value` FROM config WHERE `key`='qAvailable';");
+                if (qAvailableConfig != null && qAvailableConfig.size() > 0) {
+                    qAvailableValue = qAvailableConfig.get(0).getItem("value");
+                } else {
+                    trace("Warning: Could not fetch qAvailable config while updating quests for user " + username);
+                }
+                var processedQAvailable = processQAvailable(String(qAvailableValue));
+
+                // Update crumbs and clear related quest data
+                crumbs.qAvailable = processedQAvailable;
+                crumbs.questHash = currentQuestHash;
+                crumbs.qItems = "";  // Clear quest items
+                crumbs.qActive = ""; // Clear active quests
+            }
+        } catch (e) {
+            trace("Error checking/updating questHash for user " + username + ": " + e);
+        }
+        
         // Check if mute has expired or no active mute and update isSafe accordingly
         if (shouldClearSafeChat && crumbs.isSafe == 1) {
             trace("Clearing SafeChat mode for user " + username + " (mute expired or no active mute)");
@@ -148,15 +179,20 @@ function loginFunction(username, password, chan) {
     user = _server.getUserByChannel(chan);
 
     user.properties.put("id", qRes.get(0).getItem("id"));
+    
+    // Set isMuted status if it exists in the database
+    var isMuted = crumbs.isMuted === 1 ? "1" : "0";
+    user.properties.put("isMuted", isMuted);
+    
     _server.setUserVariables(user, {
       pw: crumbs.wearing || null,
       pc: Number(crumbs.color) || 0,
       px: 530,
       py: 400,
       bc: crumbs.bc,
-      ng: crumbs.ng,
+      ng: "undefined",
+      nc: "undefined",
       btc: crumbs.btc,
-      nc: crumbs.nc,
       bh: crumbs.bh,
     });
     if (crumbs.isMod == 1) {
@@ -214,7 +250,7 @@ function loginFunction(username, password, chan) {
     crumbs["_cmd"] = "loginSuccess";
     // Provide encrypted IP blob in crumbs
     try {
-      crumbs["ip"] = String(CryptoUtil.encryptIp(String(user.getIpAddress())) || "127.0.0.1");
+      crumbs["ip"] = String(CryptoUtil.encryptIp(String(user.getIpAddress())) || "");
     } catch (e) {
       crumbs["ip"] = "";
     }
@@ -276,6 +312,13 @@ function loginFunction(username, password, chan) {
     } catch (e) {
       trace("Error checking eventconfig, using default price list: " + e);
     }
+    
+    crumbs["priceList"] = String(
+      dbase
+        .executeQuery("SELECT `value` FROM config WHERE `key`='" + priceListKey + "';")
+        .get(0)
+        .getItem("value")
+    );
     crumbs["catalogs"] = String(
       dbase
         .executeQuery("SELECT `value` FROM config WHERE `key`='catalogs';")
@@ -332,10 +375,23 @@ function loginFunction(username, password, chan) {
       trace("Error checking eventconfig for bunnyDay, using default value: " + e);
     }
     crumbs["ghostDay"] = isGhostDayValue;
-
+    
     crumbs["isChristmas"] = 0;
-    crumbs["festivalCollection"] = 0;
+    // crumbs["festivalCollection"] = 0;
     crumbs["id"] = String(user.getUserId());
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1; // Months are 0-indexed
+    const day = now.getDate();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+    crumbs["lastPlayed"] = year + "-" +
+                        (month < 10 ? '0' : '') + month + "-" +
+                        (day < 10 ? '0' : '') + day + " " +
+                        (hours < 10 ? '0' : '') + hours + ":" +
+                        (minutes < 10 ? '0' : '') + minutes + ":" +
+                        (seconds < 10 ? '0' : '') + seconds; // Manually pad with leading zeros
     Users.PopulateObject(user, crumbs);
     user.properties.put("id", qRes.get(0).getItem("id"));
     Users.UpdateCrumbs(qRes.get(0).getItem("id"), crumbs);

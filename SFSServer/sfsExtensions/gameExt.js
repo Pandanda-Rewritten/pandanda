@@ -1,4 +1,4 @@
-var dbase, zone, _sfs, zingItem, celebItem;
+var dbase, zone, _sfs, celebItem;
 var popInterval;
 
 eval(_server.readFile("utils/json.js"));
@@ -14,6 +14,40 @@ eval(_server.readFile("petHandlers.js"));
 eval(_server.readFile("modExt.js"));
 
 var Commands = {};
+
+function checkItemLevelRequirement(user, itemId) {
+    // Get user's level from crumbs
+    var userLevel = Number(user.properties.get("level")) || 1;
+    
+    // For mounts (starting with M), use the full item code
+    // For other items, remove the color suffix
+    var item_code = itemId;
+
+    // Disabled For now as some items have specific versions that need to be locked due to how Pandanda Clothes work.
+    // if (itemId[0] !== 'M' && itemId.length > 4) {  // If it's not a mount and has a color suffix
+    //     item_code = itemId.substring(0, itemId.length - 1);  // Remove last character (color code)
+    // }
+    
+    // Query the database for item level requirement using item_code
+    var qRes = dbase.executeQuery(
+        "SELECT level_required FROM items WHERE item_code='" + 
+        _server.escapeQuotes(item_code) + "' LIMIT 1;"
+    );
+    
+    if (qRes != null && qRes.size() > 0) {
+        var requiredLevel = Number(qRes.get(0).getItem("level_required")) || 0;
+        if (requiredLevel > 0 && userLevel < requiredLevel) {
+            return {
+                allowed: false,
+                requiredLevel: requiredLevel
+            };
+        }
+    }
+    
+    return {
+        allowed: true
+    };
+}
 
 function handlePandandaPacket(cmd, params, user, fromRoom) {
   var roomObj = fromRoom;
@@ -105,7 +139,7 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
             px: 530,
             py: 400,
           });
-
+          
           // Check for login item when user joins their first room after login
           if (!user.properties.get("loginItemChecked")) {
             // Mark as checked for this session to prevent multiple checks
@@ -116,6 +150,7 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
               checkAndGiveLoginItem(user);
             }
           }
+          
           break;
         }
         case "GET_USER_ROOM": {
@@ -285,6 +320,7 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
         case "PURCHASE_ITEMS": {
           var itype = "error";
           var Items = Decoder.decodeData(params["e"], 11).split(",");
+          trace(Decoder.decodeData(params["e"], 11));
 
           var uniqueItems = [];
           var seenItems = {};
@@ -308,6 +344,18 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
               isSuccess: false,
               msg: "Item already owned.",
             });
+          }
+
+          // Check level requirements for all items
+          for (var i in uniqueItems) {
+            var levelCheck = checkItemLevelRequirement(user, uniqueItems[i]);
+            if (!levelCheck.allowed) {
+              return Users.SendJSON(user, {
+                _cmd: "purchaseItem",
+                isSuccess: false,
+                msg: "You need to be level " + levelCheck.requiredLevel + " or higher to purchase this item.",
+              });
+            }
           }
 
           var priceList = user.properties.get("priceList") || "";
@@ -436,7 +484,6 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
           for (var i in Items) {
             var item = Items[i];
             var itemPrice = getItemPrice(item, priceList);
-
             totalSellPrice += itemPrice;
 
             removeBackpackItem(user, item);
@@ -497,7 +544,7 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
           _server.setUserVariables(user, {
             px: 530,
             py: 400,
-          });
+          });          
           break;
         }
 
@@ -540,7 +587,8 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
           var backpackItems = backpack.split(",");
           var targetItems = ["GI601", "GI615", "GI617", "GI619"];
 
-          for (var i = 0; i < backpackItems.length; i++) {
+          var chestRemoved = false;
+          for (var i = 0; i < backpackItems.length && !chestRemoved; i++) {
             var currentItem = backpackItems[i].trim();
 
             for (var j = 0; j < targetItems.length; j++) {
@@ -551,7 +599,7 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
                   isSuccess: true,
                   _cmd: "useItem",
                 });
-                // Chest removed; proceed to credit coins and consume key
+                chestRemoved = true;
                 break;
               }
             }
@@ -661,6 +709,31 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
             });
             return;
           } else {
+            // Check if the target user allows friend requests
+            var targetUser = Users.GetUserByName(String(whom));
+            if (targetUser) {
+              var targetId = targetUser.properties.get("id");
+              var qRes = dbase.executeQuery(
+                "SELECT crumbs FROM users WHERE id='" +
+                  _server.escapeQuotes(targetId) +
+                  "';"
+              );
+              
+              if (qRes.size() > 0) {
+                var targetCrumbs = JSON.parse(qRes.get(0).getItem("crumbs"));
+                // If allowFriends is 0, don't allow friend request
+                if (targetCrumbs.allowFriends === 0) {
+                  Users.SendJSON(user, {
+                    _cmd: "friendRequest",
+                    success: false,
+                    error: "This user is not accepting friend requests."
+                  });
+                  return;
+                }
+              }
+            }
+            
+            // Proceed with friend request if allowed
             _server.requestAddBuddyPermission(user, String(whom), null);
           }
           break;
@@ -1098,12 +1171,17 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
           break;
         }
         case "TICKET_PRIZE": {
-          refreshZingItem();
+          // Query the database fresh for the current zingItem
+          var zingItemResult = dbase.executeQuery("SELECT `value` FROM config WHERE `key`='zingItem';");
+          var currentZingItem = "0"; // Default fallback
+          if (zingItemResult.size() > 0) {
+            currentZingItem = String(zingItemResult.get(0).getItem("value"));
+          }
           Users.SendJSON(user, {
             _cmd: "zing",
             cmd2: "ticketPrize",
             isEligible: 1,
-            itemId: zingItem,
+            itemId: currentZingItem,
           });
           break;
         }
@@ -1143,7 +1221,14 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
               success: true,
             });
           } else {
-            if (hasItem(user, zingItem)) {
+            // Query the database fresh for the current zingItem
+            var zingItemResult = dbase.executeQuery("SELECT `value` FROM config WHERE `key`='zingItem';");
+            var currentZingItem = "0"; // Default fallback
+            if (zingItemResult.size() > 0) {
+              currentZingItem = String(zingItemResult.get(0).getItem("value"));
+            }
+            
+            if (hasItem(user, currentZingItem)) {
               Users.SendJSON(user, {
                 _cmd: "purchaseItem",
                 isSuccess: false,
@@ -1151,11 +1236,12 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
               });
               break;
             }
-            receiveItem(user, zingItem);
+
+            receiveItem(user, currentZingItem);
             Users.SendJSON(user, {
               _cmd: "zing",
               cmd2: "ticketPurchase",
-              itemId: zingItem,
+              itemId: currentZingItem,
               success: true,
             });
           }
@@ -1218,7 +1304,7 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
         }
         case "COLLECT_FESTIVAL_TICKET": {
           var ticks = Number(user.properties.get("festivalCollection"));
-          if (ticks < 10) {
+          if (ticks < 999 ) {
             ticks = ticks + 1;
           }
           user.properties.put("festivalCollection", ticks);
@@ -1235,13 +1321,7 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
           break;
         }
         case "PURCHASE_FESTIVAL_PRIZE": {
-          var reqit = String(params["purchase"]);
-          purchaseItem(user, reqit);
-          Users.SendJSON(user, {
-            _cmd: "secretUpdate",
-            success: true,
-            itemId: reqit,
-          });
+          handlePurchaseFestivalPrize(user, params);
           break;
         }
 
@@ -1258,29 +1338,79 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
   }
 }
 
-function refreshZingItem() {
-  try {
-    var result = dbase.executeQuery("SELECT value FROM config WHERE `key` = 'zingItem'");
-    if (result && result.size() > 0) {
-      zingItem = String(result.get(0).getItem("value"));
+function handlePurchaseFestivalPrize(user, params) {
+    var reqit = String(params["purchase"]);
+    var priceList = user.properties.get("priceList") || "";
+    var itemCost = getItemPrice(reqit, priceList);
+    var currentTickets = Number(user.properties.get("festivalCollection")) || 0;
+    
+    // Check if we have enough festival tickets
+    if (currentTickets >= itemCost) {
+        // For non-potion items, check if user already has them
+        if (reqit.indexOf("GI") !== 0 && hasItem(user, reqit)) {
+            Users.SendJSON(user, {
+                _cmd: "purchaseItem",
+                isSuccess: false,
+                msg: "You already have this item"
+            });
+            return;
+        }
+
+        // Update festival tickets first
+        var newTicketBalance = currentTickets - itemCost;
+        user.properties.put("festivalCollection", newTicketBalance);
+        Users.UpdateCrumb(user.properties.get("id"), "festivalCollection", newTicketBalance);
+        
+        // Use receiveItem to handle all item types
+        receiveItem(user, reqit);
+        
+        // Determine item type and create appropriate response
+        var response = {
+            _cmd: "purchaseItem",
+            isSuccess: true
+        };
+        
+        // Add the appropriate property based on item type
+        if (reqit.indexOf("M") === 0) {
+            response.mount = reqit;
+        } else if (reqit.indexOf("F") === 0) {
+            response.storage = reqit;
+        } else if (reqit.indexOf("GI") === 0) {
+            response.backpack = reqit;
+        } else {
+            response.clothes = reqit;
+        }
+        
+        // Send purchase success response
+        Users.SendJSON(user, response);
+        
+        // Send updated festival ticket count
+        Users.SendJSON(user, {
+            _cmd: "festivalCollection",
+            count: newTicketBalance,
+            success: true
+        });
+    } else {
+        Users.SendJSON(user, {
+            _cmd: "purchaseItem",
+            isSuccess: false,
+            msg: "Not enough festival tickets"
+        });
     }
-  } catch (e) {
-    trace("Failed to refresh zingItem: " + e);
-  }
 }
 
 function init() {
   dbase = _server.getDatabaseManager();
   zone = _server.getCurrentZone();
   _sfs = Packages.it.gotoandplay.smartfoxserver.SmartFoxServer;
-  celebItem = String(
-    dbase
-      .executeQuery("SELECT `value` FROM config WHERE `key`='celebItem';")
-      .get(0)
-      .getItem("value")
-  );
-  popInterval = setInterval("updatePop", 30000);
-  _server.getCurrentZone().setPubMsgInternalEvent(true);
+  var celebItemResult = dbase.executeQuery("SELECT `value` FROM config WHERE `key`='celebItem';");
+  if (celebItemResult.size() > 0) {
+    celebItem = String(celebItemResult.get(0).getItem("value"));
+  } else {
+    celebItem = "0"; // Default fallback value
+  }
+  popInterval = setInterval("updatePop", 15000);
+  _server.getCurrentZone().setPubMsgInternalEvent(true);  
   // Load bad words from database
   loadBadWordsFromDB();
 }

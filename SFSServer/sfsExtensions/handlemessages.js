@@ -9,19 +9,6 @@ function handlePublicMessage(user, message, fromRoom) {
   // Debug check for mute status
   trace("Message from " + user.getName() + ", muted status: " + user.properties.get("muted"));
   
-  // Ensure bad words are loaded if they haven't been yet
-  if (typeof badWords === 'undefined' || badWords.length === 0) {
-    trace("handlemessages.js: Bad words not loaded, attempting to load from database");
-    try {
-      if (typeof dbase !== 'undefined' && dbase !== null) {
-        loadBadWordsFromDB();
-        trace("handlemessages.js: Bad words loaded from database, count: " + badWords.length);
-      }
-    } catch (e) {
-      trace("handlemessages.js: Error loading bad words: " + e);
-    }
-  }
-  
   // Check if message contains any bad words
   if (containsBadWord(message)) {
     trace("Bad word detected from user " + user.getName() + ": " + message);
@@ -393,7 +380,7 @@ function handlePublicMessage(user, message, fromRoom) {
               "';"
           );
 
-          if (queryResult && queryResult.size() > 0) {
+          if (queryResult) {
             dbase.executeCommand(
               "UPDATE users SET ubdate=null WHERE username='" +
                 _server.escapeQuotes(targetUsername) +
@@ -602,6 +589,54 @@ function handlePublicMessage(user, message, fromRoom) {
           fromRoom
         );
       }
+    } else if (thecmd == "!festivalexchange") {
+      hide = true;
+      // Usage: !festivalExchange <amount>
+      // Exchanges (deducts) an amount of festival tickets from user's balance.
+      // Allowed range: 15 - 50 inclusive.
+      if (msgex.length < 2) {
+        Users.SendAdmin(user, "Usage: !festivalExchange amount (15-50)", fromRoom);
+      } else {
+        var amount = parseInt(msgex[1]);
+        if (isNaN(amount)) {
+          Users.SendAdmin(user, "Please enter a valid number between 15 and 50", fromRoom);
+          return;
+        }
+        if (amount < 15 || amount > 50) {
+          Users.SendAdmin(user, "Amount must be between 15 and 50", fromRoom);
+          return;
+        }
+
+        var currentTickets = Number(user.properties.get("festivalCollection")) || 0;
+        if (currentTickets < amount) {
+          Users.SendAdmin(user, "You do not have enough festival tickets (You currently have " + currentTickets + ")", fromRoom);
+          return;
+        }
+
+        var newBalance = currentTickets - amount;
+        user.properties.put("festivalCollection", newBalance);
+        Users.UpdateCrumb(user.properties.get("id"), "festivalCollection", newBalance);
+
+        // Grant 5 coins per exchanged ticket
+        var currentCoins = Number(user.properties.get("coins")) || 0;
+        var coinsToAdd = amount * 5;
+        var newCoins = currentCoins + coinsToAdd;
+        user.properties.put("coins", newCoins);
+        Users.UpdateCrumb(user.properties.get("id"), "coins", newCoins);
+
+        // Notify user in chat and via JSON updates used elsewhere in the client
+        Users.SendAdmin(user, "Exchanged " + amount + " festival tickets for " + coinsToAdd + " coins. New tickets: " + newBalance + ", coins: " + newCoins, fromRoom);
+        Users.SendJSON(user, {
+          _cmd: "festivalCollection",
+          count: newBalance,
+          success: true,
+        });
+        Users.SendJSON(user, {
+          _cmd: "coinUpdate",
+          coins: newCoins,
+          success: true,
+        });
+      }
     } else if (thecmd == "!tp") {
       hide = true;
       if (user.isModerator() || user.properties.get("isSMod") == 1) {
@@ -698,19 +733,11 @@ function handlePublicMessage(user, message, fromRoom) {
     } else if (thecmd == "!ban") {
       if (user.isModerator() || user.properties.get("isSMod") == 1) {
         if (!msgex[1]) {
-          Users.SendAdmin(user, "Usage: !ban [username]", fromRoom);
         } else {
-          var targetUsername = String(message).replace("!ban ", "").trim();
-          
-          // Check if user exists in database
-          var queryResult = dbase.executeQuery(
-            "SELECT * FROM users WHERE username='" +
-              _server.escapeQuotes(targetUsername) +
-              "';"
+          var targetz = Users.GetUserByName(
+            String(message).replace("!ban ", "")
           );
-          
-          if (queryResult && queryResult.size() > 0) {
-            var targetz = Users.GetUserByName(targetUsername);
+          if (targetz != null) {
             var date = new Date();
             var permanentDate = new Date(
               date.getTime() + 1000 * 60 * 60 * 24 * 365 * 1000
@@ -721,57 +748,177 @@ function handlePublicMessage(user, message, fromRoom) {
               "UPDATE users SET ubdate='" +
                 _server.escapeQuotes(dateString) +
                 "' WHERE username='" +
-                _server.escapeQuotes(targetUsername) +
+                _server.escapeQuotes(String(message).replace("!ban ", "")) +
                 "';"
             );
-            
-            // Show success message to moderator first
-            Users.SendAdmin(user, targetUsername + " has been banned permanently.", fromRoom);
-            
-            // Then try to kick if user is online
-            if (targetz != null) {
-              try {
-                _server.kickUser(
-                  targetz,
-                  1,
-                  "You have been banned! Please behave better next time..."
-                );
-              } catch (e) {
-                trace("handlemessages.js: Error kicking user " + targetUsername + ": " + e);
-                // User was banned in database, kick error doesn't matter
-              }
-            }
-          } else {
-            Users.SendAdmin(user, "Error: User '" + targetUsername + "' does not exist.", fromRoom);
+            _server.kickUser(
+              targetz,
+              10,
+              "You have been banned! Please behave better next time..."
+            );
           }
         }
       }
-    } 
+    } // else if (thecmd == "!quest_status") {
+    //   hide = true;
+    //   if (user.isModerator() || user.properties.get("isSMod") == 1) {
+    //     try {
+    //       var statusResult = dbase.executeQuery(
+    //         "SELECT " +
+    //         "(SELECT config_value FROM questConfig WHERE config_key = 'currentQListDay') AS currentDay, " +
+    //         "(SELECT config_value FROM questConfig WHERE config_key = 'totalQListDays') AS totalDays, " +
+    //         "(SELECT config_value FROM questConfig WHERE config_key = 'lastRotationDate') AS lastRotation, " +
+    //         "(SELECT config_value FROM questConfig WHERE config_key = 'rotationHour') AS rotationHour, " +
+    //         "(SELECT value FROM config WHERE `key` = 'qAvailable') AS currentQuests"
+    //       );
+          
+    //       if (statusResult && statusResult.size() > 0) {
+    //         var currentDay = statusResult.get(0).getItem("currentDay");
+    //         var totalDays = statusResult.get(0).getItem("totalDays");
+    //         var lastRotation = statusResult.get(0).getItem("lastRotation") || "Never";
+    //         var rotationHour = statusResult.get(0).getItem("rotationHour");
+            
+    //         var statusMessage = "Quest Rotation Status: " +
+    //           "Current Day: " + currentDay + " of " + totalDays + ", " +
+    //           "Last Rotation: " + lastRotation + ", " +
+    //           "Rotation Hour: " + rotationHour + " UTC";
+            
+    //         Users.SendAdmin(user, statusMessage, fromRoom);
+    //       } else {
+    //         Users.SendAdmin(user, "Could not retrieve quest configuration", fromRoom);
+    //       }
+    //     } catch (e) {
+    //       Users.SendAdmin(user, "Error retrieving quest status: " + e, fromRoom);
+    //     }
+    //   }
+    //}  else if (thecmd == "!quest_rotate") {
+    //   hide = true;
+    //   if (user.isModerator() || user.properties.get("isSMod") == 1) {
+    //     try {
+    //       // Get current configuration
+    //       var configResult = dbase.executeQuery(
+    //         "SELECT " +
+    //         "(SELECT config_value FROM questConfig WHERE config_key = 'currentQListDay') AS currentQListDay, " +
+    //         "(SELECT config_value FROM questConfig WHERE config_key = 'totalQListDays') AS totalQListDays"
+    //       );
+          
+    //       if (configResult && configResult.size() > 0) {
+    //         var currentQListDay = parseInt(configResult.get(0).getItem("currentQListDay")) || 1;
+    //         var totalQListDays = parseInt(configResult.get(0).getItem("totalQListDays")) || 7;
+            
+    //         // Increment the day, looping back to 1 after reaching the total
+    //         var nextQListDay = (currentQListDay % totalQListDays) + 1;
+            
+    //         // Get the quest list for the next day
+    //         var qListKey = "qListDay" + nextQListDay;
+    //         var qListResult = dbase.executeQuery(
+    //           "SELECT config_value " +
+    //           "FROM questConfig " +
+    //           "WHERE config_key = '" + qListKey + "'"
+    //         );
+            
+    //         if (qListResult && qListResult.size() > 0 && qListResult.get(0).getItem("config_value")) {
+    //           var newQuestList = qListResult.get(0).getItem("config_value");
+              
+    //           // Update the currentQListDay
+    //           dbase.executeCommand(
+    //             "UPDATE questConfig " +
+    //             "SET config_value = '" + nextQListDay + "' " +
+    //             "WHERE config_key = 'currentQListDay'"
+    //           );
+              
+    //           // Update the qAvailable in the main config table
+    //           dbase.executeCommand(
+    //             "UPDATE config " +
+    //             "SET value = '" + _server.escapeQuotes(newQuestList) + "' " +
+    //             "WHERE `key` = 'qAvailable'"
+    //           );
+              
+    //           // Also update the questHash to trigger quest updates for users when they log in
+    //           var newQuestHash = "quest_" + new Date().getTime();
+    //           dbase.executeCommand(
+    //             "UPDATE config " +
+    //             "SET value = '" + _server.escapeQuotes(newQuestHash) + "' " +
+    //             "WHERE `key` = 'questHash'"
+    //           );
+              
+    //           // Update last rotation date
+    //           var now = new Date();
+    //           var formattedDate = formatDate(now);
+    //           dbase.executeCommand(
+    //             "UPDATE questConfig " +
+    //             "SET config_value = '" + formattedDate + "' " +
+    //             "WHERE config_key = 'lastRotationDate'"
+    //           );
+              
+    //           Users.SendAdmin(
+    //             user, 
+    //             "Quest rotation successful. Moved from Day " + currentQListDay + 
+    //             " to Day " + nextQListDay + " with hash " + newQuestHash,
+    //             fromRoom
+    //           );
+    //         } else {
+    //           // If next day doesn't exist, cycle back to day 1
+    //           nextQListDay = 1;
+              
+    //           dbase.executeCommand(
+    //             "UPDATE questConfig " +
+    //             "SET config_value = '" + nextQListDay + "' " +
+    //             "WHERE config_key = 'currentQListDay'"
+    //           );
+              
+    //           // Get the quest list for day 1
+    //           qListResult = dbase.executeQuery(
+    //             "SELECT config_value " +
+    //             "FROM questConfig " +
+    //             "WHERE config_key = 'qListDay1'"
+    //           );
+              
+    //           if (qListResult && qListResult.size() > 0 && qListResult.get(0).getItem("config_value")) {
+    //             var newQuestList = qListResult.get(0).getItem("config_value");
+                
+    //             // Update the qAvailable in the main config table
+    //             dbase.executeCommand(
+    //               "UPDATE config " +
+    //               "SET value = '" + _server.escapeQuotes(newQuestList) + "' " +
+    //               "WHERE `key` = 'qAvailable'"
+    //             );
+                
+    //             // Also update the questHash to trigger quest updates for users when they log in
+    //             var newQuestHash = "quest_" + new Date().getTime();
+    //             dbase.executeCommand(
+    //               "UPDATE config " +
+    //               "SET value = '" + _server.escapeQuotes(newQuestHash) + "' " +
+    //               "WHERE `key` = 'questHash'"
+    //             );
+                
+    //             // Update last rotation date
+    //             var now = new Date();
+    //             var formattedDate = formatDate(now);
+    //             dbase.executeCommand(
+    //               "UPDATE questConfig " +
+    //               "SET config_value = '" + formattedDate + "' " +
+    //               "WHERE config_key = 'lastRotationDate'"
+    //             );
+                
+    //             Users.SendAdmin(
+    //               user, 
+    //               "Next day not found. Cycled back to Day 1 with hash " + newQuestHash,
+    //               fromRoom
+    //             );
+    //           } else {
+    //             Users.SendAdmin(user, "Error: Could not find quest list for day 1", fromRoom);
+    //           }
+    //         }
+    //       } else {
+    //         Users.SendAdmin(user, "Error: Could not retrieve quest configuration", fromRoom);
+    //       }
+    //     } catch (e) {
+    //       Users.SendAdmin(user, "Error rotating quest list: " + e, fromRoom);
+    //     }
+    //   }
+    // }
   }
   if (!user.properties.get("muted") && !hide)
     _server.dispatchPublicMessage(message, fromRoom, user);
-}
-
-// Ensure bad words are loaded from database when this module is loaded
-try {
-  if (typeof dbase !== 'undefined' && dbase !== null) {
-    loadBadWordsFromDB();
-    trace("handlemessages.js: Bad words loaded from database");
-  } else {
-    trace("handlemessages.js: Database not available yet, bad words will be loaded later");
-  }
-} catch (e) {
-  trace("handlemessages.js: Error loading bad words: " + e);
-}
-
-// Function to check bad words status (can be called from other modules)
-function checkBadWordsStatus() {
-  var status = {
-    badWordsLoaded: typeof badWords !== 'undefined',
-    badWordsCount: typeof badWords !== 'undefined' ? badWords.length : 0,
-    databaseAvailable: typeof dbase !== 'undefined' && dbase !== null
-  };
-  
-  trace("handlemessages.js: Bad words status - " + JSON.stringify(status));
-  return status;
 }

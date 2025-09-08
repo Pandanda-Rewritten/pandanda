@@ -245,6 +245,79 @@ function processQAvailable(qAvailableString) {
   }
 }
 
+// Function to get the current questHash from the config table
+function getQuestHashConfig() {
+    var questHashValue = ""; // Default value
+    try {
+        var sql = "SELECT `value` FROM config WHERE `key`='questHash';";
+        var configResult = dbase.executeQuery(sql);
+        if (configResult != null && configResult.size() > 0) {
+            questHashValue = String(configResult.get(0).getItem("value"));
+        } else {
+            trace("Warning: Could not find 'questHash' key in config table.");
+        }
+    } catch (e) {
+        trace("Error fetching 'questHash' from config table: " + e);
+    }
+    return questHashValue;
+}
+
+function processUserColorAndCloset(color, existingCloset) {
+    try {
+        // Process color - remove letters and leading zeros
+        var processedColor = "0";
+        if (color) {
+            // Store original color for closet
+            var originalColor = color;
+            
+            // Remove first character if it's a letter
+            if (color.length > 0 && color.charAt(0) >= 'A' && color.charAt(0) <= 'Z') {
+                color = color.substring(1);
+            }
+            // Remove leading zeros
+            while (color.length > 0 && color.charAt(0) === '0') {
+                color = color.substring(1);
+            }
+            processedColor = color || "0";
+
+            // Process closet - combine color with existing items
+            var closetItems = [];
+            if (existingCloset) {
+                closetItems = existingCloset.split(',');
+            }
+            
+            // Add original color item if it's not already in the closet
+            var hasColor = false;
+            for (var i = 0; i < closetItems.length; i++) {
+                if (closetItems[i] === originalColor) {
+                    hasColor = true;
+                    break;
+                }
+            }
+            if (!hasColor) {
+                closetItems.unshift(originalColor);
+            }
+            
+            return {
+                processedColor: processedColor,
+                processedCloset: closetItems.join(',')
+            };
+        }
+        
+        // Default return if no color provided
+        return {
+            processedColor: "0",
+            processedCloset: existingCloset || ""
+        };
+    } catch (e) {
+        trace("Error processing user color and closet: " + e);
+        return {
+            processedColor: "0",
+            processedCloset: existingCloset || ""
+        };
+    }
+}
+
 function checkAndGiveLoginItem(user) {
   try {
     // Check if free item event is active

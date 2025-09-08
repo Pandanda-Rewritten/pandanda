@@ -176,16 +176,17 @@ function handleLoadClient(params, user) {
 }
 
 function handleChangePassword(evtObj, user) {
-  
   var username = evtObj.name;
   var oldPassword = evtObj.oldPW;
   var newPassword = evtObj.newPW;
   var chan = [user];
   
+  // Validate input
   if (!newPassword || newPassword.length < 5) {
     return sendResponse(chan, "cp", false);
   }
   
+  // Check if user exists and old password is correct
   var qRes = dbase.executeQuery(
     "SELECT * FROM users WHERE username='" +
       _server.escapeQuotes(username) +
@@ -200,6 +201,7 @@ function handleChangePassword(evtObj, user) {
       return sendResponse(chan, "cp", false);
     }
     
+    // Update password
     var updateResult = dbase.executeCommand(
       "UPDATE users SET password='" +
       _server.md5(newPassword) +

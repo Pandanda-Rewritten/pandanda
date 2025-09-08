@@ -1,55 +1,48 @@
 // Bad words configuration file
-// This list should be customized with the actual words you want to filter
-// The words are stored in lowercase for easier comparison
+// This module queries the database directly for better performance and consistency
+// All functions maintain backward compatibility with existing code
+//
+// USAGE:
+// 1. Call initializeBadWordsDB() once during server startup to ensure database is initialized
+// 2. Use containsBadWord(message) to check if a message contains bad words
+// 3. Use getTriggeredBadWord(message) to get the specific bad word that was found
+// 4. Use addBadWord(word) and removeBadWord(word) to manage the word list
+// 5. Use getAllBadWords() to get the complete list of bad words
+//
+// DATABASE SCHEMA:
+// Table: config
+// Key: 'badWordsList'
+// Value: comma-separated list of bad words (e.g., "word1,word2,word3")
 
-// Use global variable to ensure bad words list is shared across all modules
-if (typeof globalBadWords === 'undefined') {
-  globalBadWords = []; // Start with empty array - will be populated from database
-}
+// Default bad words list for initialization if database is empty
+var defaultBadWords = [];
 
-var badWords = globalBadWords; // Reference the global array
-
-// Load bad words from the database
-function loadBadWordsFromDB() {
+// Helper function to get bad words from database (optimized)
+function getBadWordsFromDB() {
   try {
-    if (typeof dbase === 'undefined' || dbase === null) {
-      trace("loadBadWordsFromDB: ERROR - Database connection not available");
-      return;
-    }
-    
     var result = dbase.executeQuery("SELECT value FROM config WHERE `key` = 'badWordsList';");
     
     if (result && result.size() > 0) {
-      var dbBadWords = result.get(0).getItem("value");
-      
-      if (dbBadWords && dbBadWords.trim() !== "") {
-        // Replace the default list with the database version
-        badWords = dbBadWords.split(",");
-        trace("loadBadWordsFromDB: Successfully loaded " + badWords.length + " bad words from database");
-      } else {
-        // If the list is empty in the DB, use empty list
-        badWords = [];
+      var badWordsStr = result.get(0).getItem("value");
+      if (badWordsStr && badWordsStr.trim() !== "") {
+        return badWordsStr.split(",");
       }
-    } else {
-      // If there's no entry in the database, use empty list
-      badWords = [];
     }
+    
+    return null;
   } catch (e) {
-    trace("loadBadWordsFromDB: Error loading bad words from database: " + e);
+    trace("Error getting bad words from database: " + e);
+    return null;
   }
 }
 
-// Save bad words to the database
-function saveBadWordsToDB() {
+// Helper function to save bad words to database (optimized)
+function saveBadWordsToDB(badWordsArray) {
   try {
-    if (typeof dbase === 'undefined' || dbase === null) {
-      trace("saveBadWordsToDB: ERROR - Database connection not available");
-      return false;
-    }
+    var badWordsStr = badWordsArray.join(",");
     
-    var badWordsStr = badWords.join(",");
-    
-    // Check if the config entry exists
+    // Use INSERT ... ON DUPLICATE KEY UPDATE for better performance
+    // or check if entry exists first for compatibility
     var result = dbase.executeQuery("SELECT 1 FROM config WHERE `key` = 'badWordsList';");
     
     if (result && result.size() > 0) {
@@ -68,35 +61,75 @@ function saveBadWordsToDB() {
     
     return true;
   } catch (e) {
-    trace("saveBadWordsToDB: Error saving bad words to database: " + e);
+    trace("Error saving bad words to database: " + e);
     return false;
+  }
+}
+
+// Initialize database with default words if needed
+function initializeBadWordsDB() {
+  try {
+    var result = dbase.executeQuery("SELECT value FROM config WHERE `key` = 'badWordsList';");
+    
+    if (!result || result.size() === 0) {
+      // No entry exists, create one with default words
+      saveBadWordsToDB(defaultBadWords);
+      trace("Initialized bad words database with " + defaultBadWords.length + " default words");
+    } else {
+      var dbValue = result.get(0).getItem("value");
+      if (!dbValue || dbValue.trim() === "") {
+        // Entry exists but is empty, update with default words
+        saveBadWordsToDB(defaultBadWords);
+        trace("Updated empty bad words database with " + defaultBadWords.length + " default words");
+      }
+    }
+  } catch (e) {
+    trace("Error initializing bad words database: " + e);
   }
 }
 
 // Function to check if a message contains bad words
 function containsBadWord(message) {
-  var messageLower = message.toLowerCase();
-  
-  for (var i = 0; i < badWords.length; i++) {
-    if (isExactWordMatch(messageLower, badWords[i])) {
-      return true;
+  try {
+    var messageLower = message.toLowerCase();
+    var badWords = getBadWordsFromDB();
+    
+    if (badWords) {
+      for (var i = 0; i < badWords.length; i++) {
+        var word = badWords[i].trim();
+        if (word && isExactWordMatch(messageLower, word)) {
+          return true;
+        }
+      }
     }
+    
+    return false;
+  } catch (e) {
+    trace("Error checking bad words: " + e);
+    return false;
   }
-  
-  return false;
 }
 
 // Function to get the bad word that triggered the filter
 function getTriggeredBadWord(message) {
-  var messageLower = message.toLowerCase();
-  
-  for (var i = 0; i < badWords.length; i++) {
-    if (isExactWordMatch(messageLower, badWords[i])) {
-      return badWords[i];
+  try {
+    var messageLower = message.toLowerCase();
+    var badWords = getBadWordsFromDB();
+    
+    if (badWords) {
+      for (var i = 0; i < badWords.length; i++) {
+        var word = badWords[i].trim();
+        if (word && isExactWordMatch(messageLower, word)) {
+          return word;
+        }
+      }
     }
+    
+    return null;
+  } catch (e) {
+    trace("Error getting triggered bad word: " + e);
+    return null;
   }
-  
-  return null;
 }
 
 // Helper function to check for exact word matches (not substrings)
@@ -154,47 +187,110 @@ function isLetter(c) {
 
 // Function to add a word to the bad words list
 function addBadWord(word) {
-  // Convert to lowercase for consistency
-  word = word.toLowerCase();
-  
-  // Check if the word already exists in the list
-  if (badWords.indexOf(word) === -1) {
-    badWords.push(word);
-    // Save the updated list to the database
-    saveBadWordsToDB();
-    return true; // Word was added
+  try {
+    // Convert to lowercase for consistency
+    word = word.toLowerCase().trim();
+    
+    if (!word) {
+      return false; // Empty word
+    }
+    
+    // Get current bad words from database
+    var badWords = getBadWordsFromDB();
+    
+    if (badWords) {
+      // Check if word already exists
+      for (var i = 0; i < badWords.length; i++) {
+        if (badWords[i].trim() === word) {
+          return false; // Word already exists
+        }
+      }
+      
+      // Add the new word
+      badWords.push(word);
+      
+      // Save to database
+      if (saveBadWordsToDB(badWords)) {
+        trace("Added bad word: " + word);
+        return true; // Word was added
+      }
+    } else {
+      // No entry exists, create one with the new word
+      if (saveBadWordsToDB([word])) {
+        trace("Created bad words list with word: " + word);
+        return true;
+      }
+    }
+    
+    return false;
+  } catch (e) {
+    trace("Error adding bad word: " + e);
+    return false;
   }
-  
-  return false; // Word already exists
 }
 
 // Function to remove a word from the bad words list
 function removeBadWord(word) {
-  // Convert to lowercase for consistency
-  word = word.toLowerCase();
-  
-  // Check if the word exists in the list
-  var index = badWords.indexOf(word);
-  if (index !== -1) {
-    badWords.splice(index, 1);
-    // Save the updated list to the database
-    saveBadWordsToDB();
-    return true; // Word was removed
+  try {
+    // Convert to lowercase for consistency
+    word = word.toLowerCase().trim();
+    
+    if (!word) {
+      return false; // Empty word
+    }
+    
+    // Get current bad words from database
+    var badWords = getBadWordsFromDB();
+    
+    if (badWords) {
+      var wordFound = false;
+      var newBadWords = [];
+      
+      // Remove the word from the list
+      for (var i = 0; i < badWords.length; i++) {
+        if (badWords[i].trim() !== word) {
+          newBadWords.push(badWords[i]);
+        } else {
+          wordFound = true;
+        }
+      }
+      
+      if (wordFound) {
+        // Save updated list to database
+        if (saveBadWordsToDB(newBadWords)) {
+          trace("Removed bad word: " + word);
+          return true; // Word was removed
+        }
+      }
+    }
+    
+    return false; // Word wasn't in the list
+  } catch (e) {
+    trace("Error removing bad word: " + e);
+    return false;
   }
-  
-  return false; // Word wasn't in the list
 }
 
 // Function to get the list of all bad words
 function getAllBadWords() {
-  return badWords.slice(); // Return a copy of the array
-}
-
-// Function to get the current status of bad words loading
-function getBadWordsStatus() {
-  return {
-    totalWords: badWords.length,
-    isLoadedFromDB: true, // Always loaded from DB now (no backup list)
-    sampleWords: badWords.slice(0, 5) // First 5 words for verification
-  };
+  try {
+    var badWords = getBadWordsFromDB();
+    
+    if (badWords) {
+      // Trim each word and filter out empty strings
+      var trimmedWords = [];
+      for (var i = 0; i < badWords.length; i++) {
+        var word = badWords[i].trim();
+        if (word) {
+          trimmedWords.push(word);
+        }
+      }
+      return trimmedWords;
+    }
+    
+    return []; // Return empty array if no words found
+  } catch (e) {
+    trace("Error getting all bad words: " + e);
+    return [];
+  }
 } 

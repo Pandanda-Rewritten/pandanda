@@ -1,8 +1,13 @@
 var XT_Name = {};
 XT_Name["MOD_MSG"] = "modMsg";
 XT_Name["MOD_MUTE"] = "modMute";
+XT_Name["UN_MU"] = "modMute";
 XT_Name["MOD_KICK"] = "modKick";
 XT_Name["MOD_BAN"] = "modBan";
+XT_Name["MOD_COINS"] = "modCoins";
+XT_Name["MOD_ITEMS"] = "modItems";
+XT_Name["PERM_BAN"] = "permBan";
+XT_Name["MOD_PERM_BAN"] = "modPermBan";
 XT_Name["MOD_GET_USER_INFO"] = "modUserInfo";
 XT_Name["REQUEST_RELATION_CHANGE"] = "REQUEST_RELATION_CHANGE";
 XT_Name["ACCEPT_RELATION_CHANGE"] = "ACCEPT_RELATION_CHANGE";
