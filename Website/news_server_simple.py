@@ -29,6 +29,11 @@ class SimpleNewsHandler(http.server.SimpleHTTPRequestHandler):
             self.serve_news_api()
         elif path == '/api/news.json':
             self.serve_news_json()
+        elif path == '/' or path == '':
+            # Redirect root to /blog
+            self.send_response(302)
+            self.send_header('Location', '/blog')
+            self.end_headers()
         else:
             # Serve static files from blog directory
             self.serve_static_file()
@@ -508,10 +513,10 @@ def main():
     print("=" * 60)
     print(f"🌐 Server running on: http://localhost:{PORT}")
     print("\n📋 Available endpoints:")
-    print(f"  • http://localhost:{PORT}/          - Dynamic news page")
-    print(f"  • http://localhost:{PORT}/news      - Dynamic news page")
+    print(f"  • http://localhost:{PORT}/blog      - Dynamic news page")
     print(f"  • http://localhost:{PORT}/api/news  - News data as JSON API")
     print(f"  • http://localhost:{PORT}/api/news.json - Raw JSON file")
+    print(f"  • http://localhost:{PORT}/          - Redirects to /blog")
     print("\n🎯 Features:")
     print("  ✅ Dynamic news generation from JSON")
     print("  ✅ JSON API for external integration")

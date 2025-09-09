@@ -1,12 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<link rel=stylesheet href="pandanda2.css" type="text/css">
+	<link rel=stylesheet href="css/pandanda2.css" type="text/css">
 	<title>Pandanda - Terms of Use</title>
 	<meta name="description" content="Pandanda is the popular web based multiplayer red panda Flash game for kids.">
 	<meta name="keywords" content="pandanda kids flash games multiplayer clothes quests online pandandaland red panda land safe fun educational kid game popular fun mmo rpg virtual world explore">
-	<script src="pandanda.js" type="text/javascript"></script>
-	<script src="AC_RunActiveContent.js" type="text/javascript"></script>
+	<script src="js/pandanda.js" type="text/javascript"></script>
+	<script src="js/AC_RunActiveContent.js" type="text/javascript"></script>
 	<!--google analytics-->
 	<script type="text/javascript">
 		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -45,19 +45,32 @@
 	  <img src="http://b.scorecardresearch.com/p?c1=2&c2=8586891&cv=2.0&cj=1" />
 	</noscript>
 	<!-- End comScore Tag -->
+	<!-- Ruffle Flash Emulator -->
+	<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+	<script>
+		// Configure Ruffle for autoplay
+		window.RufflePlayer = window.RufflePlayer || {};
+		window.RufflePlayer.config = {
+			"autoplay": "on",
+			"unmuteOverlay": "hidden",
+			"splashScreen": false,
+			"preferredRenderer": "webgl",
+			"logLevel": "warn"
+		};
+	</script>
 </head>
 <body>
 	<div id="navBar">
 		<script language="javascript">
-			AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0',	'width','1006px',	'height','89px', 'src','heading_menu', 'quality','high', 'wmode','transparent', 'menu','false', 'pluginspage','http://www.macromedia.com/go/getflashplayer',	'movie','heading_menu');
+			AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0',	'width','1006px',	'height','89px', 'src','flash/heading_menu', 'quality','high', 'wmode','transparent', 'menu','false', 'pluginspage','http://www.macromedia.com/go/getflashplayer',	'movie','flash/heading_menu');
 		</script>
 		<noscript>
 			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0" width="1006" height="89px">
-				<param name="movie" value="heading_menu.swf">
+				<param name="movie" value="flash/heading_menu.swf">
 				<param name="quality" value="high">
 				<param name="wmode" value="transparent">
 				<param name="menu" value="false">
-				<embed src="heading_menu.swf" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="1006" height="89"></embed>
+				<embed src="flash/heading_menu.swf" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="1006" height="89"></embed>
 			</object>
 		</noscript>
 	</diV><!-- end navBar-->
@@ -80,6 +93,8 @@
 											<table border=0; cellspacing=0; cellpadding=0; align="center">
 												<tr>
 													<td  height="33" valign="top"><font class="TextSubHeaderYellow">Terms of Use</font></td>
+													<td width="32" height="16" align="center" valign="top"><img src="images/cmn_diamond_divider.gif" width="16" height="16" alt="pandanda game"></td>
+													<td  height="33" valign="top"><a href="/blog">Henry's Blog</a></td>
 												</tr>
 											</table>
 										</td>
@@ -124,13 +139,13 @@
 								<br><br>
 								Welcome to pandanda.com. This website is owned and operated by Sunleaf Studios, LLC. If you have any questions or concerns relating to this website please contact our customer service department at <a class="TextNormalBlueUnderline" href="mailto:websupport@pandanda.com">websupport@pandanda.com</a>.
 								<br><br>
-								This website provides a fun, safe place for kids to create and care for their own virtual Red Panda, play games together and socialize. We hope you will visit our website often and enjoy your time there. The following are the “Terms of Use” that set forth the rules that govern the use of our website.
+								This website provides a fun, safe place for kids to create and care for their own virtual Red Panda, play games together and socialize. We hope you will visit our website often and enjoy your time there. The following are the Terms of Use that set forth the rules that govern the use of our website.
 								<br><br>
-								By using our site, you are agreeing to comply with and be bound by the following terms of use. Please review the following terms carefully. If you do not agree to these terms, you will not be able to create an account and sign in to the game portion of the site. The term “us” or “we” or “our” refers to Sunleaf Studios, LLC, the owner of the web site.  The term “you” refers to the user or viewer of our web Site.
+								By using our site, you are agreeing to comply with and be bound by the following terms of use. Please review the following terms carefully. If you do not agree to these terms, you will not be able to create an account and sign in to the game portion of the site. The term us or we or our refers to Sunleaf Studios, LLC, the owner of the web site.  The term you refers to the user or viewer of our web Site.
 								<br><br>
 								<font class="TextTitleBlue">1.	Acceptance of Agreement.</font>
 								<br><br>
-								You agree to the terms and conditions outlined in this Terms of Use Agreement ("Agreement") with respect to our site (the "Site" or “Pandanda”). This Agreement constitutes the entire and only agreement between us and you, and supersedes all prior or contemporaneous agreements, representations, warranties and understandings with respect to Pandanda, the content, products or services provided by or through Pandanda, and the subject matter of this Agreement. This Agreement may be amended at any time by us from time to time without specific notice to you. The latest Agreement will be posted on Pandanda.com, and you should review this Agreement prior to using Pandanda.
+								You agree to the terms and conditions outlined in this Terms of Use Agreement ("Agreement") with respect to our site (the "Site" or Pandanda). This Agreement constitutes the entire and only agreement between us and you, and supersedes all prior or contemporaneous agreements, representations, warranties and understandings with respect to Pandanda, the content, products or services provided by or through Pandanda, and the subject matter of this Agreement. This Agreement may be amended at any time by us from time to time without specific notice to you. The latest Agreement will be posted on Pandanda.com, and you should review this Agreement prior to using Pandanda.
 								<br><br>
 								<font class="TextTitleBlue">2.	Copyright.</font>
 								<br><br>
@@ -146,7 +161,7 @@
 								<br><br>
 								<font class="TextTitleBlue">5.	Restrictions and Prohibitions on Use.</font>
 								<br><br>
-								Your license for access and use of Pandanda and any information, materials or documents (collectively defined as “Content and Materials”) therein are subject to the following restrictions and prohibitions on use:  You may not (a) copy, print (except for the express limited purpose permitted by Section 4 above), republish, display, distribute, transmit, sell, rent, lease, loan or otherwise make available in any form or by any means all or any portion of the Site or any Content and Materials retrieved there from; (b) use Pandanda or any materials obtained from Pandanda to develop, of as a component of, any information, storage and retrieval system, database, information base, or similar resource (in any media now existing or hereafter developed), that is offered for commercial distribution of any kind, including through sale, license, lease, rental, subscription, or any other commercial  distribution mechanism; (c) create compilations or derivative works of any Content and Materials from Pandanda; (d) use any Content and Materials from Pandanda in any manner that may infringe any copyright, intellectual property right, proprietary right, or property right of us or any third parties; (e) remove, change or obscure any copyright notice or other proprietary notice or terms of use contained in Pandanda; (f) make any portion of Pandanda available through any timesharing system, service bureau, the Internet or any other technology now existing or developed in the future; (g) remove, decompile, disassemble or reverse engineer any Site software or use any network monitoring or discovery software to determine Pandanda architecture; (h) use any automatic or manual process to harvest information from Pandanda; (i) use Pandanda for the purpose of gathering information for or transmitting (1) unsolicited commercial email; (2) email that makes use of headers, invalid or nonexistent domain names, or other means of deceptive addressing; and (3) unsolicited telephone calls or facsimile transmissions; (j) use Pandanda in a manner that violates any state or federal law regulating email, facsimile transmissions or telephone solicitations; and (k) export or re-export Pandanda or any portion thereof, or any software available on or through Pandanda, in violation of the export control laws or regulations of the United States.
+								Your license for access and use of Pandanda and any information, materials or documents (collectively defined as Content and Materials) therein are subject to the following restrictions and prohibitions on use:  You may not (a) copy, print (except for the express limited purpose permitted by Section 4 above), republish, display, distribute, transmit, sell, rent, lease, loan or otherwise make available in any form or by any means all or any portion of the Site or any Content and Materials retrieved there from; (b) use Pandanda or any materials obtained from Pandanda to develop, of as a component of, any information, storage and retrieval system, database, information base, or similar resource (in any media now existing or hereafter developed), that is offered for commercial distribution of any kind, including through sale, license, lease, rental, subscription, or any other commercial  distribution mechanism; (c) create compilations or derivative works of any Content and Materials from Pandanda; (d) use any Content and Materials from Pandanda in any manner that may infringe any copyright, intellectual property right, proprietary right, or property right of us or any third parties; (e) remove, change or obscure any copyright notice or other proprietary notice or terms of use contained in Pandanda; (f) make any portion of Pandanda available through any timesharing system, service bureau, the Internet or any other technology now existing or developed in the future; (g) remove, decompile, disassemble or reverse engineer any Site software or use any network monitoring or discovery software to determine Pandanda architecture; (h) use any automatic or manual process to harvest information from Pandanda; (i) use Pandanda for the purpose of gathering information for or transmitting (1) unsolicited commercial email; (2) email that makes use of headers, invalid or nonexistent domain names, or other means of deceptive addressing; and (3) unsolicited telephone calls or facsimile transmissions; (j) use Pandanda in a manner that violates any state or federal law regulating email, facsimile transmissions or telephone solicitations; and (k) export or re-export Pandanda or any portion thereof, or any software available on or through Pandanda, in violation of the export control laws or regulations of the United States.
 								<br><br>
 								<font class="TextTitleBlue">6.	Linking to Pandanda.</font>
 								<br><br>
@@ -164,7 +179,7 @@
 								<br><br>
 								<font class="TextTitleBlue">8.	Registration.</font>
 								<br><br>
-								When registering for a free account you agree to provide us with a valid email address. As a safety precaution it is highly recommended that you do NOT use your child’s real name as your virtual Red Panda’s name.
+								When registering for a free account you agree to provide us with a valid email address. As a safety precaution it is highly recommended that you do NOT use your childs real name as your virtual Red Pandas name.
 								<br><br>
 								When you register for a paid Elite Membership to Pandanda your registration must be done using your real name and accurate information.  Each registration is for your personal use only and not on behalf of any other person or entity. We do not permit (a) any other person using the registered sections under your name; or (b) access through a single name being made available to multiple users on a network.  You are responsible for preventing such unauthorized use.
 								<br><br>
@@ -190,7 +205,7 @@
 								<br><br>
 								<font class="TextTitleBlue">14.	Disclaimer.</font>
 								<br><br>
-								THE INFORMATION, CONTENT AND DOCUMENTS FROM OR THROUGH PANDANDA ARE PROVIDED "AS-IS," "AS AVAILABLE," WITH “ALL FAULTS”, AND ALL WARRANTIES, EXPRESS OR IMPLIED, ARE DISCLAIMED (INCLUDING BUT NOT LIMITED TO THE DISCLAIMER OF ANY IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE). THE INFORMATION AND SERVICES MAY CONTAIN BUGS, ERRORS, PROBLEMS OR OTHER LIMITATIONS. WE AND OUR AFFILIATED PARTIES HAVE NO LIABILITY WHATSOEVER FOR YOUR USE OF ANY INFORMATION OR SERVICE, EXCEPT AS PROVIDED IN SECTION 17(b). IN PARTICULAR, BUT NOT AS A LIMITATION THEREOF, WE AND OUR AFFILIATED PARTIES ARE NOT LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES (INCLUDING DAMAGES FOR LOSS OF BUSINESS, LOSS OF PROFITS, LITIGATION, OR THE LIKE), WHETHER BASED ON BREACH OF CONTRACT, BREACH OF WARRANTY, TORT (INCLUDING NEGLIGENCE), PRODUCT LIABILITY OR OTHERWISE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THE NEGATION AND LIMITATION OF DAMAGES SET FORTH ABOVE ARE FUNDAMENTAL ELEMENTS OF THE BASIS OF THE BARGAIN BETWEEN US AND YOU. PANDANDA AND THE PRODUCTS, SERVICES, DOCUMENTS AND INFORMATION PRESENTED WOULD NOT BE PROVIDED WITHOUT SUCH LIMITATIONS. NO ADVICE OR INFORMATION, WHETHER ORAL OR WRITTEN, OBTAINED BY YOU FROM US THROUGH THE SITE OR OTHERWISE SHALL CREATE ANY WARRANTY, REPRESENTATION OR GUARANTEE NOT EXPRESSLY STATED IN THIS AGREEMENT.
+								THE INFORMATION, CONTENT AND DOCUMENTS FROM OR THROUGH PANDANDA ARE PROVIDED "AS-IS," "AS AVAILABLE," WITH ALL FAULTS, AND ALL WARRANTIES, EXPRESS OR IMPLIED, ARE DISCLAIMED (INCLUDING BUT NOT LIMITED TO THE DISCLAIMER OF ANY IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE). THE INFORMATION AND SERVICES MAY CONTAIN BUGS, ERRORS, PROBLEMS OR OTHER LIMITATIONS. WE AND OUR AFFILIATED PARTIES HAVE NO LIABILITY WHATSOEVER FOR YOUR USE OF ANY INFORMATION OR SERVICE, EXCEPT AS PROVIDED IN SECTION 17(b). IN PARTICULAR, BUT NOT AS A LIMITATION THEREOF, WE AND OUR AFFILIATED PARTIES ARE NOT LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES (INCLUDING DAMAGES FOR LOSS OF BUSINESS, LOSS OF PROFITS, LITIGATION, OR THE LIKE), WHETHER BASED ON BREACH OF CONTRACT, BREACH OF WARRANTY, TORT (INCLUDING NEGLIGENCE), PRODUCT LIABILITY OR OTHERWISE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THE NEGATION AND LIMITATION OF DAMAGES SET FORTH ABOVE ARE FUNDAMENTAL ELEMENTS OF THE BASIS OF THE BARGAIN BETWEEN US AND YOU. PANDANDA AND THE PRODUCTS, SERVICES, DOCUMENTS AND INFORMATION PRESENTED WOULD NOT BE PROVIDED WITHOUT SUCH LIMITATIONS. NO ADVICE OR INFORMATION, WHETHER ORAL OR WRITTEN, OBTAINED BY YOU FROM US THROUGH THE SITE OR OTHERWISE SHALL CREATE ANY WARRANTY, REPRESENTATION OR GUARANTEE NOT EXPRESSLY STATED IN THIS AGREEMENT.
 								<br><br>
 
 								ALL RESPONSIBILITY OR LIABILITY FOR ANY DAMAGES CAUSED BY VIRUSES CONTAINED WITHIN THE ELECTRONIC FILE CONTAINING A FORM OR DOCUMENT IS DISCLAIMED.
@@ -212,13 +227,13 @@
 								<br><br>
 								1) All submissions must respect copyright, patent, trademark, trade secret and all confidentiality agreements or obligations to third parties.
 								<br><br>
-								2) All submissions must respect others right to privacy which means you are not allowed to submit anything that would invade another’s privacy by the submission of their personal information without their consent.
+								2) All submissions must respect others right to privacy which means you are not allowed to submit anything that would invade anothers privacy by the submission of their personal information without their consent.
 								<br><br>
 								3) You are not allowed to submit any content that is intended to harm another person or entity. This means content that is racially offensive, bigoted, obscene, vulgar, violent, pornographic, sexually explicit, harassing, or threatening is prohibited.
 								<br><br>
 								4) No submission can be an advertisement for any product or service commercial or otherwise, regardless of whether it is for profit or not for profit. Solicitations or requests for contributions or donations are also prohibited.
 								<br><br>
-								5) No submission is allowed to contain a virus or other harmful element. Anything that would attempt to tamper with or damage the Pandanda website or any connected network is strictly prohibited. Any attempt to disrupt the enjoyment of Pandanda for others by the use of  “flooding”, “spamming “, “griefing” or “trolling” (as these terms are commonly understood on the internet) is not allowed.
+								5) No submission is allowed to contain a virus or other harmful element. Anything that would attempt to tamper with or damage the Pandanda website or any connected network is strictly prohibited. Any attempt to disrupt the enjoyment of Pandanda for others by the use of  flooding, spamming , griefing or trolling (as these terms are commonly understood on the internet) is not allowed.
 								<br><br>
 								6) No submission can include anything illegal or encourage illegal behavior or even discuss illegal behavior. This especially includes any submission that would attempt to engage in stalking, sexual assault, child pornography, fraud, trafficking in stolen or obscene material, drug abuse, drug dealing or theft.
 								<br><br>
@@ -311,16 +326,16 @@
 	</div><!-- end main -->
 	<div id="ticker">
 		<script language="javascript">
-			AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0',	'width','100%',	'height','100%', 'src','ticker',	'quality','high',	'scale','noscale', 'wmode','transparent',	'menu','false',	'pluginspage','http://www.macromedia.com/go/getflashplayer', 'movie','ticker');
+			AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0',	'width','100%',	'height','100%', 'src','flash/ticker',	'quality','high',	'scale','noscale', 'wmode','transparent',	'menu','false',	'pluginspage','http://www.macromedia.com/go/getflashplayer', 'movie','flash/ticker');
 		</script>
 		<noscript>
 			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0" width="100%" height="100%" >
-				<param name="movie" value="ticker.swf">
+				<param name="movie" value="flash/ticker.swf">
 				<param name="quality" value="high">
 				<param name="scale" value="noscale">
 				<param name="wmode" value="transparent">
 				<param name="menu" value="false">
-				<embed src="ticker.swf" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="100%" height="100%"></embed>
+				<embed src="flash/ticker.swf" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="100%" height="100%"></embed>
 			</object>
 		</noscript>
 	</div><!-- end ticker -->

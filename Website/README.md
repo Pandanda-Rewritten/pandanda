@@ -71,7 +71,7 @@ python news_server_simple.py
 start_simple_news_server.bat
 ```
 
-Visit: **http://localhost:8002/**
+Visit: **http://localhost:8002/blog**
 
 ### 3. View Static Content
 
