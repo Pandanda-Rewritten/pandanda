@@ -1,0 +1,1209 @@
+BODY
+{
+    PADDING-RIGHT: 0px;
+    PADDING-LEFT: 0px;
+    PADDING-BOTTOM: 0px;
+    PADDING-TOP: 0px;
+    MARGIN: 0px;
+    COLOR: #000000;
+	height:100%;
+	width: 100%;
+	min-width: 1006px !important;
+    BACKGROUND-COLOR: #0083D6;
+}
+
+
+#navBar
+{
+	position: relative;
+	height:89px;
+	width: 1006px;
+	margin:auto;
+	top: 0px;
+}
+
+#subHeader
+{
+	position: relative;
+	height:42px;
+	width: 1006px;
+	margin:auto;
+	top: 0px;
+}
+
+#ticker
+{
+	position: relative;
+	top:0px;
+	height:37px;
+	width:100%;
+}
+
+#main
+{
+	position: relative;
+	width:878px;
+	margin:auto;
+	top:0px;
+}
+
+textarea
+{
+	font-family:Helvetica,sans-serif;
+	font-size:100%;
+}
+
+.TableMain
+{
+	background-color: white;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	width: 878px;
+}
+
+.TableSubHeader
+{
+	BACKGROUND-IMAGE:URL('../images/cmn_gradient_tile_green.gif');
+	/*background-color: #009dea;*/
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bold;
+}
+
+.TableMembershipMessage
+{
+	background-color: #37b3ee;
+	padding-top: 10px;
+	padding-bottom: 0px;
+	padding-left: 20px;
+	padding-right: 20px;
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+
+.TableTextBlock
+{
+	background-color: white;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 40px;
+	padding-right: 40px;
+	width: 878px;
+}
+
+.TableTextBlockHeader
+{
+	BACKGROUND-IMAGE:URL('../images/pf_blue_gradient_1x161.gif');
+	background-color: white;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 40px;
+	padding-right: 40px;
+	width: 878px;
+	height: 161px;
+}
+
+.TableMailForm
+{
+	background-color: #e6f4fd;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	width: 844px;
+    color: #0083D6;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 12pt;
+    FONT-WEIGHT: bold;
+}
+
+.TableBlogPurpleBox
+{
+	background-color: #A144BA;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 15px;
+	padding-right: 15px;
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.TableBlogLightPurpleBox
+{
+	background-color: #ecdaf1;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 9px;
+	padding-right: 0px;
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.BlogrollLink A:link
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+    COLOR: #A144BA;
+}
+.BlogrollLink A:visited
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+    COLOR: #A144BA;
+}
+
+
+.TableBlueBox
+{
+	background-color: #06a0ea;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.TableLightBlueBox
+{
+	background-color: #e6f4fd;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 16px;
+	padding-right: 10px;
+    color: #0083D6;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.TableBlogEntryWhite
+{
+	background-color: white;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 15px;
+	padding-right: 15px;
+    color: #0083D6;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.TableBlogEntryBlue
+{
+	background-color: #e6f4fd;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 15px;
+	padding-right: 15px;
+    color: #0083D6;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.TableBlogEntryOrange
+{
+	background-color: #ffa800;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 15px;
+	padding-right: 15px;
+    color: #a25b00;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.TableNewsArticle
+{
+	background-color: white;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 15px;
+	padding-right: 15px;
+    color: #0083D6;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.TableFAQ
+{
+	background-color: #e6f4fd;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 20px;
+	width: 844px;
+    color: #0083D6;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.TableFAQQuestions
+{
+	background-color: white;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 10px;
+	padding-right: 0px;
+    color: #0083D6;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 12pt;
+    FONT-WEIGHT: bold;
+}
+
+.TableFAQQuestions:hover
+{
+	background-color: white;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 10px;
+	padding-right: 0px;
+    color: #0083D6;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 12pt;
+    FONT-WEIGHT: bold;
+    TEXT-DECORATION: underline;
+}
+
+.TableFAQHeader
+{
+	background-color: #06a0ea;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	width: 878px;
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.TableContestGiveaway
+{
+	background-color: #9F1F6C;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+.TableContestGiveawayGold
+{
+	background-color: #9A7723;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+    color: #FFFFC6;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+
+.TextDisclaimerBlue
+{
+    color: #0083D6;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt;
+}
+
+.TextSubHeaderYellow
+{
+    color: #6B8800;
+	/*color: #F9EC88;*/
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bold;
+}
+
+.TextTitleWhite
+{
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 14pt;
+    FONT-WEIGHT: bold;
+}
+
+.TextTitleWhite2
+{
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 13pt;
+    FONT-WEIGHT: bold;
+}
+
+.TextNormalWhite
+{
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.TextTitlePurple
+{
+    color: #A144BA;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+    FONT-WEIGHT: bold;
+}
+
+.TextNormalPurple
+{
+    color: #A144BA;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt;
+}
+
+.TextTitleBlue
+{
+    color: #0083D6;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 13pt;
+    FONT-WEIGHT: bold;
+}
+
+.TextTitleDarkOrange
+{
+    color: #a25b00;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 13pt;
+    FONT-WEIGHT: bold;
+}
+
+.TextCaptionBlue
+{
+    color: #0083D6;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 8pt;
+    FONT-WEIGHT: normal;
+}
+
+.TextCountdownBlue
+{
+    color: #0083D6;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 18pt;
+    FONT-WEIGHT: bold;
+}
+
+.TextNormalBlue
+{
+    color: #0083D6;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+    FONT-WEIGHT: normal;
+}
+
+.TextNormalBlueUnderline
+{
+    color: #0083D6;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+    FONT-WEIGHT: normal;
+    TEXT-DECORATION: underline
+}
+
+.TextTitleDarkBlue
+{
+    color: #005082;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 13pt;
+    FONT-WEIGHT: bold;
+}
+
+.TextNormalDarkBlue
+{
+    color: #005082;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+.TextNormalDarkBlue:hover
+{
+    color: #005082;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+
+
+.TableHenryInfo
+{
+	background-color: #37B3EE;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	width: 732px;
+	height: 270px;
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.TableFooterBox
+{
+    BACKGROUND-COLOR: #0083D6;
+    WIDTH: 1006px;
+    height: 80px;
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt;
+}
+
+.TableMainPageInfoBox
+{
+	background-color: #37B3EE;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	border-style: solid;
+	border-left-width: 1px;
+	border-right-width: 0px;
+	border-top-width: 0px;
+	border-bottom-width: 0px;
+	width: 172px;
+	height: 270px;
+}
+
+.TableMainPageInfoBoxText
+{
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	width: 172px;
+	height: 155px;
+}
+
+.black_overlay
+{
+	display: none;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index:1001;
+	-moz-opacity: 0.8;
+	opacity:.80;
+	filter: alpha(opacity=80);
+}
+.white_content
+{
+	display: none;
+	position: absolute;
+	top: 50px;
+	left: 59px;
+	width: 760px;
+	height: 488px;
+	padding: 0px;
+	border: 0px solid black;
+	background-color: white;
+	z-index:1002;
+}
+
+
+H1
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 30pt;
+    COLOR: #313884;
+    FONT-FAMILY: verdana
+}
+H2
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 18pt;
+    COLOR: #628C48;
+    FONT-FAMILY: verdana
+}
+H3
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 16pt;
+    COLOR: #313884;
+    FONT-FAMILY: verdana
+}
+H4
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 30pt;
+    COLOR: #313884;
+    FONT-FAMILY: verdana
+}
+H5
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 8pt;
+    COLOR: #313884;
+    FONT-FAMILY: verdana;
+    TEXT-ALIGN: right
+}
+H6
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 9pt;
+    COLOR: #313884;
+    FONT-FAMILY: verdana;
+    TEXT-ALIGN: center
+}
+H7
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 25pt;
+    COLOR: #313884;
+    FONT-FAMILY: verdana
+}
+A
+{
+    COLOR: #653F1C;
+    TEXT-DECORATION: none
+}
+A:hover
+{
+    TEXT-DECORATION: underline
+}
+
+.BlueLink
+{
+    COLOR: #0083D6;
+    TEXT-DECORATION: underline
+}
+.BlueLink:hover
+{
+    TEXT-DECORATION: underline
+}
+
+.morelink
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+    COLOR: white;
+    TEXT-DECORATION: underline
+}
+
+.link
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt;
+    COLOR: white;
+    TEXT-DECORATION: none
+}
+.link:hover
+{
+    CURSOR: hand;
+    COLOR: #4282b5;
+    TEXT-DECORATION: underline
+}
+
+.PlainText
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 15px;
+    COLOR: #024e9a;
+    FONT-FAMILY: verdana
+}
+
+.BoldText
+{
+    FONT-WEIGHT: bold
+}
+
+.FooterLinks
+{
+	COLOR: #FFFFFF
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------*/
+/* This stuff below is for the html rollover buttons                                      */
+/*----------------------------------------------------------------------------------------*/
+
+.buttonmenu
+{
+	height: 61px;
+	width: 804px;
+}
+
+/* BUTTON 1 */
+.pcButton1
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/pc_read_msg_btn_over.gif) no-repeat;
+	width: 225px;
+	height: 23px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.pcButton1 a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 225px;
+	height: 23px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.pcButton1 a:hover
+{
+	color: #ffffff;
+}
+
+.pcButton1 img {width: 225px; height: 23px; border: 0; }
+* html a:hover {visibility:visible}
+.pcButton1 a:hover img{visibility:hidden}
+
+/* BUTTON 2 */
+.pcButton2
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/pc_parents_faq_btn_over.gif) no-repeat;
+	width: 213px;
+	height: 23px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.pcButton2 a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 213px;
+	height: 23px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.pcButton2 a:hover
+{
+	color: #ffffff;
+}
+
+.pcButton2 img {width: 213px; height: 23px; border: 0; }
+* html a:hover {visibility:visible}
+.pcButton2 a:hover img{visibility:hidden}
+
+
+/* BUTTON 3 */
+.pcButton3
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/pc_safety_tips_btn_over.gif) no-repeat;
+	width: 213px;
+	height: 23px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.pcButton3 a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 213px;
+	height: 23px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.pcButton3 a:hover
+{
+	color: #ffffff;
+}
+
+.pcButton3 img {width: 213px; height: 23px; border: 0; }
+* html a:hover {visibility:visible}
+.pcButton3 a:hover img{visibility:hidden}
+
+/* BUTTON 4 */
+.pcButton4
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/pc_privacy_policy_btn_over.gif) no-repeat;
+	width: 227px;
+	height: 23px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.pcButton4 a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 227px;
+	height: 23px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.pcButton4 a:hover
+{
+	color: #ffffff;
+}
+
+.pcButton4 img {width: 227px; height: 23px; border: 0; }
+* html a:hover {visibility:visible}
+.pcButton4 a:hover img{visibility:hidden}
+
+/* Back to top Button */
+.backToTopButton
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/cmn_back_to_top_btn_over.gif) no-repeat;
+	width: 179px;
+	height: 23px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.backToTopButton a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 179px;
+	height: 23px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.backToTopButton a:hover
+{
+	color: #ffffff;
+}
+
+.backToTopButton img {width: 179px; height: 23px; border: 0; }
+* html a:hover {visibility:visible}
+.backToTopButton a:hover img{visibility:hidden}
+
+/* helpContactUs Button */
+.helpContactUsButton
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/hh_contact_us_btn_over.gif) no-repeat;
+	width: 116px;
+	height: 23px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.helpContactUsButton a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 116px;
+	height: 23px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.helpContactUsButton a:hover
+{
+	color: #ffffff;
+}
+
+.helpContactUsButton img {width: 116px; height: 23px; border: 0; }
+* html a:hover {visibility:visible}
+.helpContactUsButton a:hover img{visibility:hidden}
+
+
+/* helpTechnical Button */
+.helpTechnicalButton
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/hh_technical_FAQ_btn_over.gif) no-repeat;
+	width: 137px;
+	height: 23px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.helpTechnicalButton a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 137px;
+	height: 23px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.helpTechnicalButton a:hover
+{
+	color: #ffffff;
+}
+
+.helpTechnicalButton img {width: 137px; height: 23px; border: 0; }
+* html a:hover {visibility:visible}
+.helpTechnicalButton a:hover img{visibility:hidden}
+
+
+/* helpReportBug Button */
+.helpReportBugButton
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/hh_report_bug_btn_over.gif) no-repeat;
+	width: 132px;
+	height: 23px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.helpReportBugButton a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 132px;
+	height: 23px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.helpReportBugButton a:hover
+{
+	color: #ffffff;
+}
+
+.helpReportBugButton img {width: 132px; height: 23px; border: 0; }
+* html a:hover {visibility:visible}
+.helpReportBugButton a:hover img{visibility:hidden}
+
+
+/* helpGoToFAQ Button */
+.helpGoToFAQButton
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/hh_go2FAQ_btn_over.gif) no-repeat;
+	width: 113px;
+	height: 23px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.helpGoToFAQButton a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 113px;
+	height: 23px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.helpGoToFAQButton a:hover
+{
+	color: #ffffff;
+}
+
+.helpGoToFAQButton img {width: 113px; height: 23px; border: 0; }
+* html a:hover {visibility:visible}
+.helpGoToFAQButton a:hover img{visibility:hidden}
+
+
+/* helpFish Button */
+.helpFishButton
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/hh_fish_btn_over.gif) no-repeat;
+	width: 86px;
+	height: 77px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.helpFishButton a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 86px;
+	height: 77px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.helpFishButton a:hover
+{
+	color: #ffffff;
+}
+
+.helpFishButton img {width: 86px; height: 77px; border: 0; }
+* html a:hover {visibility:visible}
+.helpFishButton a:hover img{visibility:hidden}
+
+/* helpCollect Button */
+.helpCollectButton
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/hh_collect_btn_over.gif) no-repeat;
+	width: 86px;
+	height: 77px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.helpCollectButton a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 86px;
+	height: 77px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.helpCollectButton a:hover
+{
+	color: #ffffff;
+}
+
+.helpCollectButton img {width: 86px; height: 77px; border: 0; }
+* html a:hover {visibility:visible}
+.helpCollectButton a:hover img{visibility:hidden}
+
+
+/* helpSell Button */
+.helpSellButton
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/hh_sell_btn_over.gif) no-repeat;
+	width: 95px;
+	height: 77px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.helpSellButton a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 95px;
+	height: 77px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.helpSellButton a:hover
+{
+	color: #ffffff;
+}
+
+.helpSellButton img {width: 95px; height: 77px; border: 0; }
+* html a:hover {visibility:visible}
+.helpSellButton a:hover img{visibility:hidden}
+
+
+
+/* newsReadBlog Button */
+.newsReadBlogButton
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/nh_read_henrys_blog_btn_over.gif) no-repeat;
+	width: 167px;
+	height: 23px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.newsReadBlogButton a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 167px;
+	height: 23px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.newsReadBlogButton a:hover
+{
+	color: #ffffff;
+}
+
+.newsReadBlogButton img {width: 167px; height: 23px; border: 0; }
+* html a:hover {visibility:visible}
+.newsReadBlogButton a:hover img{visibility:hidden}
+
+
+/* askHenry Button */
+.askHenryButton
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/hb_ask_henry_btn_over.gif) no-repeat;
+	width: 113px;
+	height: 23px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.askHenryButton a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 113px;
+	height: 23px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.askHenryButton a:hover
+{
+	color: #ffffff;
+}
+
+.askHenryButton img {width: 113px; height: 23px; border: 0; }
+* html a:hover {visibility:visible}
+.askHenryButton a:hover img{visibility:hidden}
+
+
+/* membershipGoToFAQ Button */
+.membershipGoToFAQButton
+{
+	position:relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	font-family: arial, helvetica, sans-serif;
+	background: url(../images/mb_go2FAQ_btn_over.gif) no-repeat;
+	width: 113px;
+	height: 23px;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.membershipGoToFAQButton a
+{
+	display: block;
+	color: #000000;
+	font-size: 20px;
+	width: 113px;
+	height: 23px;
+	display: block;
+	float: left;
+	color: black;
+	text-decoration: none;
+	overflow:hidden;/* for ie to hide extra height*/
+}
+.membershipGoToFAQButton a:hover
+{
+	color: #ffffff;
+}
+
+.TableWallpaperBlueBox
+{
+	background-color: #37B3EE;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 15px;
+	padding-right: 15px;
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+.TableWallpaperBorderBlueBox
+{
+	background-color: #FFFFFF;
+	border-top: 1px solid #37B3EE;
+	border-left: 1px solid #37B3EE;
+	border-right: 1px solid #37B3EE;
+	border-bottom: 1px solid #37B3EE;
+	margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+	
+
+    color: white;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 11pt;
+}
+
+.membershipGoToFAQButton img {width: 113px; height: 23px; border: 0; }
+* html a:hover {visibility:visible}
+.membershipGoToFAQButton a:hover img{visibility:hidden}
+
+

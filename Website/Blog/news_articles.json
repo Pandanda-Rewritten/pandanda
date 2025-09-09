@@ -1,0 +1,36 @@
+{
+  "articles": [
+    {
+      "id": "launch_day_2009",
+      "title": "Launch Day 2009",
+      "date": "October 24th, 2009",
+      "type": "blue",
+      "content": "#image1 Hi Pandas,<br><br>All I can say is WOW.<br>What an awesome Launch day!<br><br>Festivities started at midnight last night and will continue all through Halloween. Thousands of our awesome Panda players were maxing out our servers all day long. Pandas were enjoying their new gear, cooing over their new dragon eggs and off in search of a hidden launch item. Sheriff and I arrived on the scene shortly after midnight and partied with Pandas from all over the world. Then again today Sheriff, all of our favorite Mods and I were partying on each of the servers which lasted hours.<br><br>We danced to the street music, took tons of pictures for my blog and launch day collection and even checked out the haunted mansion together (which was kind of scary I can tell you, but it’s so perfect for Halloween). I gave a sneak preview of my upcoming player card competition that could make one lucky Panda quite famous. It was an absolutely great day - and so great to see so many of our awesome Panda players.<br><br>I hope you all enjoyed it too. <br><br>Henry<br><br>P.S: Below is just one of the many pictures I took today. I'm going to do a full review of pictures in the coming week so check back often to see if your Panda is featured.#image2",
+      "auto_size": "auto",
+      "has_image": true,
+      "images": [
+        {
+          "src": "http://www.pandanda.com/images/blog/launch_09_logo.gif",
+          "placement": "small-left",
+          "alt": "",
+          "link": "",
+          "caption": ""
+        },
+        {
+          "src": "http://www.pandanda.com/images/blog/launch_party_photo1.jpg",
+          "placement": "full-width",
+          "alt": "",
+          "link": "",
+          "caption": ""
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "last_updated": "2025-09-08",
+    "total_articles": 5,
+    "description": "Henry's Blog news articles for Pandanda - Imported from original HTML",
+    "source": "news.htm",
+    "import_date": "2025-09-08 21:20:37"
+  }
+}
