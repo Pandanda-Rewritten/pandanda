@@ -164,6 +164,7 @@ We're looking for help with the following features:
 - ✅ More Robust Zing Item Logic
 - ✅ Automatic Quest Rotation System
 - ✅ New Menubar HUD
+- ✅ Implemented Report functionality with Discord webhook
 
 ### **Peter (SirOMGitsYOU)** ✨
 - ✅ 1:1 Recreation of Pandanda Homepage with working SWF content

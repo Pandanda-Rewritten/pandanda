@@ -1,3 +1,8 @@
+/*
+ * If you somehow have this code, I will h̸a̸t̸e̸  love you forever. G̸o̸ ̸d̸i̸e̸  Stay safe.
+ * Sincerely, J̸a̸m̸e̸s̸  ???????.
+ */
+
 var dbase, zone, _sfs, celebItem;
 var popInterval;
 
@@ -1324,6 +1329,10 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
           handlePurchaseFestivalPrize(user, params);
           break;
         }
+        case "REPORT": {
+          handleReport(params, user, fromRoom);
+          break;
+        }
 
         default: {
           trace("No handler found for: " + XT_Hash[header]);
@@ -1335,6 +1344,193 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
     }
   } else {
     trace("Unknown handler hash: " + header);
+  }
+}
+
+function handleReport(params, user, fromRoom) {
+  try {
+    // Debug: Log the raw parameters
+    trace("Report params: " + JSON.stringify(params));
+    
+    var decoded = Decoder.decodeData(params["e"] || "", 11);
+    trace("Decoded report data: " + decoded);
+    
+    // Expected formats seen historically:
+    // - "targetName,true,reason text" (we ignore the abuse flag)
+    // - "targetName,reason text"
+    var parts = decoded.split(",");
+    trace("Report parts: " + JSON.stringify(parts));
+    
+    var targetName = (parts.shift() || "").trim();
+    trace("Raw target name: " + targetName);
+    
+    // If next token is an abuse boolean, drop it (we no longer use it)
+    if (parts.length > 1 && /^(true|false|1|0)$/i.test(parts[0].trim())) {
+      parts.shift();
+    }
+    var reason = parts.join(",").trim() || "(no message)";
+    
+    trace("Final target name: " + targetName);
+    trace("Final reason: " + reason);
+
+    // Get reporter and target user info
+    var reporterName = user.getName();
+    var reporterIp = String(CryptoUtil.encryptIp(String(user.getIpAddress() || "")) || "");
+    var targetUser = zone.getUserByName(targetName);
+    var targetIp = String(CryptoUtil.encryptIp(String(targetUser ? targetUser.getIpAddress() || "" : "")) || "");
+
+    // Query database for reportHook webhook URL
+    var reportHookResult = dbase.executeQuery("SELECT `value` FROM config WHERE `key`='reportHook';");
+    var reportHookUrl = "";
+    if (reportHookResult.size() > 0) {
+      reportHookUrl = String(reportHookResult.get(0).getItem("value"));
+    }
+
+    // Build Discord webhook payload
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = (now.getMonth() + 1 < 10 ? "0" : "") + (now.getMonth() + 1);
+    var day = (now.getDate() < 10 ? "0" : "") + now.getDate();
+    var hours = (now.getHours() < 10 ? "0" : "") + now.getHours();
+    var minutes = (now.getMinutes() < 10 ? "0" : "") + now.getMinutes();
+    var seconds = (now.getSeconds() < 10 ? "0" : "") + now.getSeconds();
+    var milliseconds = now.getMilliseconds();
+    if (milliseconds < 10) milliseconds = "00" + milliseconds;
+    else if (milliseconds < 100) milliseconds = "0" + milliseconds;
+    
+    var nowIso = year + "-" + month + "-" + day + "T" + hours + ":" + minutes + ":" + seconds + "." + milliseconds + "Z";
+    
+    // Function to create embed
+    function createEmbed() {
+      return {
+        title: "New Player Report",
+        description: [
+          "A new report was submitted in-game.",
+          "\n",
+          "Please review and take action if needed.",
+          "\n"
+        ].join(""),
+        color: 0xF1C40F,
+        fields: [
+          { name: "Target", value: targetName || "(unknown)", inline: true },
+          { name: "Reporter", value: reporterName || "(unknown)", inline: true },
+          { name: "Reason", value: reason || "(no message)", inline: false },
+          { name: "ZONE", value: zone.getName() || 'unknown', inline: true },
+          { name: "ROOM", value: fromRoom ? fromRoom.getName() : 'unknown', inline: true },
+          { name: "Reporter IP (Encrypted)", value: reporterIp || "(unavailable)", inline: false },
+          { name: "Target IP (Encrypted)", value: targetIp || "(unavailable)", inline: false }
+        ],
+        footer: { text: "Pandanda Rewritten" },
+        timestamp: nowIso
+      };
+    }
+
+     // Send webhook if URL is configured
+     if (reportHookUrl && reportHookUrl !== "") {
+       try {
+         var webhookData = {
+           url: reportHookUrl,
+           method: "POST",
+           headers: {
+             "Content-Type": "application/json",
+             "User-Agent": "Pandanda-Server/1.0"
+           },
+           payload: {
+             username: "Pandanda Reports",
+             embeds: [createEmbed()]
+           },
+           timestamp: new Date().getTime(),
+           reporter: reporterName,
+           target: targetName,
+           reason: reason
+         };
+         
+         // Call Python script to send webhook
+         var pythonScript = "sfsScripts/process_webhooks.py";
+         var pythonFile = new java.io.File(pythonScript);
+         
+         if (pythonFile.exists()) {
+           try {
+             // Create temporary file with webhook data
+             var tempFile = new java.io.File("temp_webhook.json");
+             var tempWriter = new java.io.FileWriter(tempFile);
+             tempWriter.write(JSON.stringify(webhookData));
+             tempWriter.close();
+             
+             // Call Python script
+             var processBuilder = new java.lang.ProcessBuilder("python", pythonScript, tempFile.getAbsolutePath());
+             processBuilder.directory(new java.io.File("."));
+             processBuilder.redirectErrorStream(true);
+             
+             var process = processBuilder.start();
+             var reader = new java.io.BufferedReader(new java.io.InputStreamReader(process.getInputStream()));
+             var line;
+             var output = "";
+             while ((line = reader.readLine()) != null) {
+               output += line + "\n";
+             }
+             
+             var exitCode = process.waitFor();
+             reader.close();
+             
+             if (exitCode === 0) {
+               trace("SUCCESS: Webhook sent via Python script: " + output);
+               // Clean up temp file
+               try {
+                 if (tempFile.exists()) {
+                   tempFile["delete"]();
+                 }
+               } catch (cleanupError) {
+                 trace("Warning: Could not delete temp file: " + cleanupError);
+               }
+             } else {
+               trace("ERROR: Python script failed with exit code: " + exitCode);
+               trace("Output: " + output);
+               
+               // Fallback: Write to queue file
+               var webhookFile = new java.io.File("logs/webhook_queue.json");
+               if (!webhookFile.getParentFile().exists()) {
+                 webhookFile.getParentFile().mkdirs();
+               }
+               
+               var fileWriter = new java.io.FileWriter(webhookFile, true);
+               fileWriter.write(JSON.stringify(webhookData) + "\n");
+               fileWriter.close();
+               
+               trace("INFO: Webhook data written to logs/webhook_queue.json for external processing");
+             }
+             
+             // Clean up temp file
+             try {
+               if (tempFile.exists()) {
+                 tempFile["delete"]();
+               }
+             } catch (cleanupError) {
+               trace("Warning: Could not delete temp file: " + cleanupError);
+             }
+             
+           } catch (pythonError) {
+             trace("ERROR: Python script execution failed: " + pythonError);
+           }
+         } else {
+           trace("ERROR: Python script not found: " + pythonScript);
+         }
+         
+       } catch (webhookError) {
+         trace("ERROR: Webhook processing failed: " + webhookError);
+       }
+     } else {
+       trace("Report webhook URL not configured. Skipping Discord webhook send.");
+     }
+
+    // Log report to console for debugging
+    trace("Report submitted - Reporter: " + reporterName + ", Target: " + targetName + ", Reason: " + reason);
+
+    // Send success response to client
+    Users.SendJSON(user, { _cmd: "report", isSuccess: true }, fromRoom);
+  } catch (e) {
+    trace("handleReport error: " + e);
+    Users.SendJSON(user, { _cmd: "report", isSuccess: false, msg: "Failed to submit report" }, fromRoom);
   }
 }
 
