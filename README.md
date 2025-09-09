@@ -165,6 +165,11 @@ We're looking for help with the following features:
 - ✅ Automatic Quest Rotation System
 - ✅ New Menubar HUD
 
+## **Peter (SirOMGitsYOU)**
+- ✅ 1:1 Recreation of Pandanda Homepage with working SWF content
+- ✅ 1:1 Recreations of Pandanda Play page
+- ✅ 1:1 Recreation of Henry's Blog from Pandanda with a custom Article generator and JSON storage for articles.
+
 ### **iPandanda** 📱
 - ✅ Original Media Server assets
 
