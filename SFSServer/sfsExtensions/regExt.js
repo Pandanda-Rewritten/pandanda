@@ -18,27 +18,18 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
 
 // Check if username contains bad words
 function containsBadWordsInUsername(username) {
-  var usernameLower = username.toLowerCase();
-  
-  // Make sure bad words are loaded
-  if (!badWords || badWords.length === 0) {
-    try {
-      loadBadWordsFromDB();
-    } catch (e) {
-      trace("regExt: Error loading bad words: " + e);
-      return false; // Allow registration if we can't load bad words (failsafe)
-    }
-  }
-  
-  // Check each bad word using strict word matching
-  for (var i = 0; i < badWords.length; i++) {
-    if (badWords[i] && badWords[i].trim() !== "" && isExactWordMatch(usernameLower, badWords[i])) {
-      trace("regExt: Bad word found in username: " + badWords[i]);
+  try {
+    // Use the new database-direct function
+    if (containsBadWord(username)) {
+      var triggeredWord = getTriggeredBadWord(username);
+      trace("regExt: Bad word found in username: " + triggeredWord);
       return true;
     }
+    return false;
+  } catch (e) {
+    trace("regExt: Error checking bad words in username: " + e);
+    return false; // Allow registration if we can't check bad words (failsafe)
   }
-  
-  return false;
 }
 
 function handleRegister(evtObj, user) {
@@ -162,12 +153,13 @@ function init() {
   // Initialize database connection
   dbase = _server.getDatabaseManager();
   
-  // Load bad words list
+  // Initialize bad words database
   try {
-    loadBadWordsFromDB();
-    trace("regExt: Bad words list loaded successfully (" + badWords.length + " words)");
+    initializeBadWordsDB();
+    var wordCount = getAllBadWords().length;
+    trace("regExt: Bad words database initialized successfully (" + wordCount + " words)");
   } catch (e) {
-    trace("regExt: Error loading bad words list: " + e);
+    trace("regExt: Error initializing bad words database: " + e);
   }
   
   trace("regExt: Registration Extension initialized successfully");
