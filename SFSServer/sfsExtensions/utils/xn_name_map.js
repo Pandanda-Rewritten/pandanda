@@ -27,6 +27,7 @@ XT_Name["MG_GET_STATS"] = "723f20ds";
 XT_Name["PET_RETURN_HOME"] = "ivmalvis";
 XT_Name["BUNNY_GAME_START_CHECK"] = "basf3fxcpj7k8s3lk3jaf8s2";
 XT_Name["COLLECT_FESTIVAL_TICKET"] = "jsmdje22";
+XT_Name["EXCHANGE_FESTIVAL_COINS"] = "fec99xyz";
 XT_Name["CHANGE_CLOTHES"] = "kdns81ls";
 XT_Name["PLACE_FURNITURE"] = "aeva372s";
 XT_Name["REJECT_FRIEND"] = "cuwehsn3";

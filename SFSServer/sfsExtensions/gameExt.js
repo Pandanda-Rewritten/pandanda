@@ -23,35 +23,41 @@ var Commands = {};
 function checkItemLevelRequirement(user, itemId) {
     // Get user's level from crumbs
     var userLevel = Number(user.properties.get("level")) || 1;
-    
-    // For mounts (starting with M), use the full item code
-    // For other items, remove the color suffix
-    var item_code = itemId;
 
-    // Disabled For now as some items have specific versions that need to be locked due to how Pandanda Clothes work.
-    // if (itemId[0] !== 'M' && itemId.length > 4) {  // If it's not a mount and has a color suffix
-    //     item_code = itemId.substring(0, itemId.length - 1);  // Remove last character (color code)
-    // }
-    
-    // Query the database for item level requirement using item_code
+    // Derive base code (remove last char when it is a letter and the item is not a mount)
+    var baseCode = itemId;
+    if (itemId[0] !== "M" && /[a-zA-Z]$/.test(itemId)) {
+        baseCode = itemId.slice(0, -1);
+    }
+
+    var requiredLevel = 0;
+
+    // Try exact code first
     var qRes = dbase.executeQuery(
-        "SELECT level_required FROM items WHERE item_code='" + 
-        _server.escapeQuotes(item_code) + "' LIMIT 1;"
+        "SELECT level_required FROM items WHERE item_code='" +
+        _server.escapeQuotes(itemId) + "' LIMIT 1;"
     );
-    
     if (qRes != null && qRes.size() > 0) {
-        var requiredLevel = Number(qRes.get(0).getItem("level_required")) || 0;
-        if (requiredLevel > 0 && userLevel < requiredLevel) {
-            return {
-                allowed: false,
-                requiredLevel: requiredLevel
-            };
+        requiredLevel = Number(qRes.get(0).getItem("level_required")) || 0;
+    } else if (baseCode !== itemId) {
+        // Fallback to base code when no exact row exists
+        qRes = dbase.executeQuery(
+            "SELECT level_required FROM items WHERE item_code='" +
+            _server.escapeQuotes(baseCode) + "' LIMIT 1;"
+        );
+        if (qRes != null && qRes.size() > 0) {
+            requiredLevel = Number(qRes.get(0).getItem("level_required")) || 0;
         }
     }
-    
-    return {
-        allowed: true
-    };
+
+    if (requiredLevel > 0 && userLevel < requiredLevel) {
+        return {
+            allowed: false,
+            requiredLevel: requiredLevel
+        };
+    }
+
+    return { allowed: true };
 }
 
 function handlePandandaPacket(cmd, params, user, fromRoom) {
@@ -1329,6 +1335,10 @@ function handlePandandaPacket(cmd, params, user, fromRoom) {
           handlePurchaseFestivalPrize(user, params);
           break;
         }
+        case "EXCHANGE_FESTIVAL_COINS": {
+          handleExchangeFestivalCoins(user, params);
+          break;
+        }
         case "REPORT": {
           handleReport(params, user, fromRoom);
           break;
@@ -1593,6 +1603,68 @@ function handlePurchaseFestivalPrize(user, params) {
             msg: "Not enough festival tickets"
         });
     }
+}
+
+function handleExchangeFestivalCoins(user, params) {
+    var REQUIRED_TICKETS = 99;
+    var COINS_REWARD = 500; // Fixed amount, matching zing ticket behavior
+    var REQUIRE_LEVEL_CHECK = true; // Toggle: Set to false to disable level requirement
+    var MINIMUM_LEVEL = 10;
+    
+    var currentTickets = Number(user.properties.get("festivalCollection")) || 0;
+    
+    // Check if user has enough festival tickets
+    if (currentTickets < REQUIRED_TICKETS) {
+        Users.SendJSON(user, {
+            _cmd: "festivalCoinExchange",
+            success: false
+        });
+        return;
+    }
+    
+    // Check level requirement (if enabled)
+    if (REQUIRE_LEVEL_CHECK) {
+        var userLevel = Number(user.properties.get("level")) || 1;
+        if (userLevel < MINIMUM_LEVEL) {
+            Users.SendJSON(user, {
+                _cmd: "festivalCoinExchange",
+                success: false,
+                msg: "You need to be level " + MINIMUM_LEVEL + " or higher to exchange your festival collectibles for coins."
+            });
+            return;
+        }
+    }
+    
+    // Deduct festival tickets
+    var newTicketBalance = currentTickets - REQUIRED_TICKETS;
+    user.properties.put("festivalCollection", newTicketBalance);
+    Users.UpdateCrumb(user.properties.get("id"), "festivalCollection", newTicketBalance);
+    var currentCoins = Number(user.properties.get("coins")) || 0;
+    var newCoins = currentCoins + COINS_REWARD;
+    user.properties.put("coins", newCoins);
+    Users.UpdateCrumb(user.properties.get("id"), "coins", newCoins);
+    
+    // Send success responses
+    Users.SendJSON(user, {
+        _cmd: "festivalCollection",
+        count: newTicketBalance,
+        success: true
+    });
+    
+    Users.SendJSON(user, {
+        _cmd: "coinUpdate",
+        coins: newCoins,
+        success: true
+    });
+    
+    Users.SendJSON(user, {
+        _cmd: "festivalCoinExchange",
+        success: true,
+        ticketsUsed: REQUIRED_TICKETS,
+        coinsReceived: COINS_REWARD,
+        newTicketBalance: newTicketBalance,
+        newCoinBalance: newCoins
+    });
 }
 
 function init() {
