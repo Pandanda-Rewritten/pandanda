@@ -165,6 +165,7 @@ We're looking for help with the following features:
 - ✅ Automatic Quest Rotation System
 - ✅ New Menubar HUD
 - ✅ Implemented Report functionality with Discord webhook
+- ✅ Implemented Support for Coin bag exchanges as part of the festival dialog UI (See PumpkinFestivalDialog in game_ui_events.swf for how to replicate for other events)
 
 ### **Peter (SirOMGitsYOU)** ✨
 - ✅ 1:1 Recreation of Pandanda Homepage with working SWF content
