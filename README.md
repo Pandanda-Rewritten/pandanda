@@ -140,8 +140,7 @@ Before starting development, ensure you have the following tools installed:
 We're looking for help with the following features:
 
 - 🎮 **Line Four / Pig Pen Minigame Integration**
-- 📊 **In-built Reporting System**
-- 🏗️ **New/Custom Room Creation toolkit?**
+- 🏗️ **New / Custom room creation guide**
 
 ---
 
