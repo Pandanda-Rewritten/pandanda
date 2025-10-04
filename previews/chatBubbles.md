@@ -21,10 +21,10 @@ This document showcases the various chat bubble designs available in Pandanda, i
 The default chat bubble used throughout the game.
 
 ### Regular User
-![Standard Bubble - Regular](previewImages/bubbles/user_s.png)
+![Standard Bubble - Regular](bubbles/user_s.png)
 
 ### Moderator
-![Standard Bubble - Moderator](previewImages/bubbles/mod_s.png)
+![Standard Bubble - Moderator](bubbles/mod_s.png)
 
 ---
 
@@ -33,10 +33,10 @@ The default chat bubble used throughout the game.
 Special animated chat bubble available during the Friendship Festival event.
 
 ### Regular User
-![Friendship Festival Bubble - Regular](previewImages/bubbles/user_ff.gif)
+![Friendship Festival Bubble - Regular](bubbles/user_ff.gif)
 
 ### Moderator
-![Friendship Festival Bubble - Moderator](previewImages/bubbles/mod_ff.gif)
+![Friendship Festival Bubble - Moderator](bubbles/mod_ff.gif)
 
 ---
 
@@ -45,10 +45,10 @@ Special animated chat bubble available during the Friendship Festival event.
 Special chat bubble available during the Easter Festival event.
 
 ### Regular User
-![Easter Festival Bubble - Regular](previewImages/bubbles/user_ef.png)
+![Easter Festival Bubble - Regular](bubbles/user_ef.png)
 
 ### Moderator
-![Easter Festival Bubble - Moderator](previewImages/bubbles/mod_ef.png)
+![Easter Festival Bubble - Moderator](bubbles/mod_ef.png)
 
 ---
 
@@ -57,10 +57,10 @@ Special chat bubble available during the Easter Festival event.
 Special chat bubble available during the Summer Festival event.
 
 ### Regular User
-![Summer Festival Bubble - Regular](previewImages/bubbles/user_sf.png)
+![Summer Festival Bubble - Regular](bubbles/user_sf.png)
 
 ### Moderator
-![Summer Festival Bubble - Moderator](previewImages/bubbles/mod_sf.png)
+![Summer Festival Bubble - Moderator](bubbles/mod_sf.png)
 
 ---
 
@@ -69,10 +69,10 @@ Special chat bubble available during the Summer Festival event.
 Special chat bubble available during the July 4th Festival event.
 
 ### Regular User
-![July 4th Festival Bubble - Regular](previewImages/bubbles/user_4jf.png)
+![July 4th Festival Bubble - Regular](bubbles/user_4jf.png)
 
 ### Moderator
-![July 4th Festival Bubble - Moderator](previewImages/bubbles/mod_4jf.png)
+![July 4th Festival Bubble - Moderator](bubbles/mod_4jf.png)
 
 ---
 
@@ -81,10 +81,10 @@ Special chat bubble available during the July 4th Festival event.
 Special chat bubble available during the Harvest Festival event.
 
 ### Regular User
-![Harvest Festival Bubble - Regular](previewImages/bubbles/user_hf.png)
+![Harvest Festival Bubble - Regular](bubbles/user_hf.png)
 
 ### Moderator
-![Harvest Festival Bubble - Moderator](previewImages/bubbles/mod_hf.png)
+![Harvest Festival Bubble - Moderator](bubbles/mod_hf.png)
 
 ---
 
@@ -93,10 +93,10 @@ Special chat bubble available during the Harvest Festival event.
 Special chat bubble available during the Pumpkin Festival event.
 
 ### Regular User
-![Pumpkin Festival Bubble - Regular](previewImages/bubbles/user_pf.png)
+![Pumpkin Festival Bubble - Regular](bubbles/user_pf.png)
 
 ### Moderator
-![Pumpkin Festival Bubble - Moderator](previewImages/bubbles/mod_pf.png)
+![Pumpkin Festival Bubble - Moderator](bubbles/mod_pf.png)
 
 ---
 
@@ -105,10 +105,10 @@ Special chat bubble available during the Pumpkin Festival event.
 Special chat bubble available during the Christmas Festival event.
 
 ### Regular User
-![Christmas Festival Bubble - Regular](previewImages/bubbles/user_cf.png)
+![Christmas Festival Bubble - Regular](bubbles/user_cf.png)
 
 ### Moderator
-![Christmas Festival Bubble - Moderator](previewImages/bubbles/mod_cf.png)
+![Christmas Festival Bubble - Moderator](bubbles/mod_cf.png)
 
 ---
 
@@ -117,7 +117,7 @@ Special chat bubble available during the Christmas Festival event.
 Special chat bubble available during the March of Snowmen event.
 
 ### Regular User
-![March of Snowmen Festival Bubble - Regular](previewImages/bubbles/user_mos.png)
+![March of Snowmen Festival Bubble - Regular](bubbles/user_mos.png)
 
 ### Moderator
-![March of Snowmen Festival Bubble - Moderator](previewImages/bubbles/mod_mos.png)
+![March of Snowmen Festival Bubble - Moderator](bubbles/mod_mos.png)

@@ -165,7 +165,7 @@ We're looking for help with the following features:
 - ✅ New Menubar HUD
 - ✅ Implemented Report functionality with Discord webhook
 - ✅ Implemented Support for Coin bag exchanges as part of the festival dialog UI
-- ✅ Implemented custom chat bubbles for all Pandanda Festivals
+- ✅ Implemented custom chat bubbles for all Pandanda Festivals [[Preview](previews/chatBubbles.md)]
 
 ### **Peter (SirOMGitsYOU)** ✨
 - ✅ 1:1 Recreation of Pandanda Homepage with working SWF content
