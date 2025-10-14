@@ -130,6 +130,7 @@
 				<extension name="slimeUpdatesExt" className="slimeUpdatesExt.js" type="script" />
 				<extension name="bunnyFieldExt" className="bunnyFieldExt.js" type="script" />
 				<extension name="houseExt" className="houseExt.js" type="script" />
+				<extension name="questRotationExt" className="questRotationExt.js" type="script" />
 				<extension name="graveyardExt" className="graveyardExt.js" type="script" />
 			</Extensions>
 			<DatabaseManager active="true">
