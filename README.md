@@ -166,6 +166,9 @@ We're looking for help with the following features:
 - ✅ Implemented Report functionality with Discord webhook
 - ✅ Implemented Support for Coin bag exchanges as part of the festival dialog UI
 - ✅ Implemented custom chat bubbles for all Pandanda Festivals [[Preview](previews/chatBubbles.md)]
+- ✅ XML NPC Option for Festival Specific clothing (I.e Halloween & Christmas)
+- ✅ XML NPC Option for Hiding ! Quest Icon from chosen NPCs
+- ✅ XML NPC Option for Dynamic availability allowing NPCs to appear and disappear automatically.
 
 ### **Peter (SirOMGitsYOU)** ✨
 - ✅ 1:1 Recreation of Pandanda Homepage with working SWF content
