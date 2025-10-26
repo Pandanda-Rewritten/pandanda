@@ -169,6 +169,7 @@ We're looking for help with the following features:
 - ✅ XML NPC Option for Festival Specific clothing (I.e Halloween & Christmas)
 - ✅ XML NPC Option for Hiding ! Quest Icon from chosen NPCs
 - ✅ XML NPC Option for Dynamic availability allowing NPCs to appear and disappear automatically.
+- ✅ Dynamic Treehouse Lobby for Zing or No Zing without needing to rename SWFs
 
 ### **Peter (SirOMGitsYOU)** ✨
 - ✅ 1:1 Recreation of Pandanda Homepage with working SWF content
