@@ -170,6 +170,8 @@ We're looking for help with the following features:
 - ✅ XML NPC Option for Hiding ! Quest Icon from chosen NPCs
 - ✅ XML NPC Option for Dynamic availability allowing NPCs to appear and disappear automatically.
 - ✅ Dynamic Treehouse Lobby for Zing or No Zing without needing to rename SWFs
+- ✅ Added Chilly mascot model (Uses Snowman BOT Model instead of Chilly model)
+- ✅ Added Festival Based room switching and reformatted all location rooms available
 
 ### **Peter (SirOMGitsYOU)** ✨
 - ✅ 1:1 Recreation of Pandanda Homepage with working SWF content
