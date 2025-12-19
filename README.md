@@ -140,7 +140,6 @@ Before starting development, ensure you have the following tools installed:
 We're looking for help with the following features:
 
 - 🎮 **Line Four / Pig Pen Minigame Integration**
-- 🏗️ **New / Custom room creation guide**
 
 ---
 
@@ -177,6 +176,7 @@ We're looking for help with the following features:
 - ✅ 1:1 Recreation of Pandanda Homepage with working SWF content
 - ✅ 1:1 Recreation of Pandanda Play page
 - ✅ 1:1 Recreation of Henry's Blog from Pandanda with a custom Article generator and JSON storage for articles.
+- ✅ Full Pandanda Original rooms being decompilable and recompilable to allow for custom edits and entirely new rooms using base code from an existing room (Thanks for the help iari)
 
 ### **iPandanda** 📱
 - ✅ Original Media Server assets
