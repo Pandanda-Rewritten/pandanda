@@ -1,0 +1,9 @@
+package
+{
+   internal interface IAvatarGhost
+   {
+      
+      
+   }
+}
+
