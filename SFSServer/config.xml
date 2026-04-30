@@ -115,10 +115,6 @@
 				<Room name="EN_darkroom" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
 				<Room name="EN_barn" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
 				<Room name="EN_harvest_grove" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
-				<Room name="EN_old_town" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
-				<Room name="EN_hidden_cave" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
-				<Room name="EN_old_lake" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
-				<Room name="EN_tiki_isle" maxUsers="200" isPrivate="false" isTemp="false" uCountUpdate="false" isLimbo="false" />
 			</Rooms>
 			<BuddyList active="true">
 			   <size>200</size>
@@ -128,6 +124,8 @@
 			<Extensions>
 				<extension name="gameExt" className="gameExt.js" type="script" />
 				<extension name="slimeUpdatesExt" className="slimeUpdatesExt.js" type="script" />
+				<extension name="L4GameExt" className="L4GameExt.js" type="script" />
+				<extension name="PTPGameExt" className="PTPGameExt.js" type="script" />
 				<extension name="bunnyFieldExt" className="bunnyFieldExt.js" type="script" />
 				<extension name="houseExt" className="houseExt.js" type="script" />
 				<extension name="questRotationExt" className="questRotationExt.js" type="script" />

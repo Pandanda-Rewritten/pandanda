@@ -1,8 +1,3 @@
-/*
- * If you somehow have this code, I will h̸a̸t̸e̸  love you forever. G̸o̸ ̸d̸i̸e̸  Stay safe.
- * Sincerely, J̸a̸m̸e̸s̸  ???????.
- */
-
 var dbase, zone, _sfs, celebItem;
 var popInterval;
 
@@ -19,6 +14,357 @@ eval(_server.readFile("petHandlers.js"));
 eval(_server.readFile("modExt.js"));
 
 var Commands = {};
+
+// ---------------------------------------------------------------------------
+// Minigames (L4 / PTP)
+// ---------------------------------------------------------------------------
+
+function isL4Room(room) {
+  try {
+    return room && String(room.getName()).indexOf("MG_line_four_") === 0;
+  } catch (e) {
+    return false;
+  }
+}
+
+function isPTPRoom(room) {
+  try {
+    return room && String(room.getName()).indexOf("MG_pen_the_pig_") === 0;
+  } catch (e) {
+    return false;
+  }
+}
+
+function getRoomVar(room, name, fallback) {
+  try {
+    var v = room.getVariable(name);
+    if (v == null) return fallback;
+    var val = v.getValue();
+    return typeof val === "undefined" || val === null ? fallback : String(val);
+  } catch (e) {
+    return fallback;
+  }
+}
+
+function setRoomVars(room, vars) {
+  // vars: { [name]: value }
+  var rVars = [];
+  for (var k in vars) {
+    rVars.push({ name: k, val: String(vars[k]), priv: false });
+  }
+  _server.setRoomVariables(room, null, rVars);
+}
+
+function broadcastJSONToRoom(room, packet) {
+  var us = room.getAllUsers();
+  for (var i in us) {
+    try {
+      Users.SendJSON(us[i], packet);
+    } catch (e) {}
+  }
+}
+
+function computeSpectatorNames(room) {
+  var names = [];
+  var us = room.getAllUsers();
+  for (var i in us) {
+    try {
+      var u = us[i];
+      if (u.getPlayerIndex(room) == -1) names.push(String(u.getName()));
+    } catch (e) {}
+  }
+  return names.join(",");
+}
+
+function getPlayersBySeat(room) {
+  var p1 = null,
+    p2 = null;
+  var us = room.getAllUsers();
+  for (var i in us) {
+    try {
+      var u = us[i];
+      var idx = u.getPlayerIndex(room);
+      if (idx == 1) p1 = u;
+      else if (idx == 2) p2 = u;
+    } catch (e) {}
+  }
+  return { p1: p1, p2: p2 };
+}
+
+function parseNowTurnStr(nowTurnStr, fallbackTurn) {
+  var s = String(nowTurnStr || "");
+  if (s.indexOf("2") === 0) return 2;
+  if (s.indexOf("1") === 0) return 1;
+  return fallbackTurn || 1;
+}
+
+function initL4StateVars(room) {
+  var cols = 7,
+    rows = 6;
+  var heights = [];
+  for (var c = 0; c < cols; c++) heights.push(5);
+  var board = [];
+  for (var r = 0; r < rows; r++) {
+    var row = [];
+    for (var cc = 0; cc < cols; cc++) row.push(0);
+    board.push(row);
+  }
+  setRoomVars(room, {
+    user1points: 0,
+    user2points: 0,
+    nowTurn: "1;false",
+    spectators: "",
+    l4_cols: cols,
+    l4_heights: JSON.stringify(heights),
+    l4_board: JSON.stringify(board),
+  });
+}
+
+function initPTPStateVars(room) {
+  // PTP gameplay uses 5x5 squares for fence/pig boards.
+  var max = 5;
+  var fences = [];
+  var pigs = [];
+  var owners = [];
+  for (var c = 0; c < max; c++) {
+    var fCol = [];
+    var pCol = [];
+    var oCol = [];
+    for (var r = 0; r < max; r++) {
+      fCol.push(0);
+      pCol.push(".");
+      oCol.push(0);
+    }
+    fences.push(fCol);
+    pigs.push(pCol);
+    owners.push(oCol);
+  }
+  setRoomVars(room, {
+    user1points: 0,
+    user2points: 0,
+    nowTurn: "1;false",
+    spectators: "",
+    ptp_board_fences: JSON.stringify(fences),
+    ptp_board_pigs: JSON.stringify(pigs),
+    ptp_fence_owners: JSON.stringify(owners),
+  });
+}
+
+function sendL4SpecStatus(targetUser, room) {
+  try {
+    var players = getPlayersBySeat(room);
+    if (!players.p1 || !players.p2) return;
+    var nowTurn = getRoomVar(room, "nowTurn", "1;false");
+    var t = parseNowTurnStr(nowTurn, 1);
+
+    // Stored as [row][col], payload expects [col][row]
+    var boardRowColStr = getRoomVar(room, "l4_board", "");
+    var boardRowCol = boardRowColStr ? JSON.parse(boardRowColStr) : [];
+    if (!boardRowCol || !boardRowCol.length) {
+      // default empty board
+      boardRowCol = [];
+      for (var rr = 0; rr < 6; rr++) {
+        var row = [];
+        for (var cc = 0; cc < 7; cc++) row.push(0);
+        boardRowCol.push(row);
+      }
+    }
+    var board = [];
+    for (var col = 0; col < 7; col++) {
+      var colArr = [];
+      for (var rowIdx = 0; rowIdx < 6; rowIdx++) {
+        colArr.push((boardRowCol[rowIdx] && boardRowCol[rowIdx][col]) || 0);
+      }
+      board.push(colArr);
+    }
+
+    Users.SendJSON(targetUser, {
+      _cmd: "mg##specStatus",
+      t: t,
+      p1i: 1,
+      p2i: 2,
+      p1n: String(players.p1.getName()),
+      p2n: String(players.p2.getName()),
+      board: board,
+    });
+  } catch (e) {}
+}
+
+function sendPTPSpecStatus(targetUser, room) {
+  try {
+    var players = getPlayersBySeat(room);
+    if (!players.p1 || !players.p2) return;
+    var nowTurn = getRoomVar(room, "nowTurn", "1;false");
+    var t = parseNowTurnStr(nowTurn, 1);
+
+    var fencesStr = getRoomVar(room, "ptp_board_fences", "[]");
+    var pigsStr = getRoomVar(room, "ptp_board_pigs", "[]");
+    var ownersStr = getRoomVar(room, "ptp_fence_owners", "[]");
+
+    var fences = JSON.parse(fencesStr || "[]");
+    var pigs = JSON.parse(pigsStr || "[]");
+    var owners = JSON.parse(ownersStr || "[]");
+
+    var p1Points = Number(getRoomVar(room, "user1points", "0")) || 0;
+    var p2Points = Number(getRoomVar(room, "user2points", "0")) || 0;
+
+    Users.SendJSON(targetUser, {
+      _cmd: "mg##specStatus",
+      t: t,
+      p1i: 1,
+      p2i: 2,
+      p1n: String(players.p1.getName()),
+      p2n: String(players.p2.getName()),
+      boardFences: fences,
+      boardPigs: pigs,
+      fenceOwners: owners,
+      penPigs1: p1Points,
+      penPigs2: p2Points,
+    });
+  } catch (e) {}
+}
+
+function handleJoinMinigameRoomLegacy(cmd, params, user, fromRoom) {
+  var roomName = params && params.roomName ? String(params.roomName) : "";
+  if (!roomName) return;
+
+  var targetRoom = zone.getRoomByName(roomName);
+  if (targetRoom == null) {
+    Users.SendJSON(user, { _cmd: "joinFail" });
+    return;
+  }
+
+  // Detect whether game already has 2 seated players
+  var playersBefore = getPlayersBySeat(targetRoom);
+  var gameInProgress = Boolean(playersBefore.p1 && playersBefore.p2);
+
+  // Join minigame room WITHOUT leaving the current room (minigames are side-rooms)
+  var fromId = fromRoom == null ? -1 : fromRoom.getId();
+  _server.joinRoom(user, fromId, false, targetRoom.getId());
+
+  // Initialize state only if not in progress
+  if (!gameInProgress) {
+    if (String(targetRoom.getName()).indexOf("MG_line_four_") === 0) {
+      initL4StateVars(targetRoom);
+    } else if (String(targetRoom.getName()).indexOf("MG_pen_the_pig_") === 0) {
+      initPTPStateVars(targetRoom);
+    } else {
+      // Unknown minigame room type; still set minimal vars
+      setRoomVars(targetRoom, { user1points: 0, user2points: 0, nowTurn: "1;false", spectators: "" });
+    }
+  } else {
+    // Update spectator list and send snapshot to joining spectator
+    var specNames = computeSpectatorNames(targetRoom);
+    setRoomVars(targetRoom, { spectators: specNames });
+
+    // Only send snapshot if the joiner is a spectator
+    if (user.getPlayerIndex(targetRoom) == -1) {
+      if (isL4Room(targetRoom)) sendL4SpecStatus(user, targetRoom);
+      else if (isPTPRoom(targetRoom)) sendPTPSpecStatus(user, targetRoom);
+    }
+  }
+
+  // If now there are 2 players and we weren't already in progress, emit mg##start
+  if (!gameInProgress) {
+    var players = getPlayersBySeat(targetRoom);
+    if (players.p1 && players.p2) {
+      var startPacket = {
+        _cmd: "mg##start",
+        t: 1,
+        p1i: 1,
+        p2i: 2,
+        p1n: String(players.p1.getName()),
+        p2n: String(players.p2.getName()),
+      };
+      Users.SendJSON(players.p1, startPacket);
+      Users.SendJSON(players.p2, startPacket);
+    }
+  }
+}
+
+// Called by utils/eventListener.js on userLost/logOut if defined.
+// Ensures minigame rooms don't get stuck if a seated player disconnects.
+function handleUserLost(user) {
+  try {
+    if (!zone) zone = _server.getCurrentZone();
+    var rooms = zone.getRooms();
+    for (var i in rooms) {
+      var room = rooms[i];
+      var name = "";
+      try {
+        name = String(room.getName());
+      } catch (e) {
+        continue;
+      }
+
+      if (!(name.indexOf("MG_line_four_") === 0 || name.indexOf("MG_pen_the_pig_") === 0)) continue;
+
+      // If user isn't in this room, skip.
+      var inRoom = false;
+      var users = room.getAllUsers();
+      for (var uIdx in users) {
+        try {
+          if (users[uIdx].getUserId && user.getUserId && users[uIdx].getUserId() == user.getUserId()) {
+            inRoom = true;
+            break;
+          }
+        } catch (e) {}
+      }
+      if (!inRoom) continue;
+
+      // If they were a seated player, stop the game for everyone.
+      var wasPlayer = false;
+      try {
+        wasPlayer = user.getPlayerIndex(room) != -1;
+      } catch (e) {
+        wasPlayer = false;
+      }
+
+      if (wasPlayer) {
+        try {
+          broadcastJSONToRoom(room, { _cmd: "mg##stop" });
+        } catch (e) {}
+
+        // Reset both shared vars and game-specific state vars.
+        if (name.indexOf("MG_line_four_") === 0) {
+          setRoomVars(room, {
+            spectators: "",
+            user1points: 0,
+            user2points: 0,
+            nowTurn: "1;false",
+            l4_board: "",
+            l4_heights: "",
+          });
+        } else {
+          setRoomVars(room, {
+            spectators: "",
+            user1points: 0,
+            user2points: 0,
+            nowTurn: "1;false",
+            ptp_board_fences: "",
+            ptp_board_pigs: "",
+            ptp_fence_owners: "",
+          });
+        }
+
+        // Remove all remaining users from the minigame room.
+        var still = room.getAllUsers();
+        for (var j in still) {
+          try {
+            _server.leaveRoom(still[j], room.getId());
+          } catch (e) {}
+        }
+      } else {
+        // Spectator lost: just refresh spectator list.
+        try {
+          setRoomVars(room, { spectators: computeSpectatorNames(room) });
+        } catch (e) {}
+      }
+    }
+  } catch (e) {
+    // Never let disconnect handler crash the extension.
+  }
+}
 
 function checkItemLevelRequirement(user, itemId) {
     // Get user's level from crumbs
@@ -62,6 +408,14 @@ function checkItemLevelRequirement(user, itemId) {
 
 function handlePandandaPacket(cmd, params, user, fromRoom) {
   var roomObj = fromRoom;
+  // Legacy minigame join commands bypass XT_Hash
+  try {
+    if (String(cmd).indexOf("L4##join") === 0 || String(cmd).indexOf("PTP##join") === 0) {
+      handleJoinMinigameRoomLegacy(cmd, params, user, fromRoom);
+      return;
+    }
+  } catch (e) {}
+
   var header = cmd.split("##")[1];
   if (header == undefined) header = cmd;
   if (XT_Hash[header] != null && XT_Hash[header] != "") {

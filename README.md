@@ -135,14 +135,6 @@ Before starting development, ensure you have the following tools installed:
 
 ---
 
-## 🤝 Community Contributions Needed
-
-We're looking for help with the following features:
-
-- 🎮 **Line Four / Pig Pen Minigame Integration**
-
----
-
 ## 🙏 Contributions
 
 ### **Pandanda Rewritten** 🎯
@@ -177,6 +169,7 @@ We're looking for help with the following features:
 - ✅ 1:1 Recreation of Pandanda Play page
 - ✅ 1:1 Recreation of Henry's Blog from Pandanda with a custom Article generator and JSON storage for articles.
 - ✅ Full Pandanda Original rooms being decompilable and recompilable to allow for custom edits and entirely new rooms using base code from an existing room (Thanks for the help iari)
+- ✅ Line Four & Pen The Pig Minigame Integration
 
 ### **iPandanda** 📱
 - ✅ Original Media Server assets
