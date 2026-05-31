@@ -27,8 +27,33 @@ class NewsGeneratorWithPreviewHandler(http.server.SimpleHTTPRequestHandler):
             self.serve_generator_form()
         elif path == '/preview':
             self.serve_preview_page()
+        elif path.startswith('/Blog/'):
+            self.serve_static_file(path[1:])
         else:
             self.send_error(404, "Page not found")
+    
+    def serve_static_file(self, relative_path):
+        """Serve static files (Blog images, CSS, etc.) for preview assets"""
+        file_path = Path(relative_path)
+        if not file_path.exists() or not file_path.is_file():
+            self.send_error(404, "File not found")
+            return
+        
+        content_types = {
+            '.gif': 'image/gif',
+            '.png': 'image/png',
+            '.jpg': 'image/jpeg',
+            '.jpeg': 'image/jpeg',
+            '.css': 'text/css',
+            '.js': 'application/javascript',
+        }
+        content_type = content_types.get(file_path.suffix.lower(), 'application/octet-stream')
+        
+        self.send_response(200)
+        self.send_header('Content-type', content_type)
+        self.end_headers()
+        with open(file_path, 'rb') as f:
+            self.wfile.write(f.read())
     
     def do_POST(self):
         """Handle POST requests"""
@@ -60,123 +85,112 @@ class NewsGeneratorWithPreviewHandler(http.server.SimpleHTTPRequestHandler):
         }}
         
         body {{
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+            background-color: #0083D6;
             min-height: 100vh;
             padding: 20px;
             line-height: 1.6;
+            color: #0083D6;
         }}
         
         .container {{
             max-width: 1400px;
             margin: 0 auto;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             overflow: hidden;
-            backdrop-filter: blur(10px);
             display: flex;
             min-height: calc(100vh - 40px);
         }}
         
         .generator-panel {{
             flex: 1;
-            padding: 40px;
-            border-right: 1px solid #e2e8f0;
-            overflow-y: auto;
+            padding: 0;
+            border-right: 1px solid #06a0ea;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
             max-height: calc(100vh - 40px);
+        }}
+        
+        .generator-body {{
+            padding: 30px 40px;
+            overflow-y: auto;
+            flex: 1;
         }}
         
         .preview-panel {{
             flex: 1;
-            background: #f8f9fa;
-            padding: 20px;
-            overflow-y: auto;
+            background-color: #0083D6;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
             max-height: calc(100vh - 40px);
         }}
         
+        .preview-body {{
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }}
+        
         .header {{
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #06a0ea;
             color: white;
-            padding: 30px;
+            padding: 18px 30px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            margin: -40px -40px 30px -40px;
-        }}
-        
-        .header::before {{
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: float 6s ease-in-out infinite;
-        }}
-        
-        @keyframes float {{
-            0%, 100% {{ transform: translateY(0px) rotate(0deg); }}
-            50% {{ transform: translateY(-20px) rotate(180deg); }}
+            flex-shrink: 0;
         }}
         
         .header h1 {{
             margin: 0;
-            font-size: 2.2em;
-            font-weight: 700;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-size: 18pt;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            line-height: 1.3;
         }}
         
         .header p {{
-            margin: 10px 0 0 0;
-            font-size: 1em;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
+            margin: 6px 0 0 0;
+            font-size: 11pt;
+            font-family: Arial, sans-serif;
+            opacity: 0.95;
         }}
         
         .preview-header {{
-            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            background-color: #A144BA;
             color: white;
-            padding: 20px;
+            padding: 18px 20px;
             text-align: center;
-            margin: -20px -20px 20px -20px;
-            border-radius: 0 0 15px 15px;
+            flex-shrink: 0;
         }}
         
         .preview-header h2 {{
             margin: 0;
-            font-size: 1.5em;
-            font-weight: 600;
+            font-size: 13pt;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
         }}
         
         .form-section {{
             margin-bottom: 25px;
-            padding: 25px;
-            background: linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);
-            border-radius: 16px;
-            border: 1px solid rgba(102, 126, 234, 0.1);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+            padding: 20px;
+            background-color: #e6f4fd;
+            border: 1px solid #06a0ea;
         }}
         
         .form-section:hover {{
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+            border-color: #0083D6;
         }}
         
         .form-section h3 {{
             margin-top: 0;
-            color: #2d3748;
-            font-size: 1.2em;
-            font-weight: 600;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            color: #0083D6;
+            font-size: 13pt;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            margin-bottom: 16px;
         }}
         
         .form-group {{
@@ -186,33 +200,30 @@ class NewsGeneratorWithPreviewHandler(http.server.SimpleHTTPRequestHandler):
         .form-group label {{
             display: block;
             margin-bottom: 6px;
-            font-weight: 600;
-            color: #4a5568;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-weight: bold;
+            color: #0083D6;
+            font-size: 11pt;
+            font-family: Arial, sans-serif;
         }}
         
         .form-group input,
         .form-group select,
         .form-group textarea {{
             width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 14px;
-            transition: all 0.3s ease;
+            padding: 10px 12px;
+            border: 1px solid #06a0ea;
+            font-size: 11pt;
             background: white;
-            font-family: inherit;
+            font-family: Arial, sans-serif;
+            color: #0083D6;
         }}
         
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {{
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            transform: translateY(-1px);
+            border-color: #0083D6;
+            box-shadow: 0 0 0 2px rgba(0, 131, 214, 0.2);
         }}
         
         .form-group textarea {{
@@ -222,90 +233,62 @@ class NewsGeneratorWithPreviewHandler(http.server.SimpleHTTPRequestHandler):
         }}
         
         .btn {{
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #06a0ea;
             color: white;
-            padding: 15px 30px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 11pt;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
             cursor: pointer;
-            transition: all 0.3s ease;
             width: 100%;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }}
-        
-        .btn::before {{
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }}
-        
-        .btn:hover::before {{
-            left: 100%;
         }}
         
         .btn:hover {{
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            background-color: #0083D6;
         }}
         
         .btn:active {{
-            transform: translateY(-1px);
+            background-color: #006bb3;
         }}
         
         .btn-add {{
-            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            background-color: #A144BA;
             color: white;
-            padding: 12px 20px;
+            padding: 10px 18px;
             border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 11pt;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
             cursor: pointer;
-            transition: all 0.3s ease;
             margin: 5px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }}
         
         .btn-add:hover {{
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(72, 187, 120, 0.4);
+            background-color: #8a3a9f;
         }}
         
         .content-element {{
-            background: linear-gradient(145deg, #ffffff 0%, #f7fafc 100%);
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 15px;
+            background-color: white;
+            border: 1px solid #06a0ea;
+            padding: 12px;
             margin: 10px 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }}
         
-        .content-element-info {{
-            flex: 1;
-        }}
-        
         .content-element-title {{
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 5px;
+            font-weight: bold;
+            color: #0083D6;
+            font-family: Arial, sans-serif;
+            margin-bottom: 4px;
         }}
         
         .content-element-details {{
-            font-size: 0.9em;
-            color: #4a5568;
+            font-size: 10pt;
+            color: #0083D6;
+            font-family: Arial, sans-serif;
         }}
         
         .content-element-actions {{
@@ -314,35 +297,31 @@ class NewsGeneratorWithPreviewHandler(http.server.SimpleHTTPRequestHandler):
         }}
         
         .btn-edit {{
-            background: #667eea;
+            background: #06a0ea;
             color: white;
             border: none;
-            border-radius: 6px;
-            padding: 8px 12px;
+            padding: 6px 12px;
             cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s ease;
+            font-size: 10pt;
+            font-family: Arial, sans-serif;
         }}
         
         .btn-edit:hover {{
-            background: #5a67d8;
-            transform: translateY(-1px);
+            background: #0083D6;
         }}
         
         .btn-remove {{
             background: #e53e3e;
             color: white;
             border: none;
-            border-radius: 6px;
-            padding: 8px 12px;
+            padding: 6px 12px;
             cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s ease;
+            font-size: 10pt;
+            font-family: Arial, sans-serif;
         }}
         
         .btn-remove:hover {{
             background: #c53030;
-            transform: translateY(-1px);
         }}
         
         /* Modal Styles */
@@ -362,16 +341,10 @@ class NewsGeneratorWithPreviewHandler(http.server.SimpleHTTPRequestHandler):
             background-color: white;
             margin: 5% auto;
             padding: 30px;
-            border-radius: 20px;
             width: 80%;
             max-width: 600px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-            animation: modalSlideIn 0.3s ease;
-        }}
-        
-        @keyframes modalSlideIn {{
-            from {{ transform: translateY(-50px); opacity: 0; }}
-            to {{ transform: translateY(0); opacity: 1; }}
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border: 2px solid #06a0ea;
         }}
         
         .modal-header {{
@@ -384,9 +357,10 @@ class NewsGeneratorWithPreviewHandler(http.server.SimpleHTTPRequestHandler):
         }}
         
         .modal-title {{
-            font-size: 1.5em;
-            font-weight: 600;
-            color: #2d3748;
+            font-size: 13pt;
+            font-weight: bold;
+            color: #0083D6;
+            font-family: Arial, sans-serif;
         }}
         
         .close {{
@@ -421,18 +395,17 @@ class NewsGeneratorWithPreviewHandler(http.server.SimpleHTTPRequestHandler):
         }}
         
         .btn-modal-primary {{
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #06a0ea;
             color: white;
         }}
         
         .btn-modal-secondary {{
-            background: #e2e8f0;
-            color: #4a5568;
+            background-color: #e6f4fd;
+            color: #0083D6;
         }}
         
         .btn-modal:hover {{
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            opacity: 0.9;
         }}
         
         .hidden {{
@@ -440,75 +413,88 @@ class NewsGeneratorWithPreviewHandler(http.server.SimpleHTTPRequestHandler):
         }}
         
         .image-field-group {{
-            background: linear-gradient(145deg, #ffffff 0%, #f7fafc 100%);
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 15px 0;
-            transition: all 0.3s ease;
-        }}
-        
-        .image-field-group:hover {{
-            border-color: #667eea;
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.1);
+            background-color: white;
+            border: 1px solid #06a0ea;
+            padding: 16px;
+            margin: 12px 0;
         }}
         
         .image-field-group h4 {{
             margin-top: 0;
-            color: #667eea;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 10px;
-            font-size: 1em;
-            font-weight: 600;
+            color: #A144BA;
+            border-bottom: 1px solid #ecdaf1;
+            padding-bottom: 8px;
+            font-size: 11pt;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
         }}
         
         .help-text {{
-            background: linear-gradient(145deg, #f7fafc 0%, #edf2f7 100%);
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 10px;
-            font-size: 0.85em;
+            background-color: white;
+            border: 1px solid #06a0ea;
+            padding: 12px;
+            margin-top: 8px;
+            font-size: 10pt;
             line-height: 1.5;
+            font-family: Arial, sans-serif;
         }}
         
         .help-text code {{
-            background: #2d3748;
-            color: #68d391;
-            padding: 3px 6px;
-            border-radius: 4px;
-            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-            font-size: 0.8em;
+            background: #e6f4fd;
+            color: #0083D6;
+            padding: 2px 5px;
+            font-family: Consolas, monospace;
+            font-size: 10pt;
         }}
         
         .help-text ul {{
-            margin: 10px 0;
+            margin: 8px 0;
             padding-left: 20px;
         }}
         
         .help-text li {{
-            margin: 5px 0;
-            color: #4a5568;
+            margin: 4px 0;
+            color: #0083D6;
         }}
         
         .help-text p {{
-            margin: 8px 0;
-            color: #4a5568;
+            margin: 6px 0;
+            color: #0083D6;
         }}
         
         .help-text strong {{
-            color: #2d3748;
+            color: #0083D6;
         }}
         
-        /* Blog Preview Styles - Exact Match to Henry's Blog */
+        /* Blog Preview Styles - Match Henry's Blog layout */
         .blog-preview {{
-            background: #0083D6;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            background-color: #0083D6;
             overflow: hidden;
             font-family: Arial, sans-serif;
-            width: 621px;
+            max-width: 700px;
             margin: 0 auto;
+        }}
+        
+        .preview-main {{
+            background-color: white;
+            margin: 0 auto;
+            max-width: 621px;
+        }}
+        
+        .preview-blog-bar {{
+            background: url('/Blog/images/cmn_blue_bar_tile.gif') repeat;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+        }}
+        
+        .preview-blog-bar img {{
+            height: 35px;
+        }}
+        
+        .preview-content-area {{
+            padding: 0 18px 18px 18px;
         }}
         
         .blog-preview .article {{
@@ -519,7 +505,7 @@ class NewsGeneratorWithPreviewHandler(http.server.SimpleHTTPRequestHandler):
             background-color: white;
             padding: 15px;
             color: #0083D6;
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             font-size: 11pt;
         }}
         
@@ -527,29 +513,31 @@ class NewsGeneratorWithPreviewHandler(http.server.SimpleHTTPRequestHandler):
             background-color: #e6f4fd;
             padding: 15px;
             color: #0083D6;
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             font-size: 11pt;
+        }}
+        
+        .blog-preview .corner-img {{
+            display: block;
+            width: 100%;
+            height: 15px;
         }}
         
         .blog-preview .article-title {{
             font-size: 13pt;
             font-weight: bold;
             color: #0083D6;
-            font-family: Arial;
-            margin-bottom: 0;
-            display: inline-block;
-            width: 421px;
+            font-family: Arial, sans-serif;
+            flex: 1;
         }}
         
         .blog-preview .article-date {{
             font-size: 13pt;
             font-weight: bold;
             color: #0083D6;
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             text-align: right;
-            display: inline-block;
             width: 200px;
-            margin-bottom: 0;
         }}
         
         .blog-preview .article-content {{
@@ -629,32 +617,7 @@ class NewsGeneratorWithPreviewHandler(http.server.SimpleHTTPRequestHandler):
             height: 30px;
             display: flex;
             align-items: center;
-        }}
-        
-        .blog-preview .article-blue {{
-            position: relative;
-        }}
-        
-        .blog-preview .article-blue::before {{
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 15px;
-            background: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7') no-repeat;
-            background-size: 100% 15px;
-        }}
-        
-        .blog-preview .article-blue::after {{
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 15px;
-            background: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7') no-repeat;
-            background-size: 100% 15px;
+            justify-content: space-between;
         }}
         
         .preview-placeholder {{
@@ -662,10 +625,9 @@ class NewsGeneratorWithPreviewHandler(http.server.SimpleHTTPRequestHandler):
             color: #0083D6;
             padding: 40px;
             font-style: italic;
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             font-size: 11pt;
             background-color: white;
-            margin: 15px;
         }}
         
         /* Responsive design */
@@ -690,21 +652,15 @@ class NewsGeneratorWithPreviewHandler(http.server.SimpleHTTPRequestHandler):
         @media (max-width: 768px) {{
             .container {{
                 margin: 10px;
-                border-radius: 16px;
             }}
             
-            .generator-panel,
-            .preview-panel {{
-                padding: 20px;
-            }}
-            
-            .header {{
-                margin: -20px -20px 20px -20px;
+            .generator-body,
+            .preview-body {{
                 padding: 20px;
             }}
             
             .header h1 {{
-                font-size: 1.8em;
+                font-size: 16pt;
             }}
         }}
         
@@ -732,6 +688,7 @@ class NewsGeneratorWithPreviewHandler(http.server.SimpleHTTPRequestHandler):
                 <p>Create beautiful articles with live preview</p>
             </div>
             
+            <div class="generator-body">
             <form action="/generate" method="post" id="articleForm">
                 <div class="form-section">
                     <h3>📝 Article Information</h3>
@@ -812,6 +769,7 @@ Just use normal line breaks - they'll be converted automatically!</code></p>
                     <span id="btnLoading" class="loading hidden"></span>
                 </button>
             </form>
+            </div>
         </div>
         
         <div class="preview-panel">
@@ -819,10 +777,12 @@ Just use normal line breaks - they'll be converted automatically!</code></p>
                 <h2>👁️ Live Preview</h2>
             </div>
             
+            <div class="preview-body">
             <div id="preview-content" class="blog-preview">
                 <div class="preview-placeholder">
                     Start typing to see your article preview here...
                 </div>
+            </div>
             </div>
         </div>
     </div>
@@ -914,10 +874,11 @@ Just use normal line breaks - they'll be converted automatically!</code></p>
                             </div>
                         </div>
                         <div class="content-element-actions">
-                            <button class="btn-edit" onclick="openImageModal('${{element.id}}')">✏️ Edit</button>
-                            <button class="btn-remove" onclick="removeElement('${{element.id}}')">🗑️ Remove</button>
+                            <button type="button" class="btn-edit" onclick="openImageModal('${{element.id}}')">✏️ Edit</button>
+                            <button type="button" class="btn-remove" onclick="removeElement('${{element.id}}')">🗑️ Remove</button>
                         </div>
                     `;
+                }}
                 
                 container.appendChild(elementDiv);
             }});
@@ -982,36 +943,49 @@ Just use normal line breaks - they'll be converted automatically!</code></p>
             const date = document.getElementById('date').value;
             const type = document.getElementById('type').value;
             const content = document.getElementById('content').value;
+            const previewEl = document.getElementById('preview-content');
             
             if (!title && !date && !content && contentElements.length === 0) {{
-                document.getElementById('preview-content').innerHTML = `
-                    <div class="preview-placeholder">
-                        Start typing to see your article preview here...
+                previewEl.innerHTML = `
+                    <div class="preview-main">
+                        <div class="preview-placeholder">
+                            Start typing to see your article preview here...
+                        </div>
                     </div>
                 `;
                 return;
             }}
             
+            const cornerTop = type === 'blue'
+                ? '<img class="corner-img" src="/Blog/images/hb_blue_top_corners.gif" width="621" height="15" alt="">'
+                : '';
+            const cornerBottom = type === 'blue'
+                ? '<img class="corner-img" src="/Blog/images/hb_blue_btm_corners.gif" width="621" height="15" alt="">'
+                : '';
+            
             let previewHtml = `
-                <div class="article article-${{type}}">
-                    <div class="title-row">
-                        <div class="article-title">${{title || 'Your Article Title'}}</div>
-                        <div class="article-date">${{date || 'Publication Date'}}</div>
+                <div class="preview-main">
+                    <div class="preview-blog-bar">
+                        <img src="/Blog/images/hb_henrys_blog_heading.gif" width="438" height="35" alt="Henry's Blog">
                     </div>
-                    <div class="article-content">
+                    <div class="preview-content-area">
+                        ${{cornerTop}}
+                        <div class="article article-${{type}}">
+                            <div class="title-row">
+                                <div class="article-title">${{escapeHtml(title) || 'Your Article Title'}}</div>
+                                <div class="article-date">${{escapeHtml(date) || 'Publication Date'}}</div>
+                            </div>
+                            <div class="article-content">
             `;
             
-            // Process content with placement tags
             let processedContent = content;
             
-            // Replace placement tags with actual content
             contentElements.forEach((element, index) => {{
                 const tag = `#image${{index + 1}}`;
                 
                 if (element.type === 'image' && element.src) {{
-                    let imageHtml = `<img src="${{element.src}}" alt="${{element.alt || 'Image'}}"`;
+                    let imageHtml = `<img src="${{escapeHtml(element.src)}}" alt="${{escapeHtml(element.alt || 'Image')}}"`;
                     
-                    // Add placement class
                     switch(element.placement) {{
                         case 'full-width':
                             imageHtml += ' class="image-full"';
@@ -1036,28 +1010,36 @@ Just use normal line breaks - they'll be converted automatically!</code></p>
                     imageHtml += '>';
                     
                     if (element.caption) {{
-                        imageHtml += `<div class="image-caption">${{element.caption}}</div>`;
+                        imageHtml += `<div class="image-caption">${{escapeHtml(element.caption)}}</div>`;
                     }}
                     
                     if (element.link) {{
-                        imageHtml = `<a href="${{element.link}}">${{imageHtml}}</a>`;
+                        imageHtml = `<a href="${{escapeHtml(element.link)}}">${{imageHtml}}</a>`;
                     }}
                     
-                    // Replace the tag in content
-                    processedContent = processedContent.replace(new RegExp(tag, 'g'), imageHtml);
+                    processedContent = processedContent.split(tag).join(imageHtml);
                 }}
             }});
             
-            // Convert line breaks to HTML
             processedContent = processedContent.replace(/\\r\\n/g, '\\n').replace(/\\n/g, '<br/>');
             
             previewHtml += processedContent;
             previewHtml += `
+                            </div>
+                        </div>
+                        ${{cornerBottom}}
                     </div>
                 </div>
             `;
             
-            document.getElementById('preview-content').innerHTML = previewHtml;
+            previewEl.innerHTML = previewHtml;
+        }}
+        
+        function escapeHtml(text) {{
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }}
         
         // Form submission with loading state
@@ -1153,17 +1135,18 @@ Just use normal line breaks - they'll be converted automatically!</code></p>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>📰 Article Preview</title>
                 <style>
-                    body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 20px; background: #f8f9fa; }}
-                    .container {{ max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }}
-                    h1 {{ color: #007acc; border-bottom: 3px solid #007acc; padding-bottom: 15px; text-align: center; }}
-                    .btn {{ padding: 10px 20px; margin: 10px 5px; text-decoration: none; border-radius: 5px; border: none; cursor: pointer; font-size: 14px; }}
-                    .btn-primary {{ background: #007acc; color: white; }}
-                    .btn-success {{ background: #28a745; color: white; }}
-                    .article-item {{ background: #e9ecef; padding: 15px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #007acc; }}
-                    .article-title {{ font-weight: bold; color: #007acc; margin-bottom: 5px; }}
-                    .article-meta {{ color: #6c757d; font-size: 0.9em; }}
+                    body {{ font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #0083D6; color: #0083D6; }}
+                    .container {{ max-width: 900px; margin: 0 auto; background: white; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }}
+                    h1 {{ color: #0083D6; border-bottom: 3px solid #06a0ea; padding-bottom: 15px; text-align: center; font-size: 18pt; }}
+                    h2 {{ color: #A144BA; font-size: 13pt; }}
+                    .btn {{ padding: 10px 20px; margin: 10px 5px; text-decoration: none; border: none; cursor: pointer; font-size: 11pt; font-family: Arial, sans-serif; font-weight: bold; display: inline-block; }}
+                    .btn-primary {{ background: #06a0ea; color: white; }}
+                    .btn-success {{ background: #A144BA; color: white; }}
+                    .article-item {{ background: #e6f4fd; padding: 15px; margin: 10px 0; border-left: 4px solid #0083D6; }}
+                    .article-title {{ font-weight: bold; color: #0083D6; margin-bottom: 5px; font-size: 13pt; }}
+                    .article-meta {{ color: #0083D6; font-size: 10pt; }}
                     .actions {{ text-align: center; margin: 20px 0; }}
-                    pre {{ white-space: pre-wrap; word-wrap: break-word; }}
+                    pre {{ white-space: pre-wrap; word-wrap: break-word; background: #e6f4fd; padding: 15px; font-size: 10pt; }}
                 </style>
             </head>
             <body>
@@ -1194,10 +1177,12 @@ Just use normal line breaks - they'll be converted automatically!</code></p>
                 <title>📰 No Articles Found</title>
             </head>
             <body>
-                <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+                <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif; background-color: #0083D6; min-height: 100vh;">
+                    <div style="background: white; max-width: 500px; margin: 0 auto; padding: 40px; color: #0083D6;">
                     <h1>No articles found</h1>
                     <p>Create your first article using the generator.</p>
-                    <a href="/generator" style="background: #007acc; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Create Article</a>
+                    <a href="/generator" style="background: #06a0ea; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold;">Create Article</a>
+                    </div>
                 </div>
             </body>
             </html>
